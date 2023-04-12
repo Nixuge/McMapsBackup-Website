@@ -26,8 +26,8 @@ import { currentMaps } from '@/ts/search';
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto auto;
-    margin: 10px;
-    grid-gap: 10px;
+    margin: 20px;
+    grid-gap: 20px;
     justify-items: center;
     align-items: center;
 }
