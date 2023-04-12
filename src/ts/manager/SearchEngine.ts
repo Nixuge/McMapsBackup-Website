@@ -84,7 +84,3 @@ export class SearchEngine {
         // console.log(this.currentMapsPages);
     }
 }
-
-export class PageManager {
-    public static page = 1;
-}

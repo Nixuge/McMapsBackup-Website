@@ -1,6 +1,6 @@
 import router from "@/router";
-import { searchForMap } from "./data/McMap";
-import { PageManager } from "./manager/SearchEngine";
+import { searchForMap } from "./manager/ElementViewerManager";
+import { PageManager } from "./manager/PageManager";
 
 export function parseUrlArgs() {
     const params = router.currentRoute.value.params;
@@ -9,7 +9,8 @@ export function parseUrlArgs() {
     const mapname = params.mapname;
     
     if (page != null) {
-        PageManager.page = Number.parseInt(page.toString());
+        let num = Number.parseInt(page.toString());
+        PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num
     }
 
     if (minigame != null) {
@@ -17,5 +18,5 @@ export function parseUrlArgs() {
     }
     if (mapname != null) {
         searchForMap(minigame.toString(), mapname.toString())
-    }    
+    }
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { setCurrentMap, McMap } from '@/ts/data/McMap';
+import { McMap } from '@/ts/data/McMap';
+import { setCurrentMap } from '@/ts/manager/ElementViewerManager';
 
 defineProps<{
   map: McMap

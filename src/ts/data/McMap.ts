@@ -1,7 +1,3 @@
-import router from "@/router";
-import { reactive } from "vue";
-import { SearchEngine } from "../manager/SearchEngine";
-
 export class Download {
     name: string
     url: string
@@ -28,49 +24,4 @@ export class McMap {
         this.downloads = downloads;
         this.url = minigame.toLowerCase().replace(" ", "") + '/' + map_name;
     }
-
-    static fromJsonDict(map_data_dict: any) {
-        let downloads: Array<Download> = []
-        const downloads_dict = map_data_dict["downloads"]
-        for (const dl_name of Object.keys(downloads_dict)) {
-            downloads.push(new Download(dl_name, downloads_dict[dl_name]))
-        }
-
-        return new McMap(
-            map_data_dict["minigame"],
-            map_data_dict["map_name"],
-            map_data_dict["builders"],
-            map_data_dict["preview_url"],
-            downloads
-        )
-    }
-}
-
-export const currentMap = reactive(new McMap(
-    "",
-    "No maps selected",
-    "",
-    "https://hivebackup.github.io/static/previews/Gravity/pacman.png",
-    []
-))
-
-export function setCurrentMap(newMap: McMap) {
-    router.push("/" + newMap.url)
-    
-    // Not the prettiest, thought i could reassign the reactive
-    currentMap.minigame = newMap.minigame;
-    currentMap.map_name = newMap.map_name;
-    currentMap.builders = newMap.builders;
-    currentMap.preview_url = newMap.preview_url;
-    currentMap.downloads = newMap.downloads;    
-}
-
-export function searchForMap(minigame: string, mapname: string) {
-    const full_url = minigame + "/" + mapname;
-    SearchEngine.currentMapsRawArray.forEach(map => {
-        if (map.url === full_url) {
-            setCurrentMap(map);
-        };
-    });
-    return "owo";
 }
