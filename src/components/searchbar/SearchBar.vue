@@ -24,7 +24,10 @@ const minigame_options = [
     width: 100%;
     box-sizing: border-box; /* width + padding = 100% */
 
-    background-color: #FC4C02;
+    background-color: var(--dark-transparent)
 
+}
+.searchbar:hover {
+    background-color: var(--dark-transparent-darker)
 }
 </style>

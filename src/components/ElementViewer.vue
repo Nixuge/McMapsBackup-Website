@@ -25,7 +25,8 @@ import { currentMap } from '@/ts/mcmap';
 
 .viewer {
     /* height: 50rem; */
-    background-color: antiquewhite;
+    /* color: #fff; */
+    background-color: var(--dark-transparent);
 
     /* height: 100%; */
 

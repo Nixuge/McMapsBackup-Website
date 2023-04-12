@@ -4,9 +4,9 @@ import PageSelectorButton from './PageSelectorButton.vue'
 
 <template>
     <div class="owo">
-        <PageSelectorButton/>
-        <PageSelectorButton/>
-        <PageSelectorButton/>
+        <PageSelectorButton :page_number="1"/>
+        <PageSelectorButton :page_number="3"/>
+        <PageSelectorButton :page_number="22"/>
     </div>
 </template>
 
@@ -15,8 +15,8 @@ import PageSelectorButton from './PageSelectorButton.vue'
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 10px;
+    text-align: center;
+    bottom: 20px;
     width: 100%;
-    background-color: #fff;
 }
 </style>

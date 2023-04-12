@@ -16,13 +16,9 @@ import { currentMaps } from '@/ts/search';
 </template>
 
 <style scoped>
-.page_selector {
-    position: absolute;
-    bottom: 10px;
-}
 .grid_wrapper {
     position: relative;
-    background-color: blueviolet;
+    background-color: var(--dark-transparent);
     border-radius: 10px;
     width: 100%;
 }
@@ -35,5 +31,8 @@ import { currentMaps } from '@/ts/search';
     justify-items: center;
     align-items: center;
 }
-
+.page_selector {
+    position: absolute;
+    bottom: 10px;
+}
 </style>

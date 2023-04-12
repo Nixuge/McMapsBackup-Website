@@ -21,27 +21,9 @@ const MAPS: Array<McMap> = [
 
 ]
 
-// function getMapsFromSearchParams(search: string, selected_minigame: string | undefined) {
-//     // if adding a character, just search from the old array
-//     const mapsToSearchIn = (oldSearch != "" && search.includes(oldSearch)) ? oldMaps : MAPS;
-//     let foundMaps: Array<McMap> = []
-
-//     mapsToSearchIn.forEach(map => {
-//         if (map.map_name.includes(search) || map.builders.includes(search) || map.minigame.includes(search)) {
-//             foundMaps.push(map)
-//         }
-//     });
-//     oldSearch = search;
-//     oldMaps = foundMaps;
-//     return foundMaps;
-// }
-
-
 export let currentMaps = reactive(MAPS.slice(0)); // clone original array
 
-let search = ""
-
-function onInsertText() {
+function onInsertText(search: string) {
     // recalculate based on what currentMaps holds
     for (let i = 0; i < currentMaps.length; i++) {
         const map = currentMaps[i];
@@ -51,7 +33,7 @@ function onInsertText() {
     }
 }
 
-function recalculateWhole() {
+function recalculateWhole(search: string) {
     // prolly not efficient but oh well
     currentMaps.length = 0;
     MAPS.forEach(map => {
@@ -63,23 +45,21 @@ function recalculateWhole() {
 
 //TODO: handle "select" change
 export function handleInputChange(event: any) {
-    console.log(event);
-    
+    const search = event.target.value;
+
     switch (event.inputType) {
-        case "insertText":
-            search += event.data;
-            onInsertText();
+        case "insertText": // causes issues when ctrl+a ing & replacing :/
+            onInsertText(search); // will maybe have to recalculate the whole thing anyways every time
             break;
         
         case "deleteContentBackward": // may delete one or more chars
         case "insertFromPaste": // may insert multiple chars/replace existing chars
         case "historyUndo":
-            search = event.target.value;
-            recalculateWhole();
+            recalculateWhole(search);
             break;
         
         default:
-            recalculateWhole();
+            recalculateWhole(search);
             break;
     }
 }
