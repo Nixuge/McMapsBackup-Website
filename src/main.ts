@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
+import { SearchEngine } from './ts/search';
 
 import './assets/base.css'
 
-const app = createApp(App);
+SearchEngine.init()
 
+const app = createApp(App);
 app.mount('#app');
 
 /* 

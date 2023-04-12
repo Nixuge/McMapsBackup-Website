@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { handleInputChange } from '@/ts/search';
+import { SearchEngine as se } from '@/ts/search';
 </script>
 
 <template>
     <div class="input">
-        <input name="aa" placeholder="Search for a map here" @input="event => handleInputChange(event)">
+        <input name="aa" placeholder="Search for a map here" @input="event => se.handleInputChange(event)">
     </div>
 </template>
 

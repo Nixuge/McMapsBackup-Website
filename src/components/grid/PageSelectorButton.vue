@@ -16,6 +16,7 @@ defineProps<{
     /* border: 2px solid #000000; */
     height: 50px;
     width: 50px;
+    min-width: 50px;
     margin-left: 10px;
     margin-right: 10px;
     background-color: var(--color-border);

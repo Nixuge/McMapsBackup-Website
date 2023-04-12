@@ -4,11 +4,6 @@ import SearchBar from './components/searchbar/SearchBar.vue'
 import SearchGrid from './components/grid/Grid.vue'
 
 </script>
-100% width:
-  20vw sidebar
-  3 columns 
-
-
 
 <template>
   <SearchBar />

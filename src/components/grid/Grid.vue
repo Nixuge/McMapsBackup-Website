@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import GridElement from './GridElement.vue'
 import PageSelector from './PageSelector.vue'
-import { currentMaps } from '@/ts/search';
+import { SearchEngine as se } from '@/ts/search';
 
 </script>
 
 <template>
     <div class="grid_wrapper">
         <div class="grid">
-            <GridElement v-for="current_map in currentMaps" :map="current_map" />
+            <GridElement v-for="current_map in se.currentMapsPages[1]" :map="current_map" />
         </div>
-        
         <PageSelector />
     </div>
 </template>
@@ -25,14 +24,12 @@ import { currentMaps } from '@/ts/search';
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 1fr 1fr 1fr;
     margin: 20px;
     grid-gap: 20px;
     justify-items: center;
     align-items: center;
-}
-.page_selector {
-    position: absolute;
-    bottom: 10px;
+    margin-bottom: 50px;
+    /* height: 90%; */
 }
 </style>
