@@ -2,13 +2,14 @@
 import GridElement from './GridElement.vue'
 import PageSelector from './PageSelector.vue'
 import { SearchEngine as se } from '@/ts/manager/SearchEngine';
+import { PageManager as pm } from '@/ts/manager/PageManager';
 
 </script>
 
 <template>
     <div class="grid_wrapper">
         <div class="grid">
-            <GridElement v-for="current_map in se.currentMapsPages[1]" :map="current_map" />
+            <GridElement v-for="current_map in se.currentMapsPages[pm.page.value]" :map="current_map" />
         </div>
         <PageSelector />
     </div>

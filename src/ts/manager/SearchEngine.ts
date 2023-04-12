@@ -1,6 +1,7 @@
 import { reactive, ref } from "vue";
 import { MAPS } from "../data/BaseData"
 import { McMap } from "../data/McMap";
+import { PageManager } from "./PageManager";
 
 export class SearchEngine {
     private static search: string = ""
@@ -52,6 +53,10 @@ export class SearchEngine {
                 this.currentMapsPages[_page] = []
                 this.currentPageIndexes.push(_page)
             }
+        }
+
+        if (PageManager.page.value > _page) {
+            PageManager.setPage(_page);
         }
     }
 

@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { PageManager } from '@/ts/manager/PageManager';
+
 defineProps<{
   page_number: number
 }>()
 </script>
 
 <template>
-    <div class="page_selector_button" @click=""> <!-- Click event to do  -->
+    <div class="page_selector_button" @click="PageManager.setPage(page_number)"> <!-- Click event to do  -->
         <p v-text="page_number" />
     </div>
 </template>
