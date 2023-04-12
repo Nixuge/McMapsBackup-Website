@@ -16,15 +16,15 @@ import { SearchEngine as se } from '@/ts/manager/SearchEngine';
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 0px;
+    bottom: 5px;
     width: 100%;
     overflow: auto;
 }
 
 .page_selector {
     display: flex;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-radius: 10px;
     background-color: var(--dark-transparent-darker);
     text-align: center;

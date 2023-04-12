@@ -20,16 +20,11 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
 
 <style scoped>
 .text {
-    padding-left: 5px;
+    padding: 10px;
 }
 
 .viewer {
-    /* height: 50rem; */
-    /* color: #fff; */
     background-color: var(--dark-transparent);
-
-    /* height: 100%; */
-
     border-radius: 10px;
 }
 
@@ -37,4 +32,18 @@ img {
     width: 100%;
     border-radius: 8px 8px 0px 0px;
     /* 2px smaller than viewer's border radius to avoid background color artifacts */
-}</style>
+}
+h1 {
+    margin: 0;
+}
+li {
+    font-size: large;
+}
+a {
+  color: rgb(255, 168, 212);
+}
+a:visited {
+  color: hotpink;
+}
+
+</style>

@@ -16,7 +16,15 @@ import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 input {
     width: 100%;
     box-sizing: border-box;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--text-color)
 }
+textarea:focus, input:focus{
+    outline: none;
+}
+
 .input {
     padding-left: 10px;
     padding-right: 10px;

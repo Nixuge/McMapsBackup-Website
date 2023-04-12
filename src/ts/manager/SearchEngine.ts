@@ -6,7 +6,7 @@ import { PageManager } from "./PageManager";
 export class SearchEngine {
     private static search: string = ""
     public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
-    public static currentMapsPages: any = ref({});
+    public static currentMapsPages: any = reactive({});
     public static currentPageIndexes: Array<number> = reactive([]);
 
     private static recalculateInsert() {
@@ -30,21 +30,20 @@ export class SearchEngine {
 
     private static generateCurrentMapsPages() {
         // Didn't bother with optimization on this one tbh, always clearing & redoing
-        //TODO: handle clearing pages
 
-        // clear the old pages
+        // Clear the old pages
         this.currentPageIndexes.forEach(index => {
             delete this.currentMapsPages[index];
         });
         this.currentPageIndexes.length = 0
 
-        // set the initial page to both the dict & the list
+        // Set the initial page to both the dict & the list
         let _page = 1;
 
         this.currentPageIndexes.push(_page);
         this.currentMapsPages[_page] = []
 
-        // split every 9 items
+        // Split every 9 items
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map = this.currentMapsRawArray[i];
             this.currentMapsPages[_page].push(map)
@@ -55,6 +54,7 @@ export class SearchEngine {
             }
         }
 
+        // If last page higher than current page, reduce current page to higher page
         if (PageManager.page.value > _page) {
             PageManager.setPage(_page);
         }
@@ -86,6 +86,5 @@ export class SearchEngine {
         }
 
         this.generateCurrentMapsPages();
-        // console.log(this.currentMapsPages);
     }
 }

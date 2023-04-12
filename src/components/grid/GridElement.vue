@@ -17,11 +17,8 @@ defineProps<{
 .grid_element {
     padding-bottom: 0px;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
-    /* border: 1px solid #fff; */
     border-radius: 10px;
-    /* padding: 10px; */
     text-align: center;
-    /* background-color: #FC4C02; */
     width: 100%;
 }
 .grid_element:hover {
