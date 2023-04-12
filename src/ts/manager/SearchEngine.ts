@@ -55,7 +55,7 @@ export class SearchEngine {
         }
 
         // If last page higher than current page, reduce current page to higher page
-        if (PageManager.page.value > _page) {
+        if (PageManager.getPage() > _page) {
             PageManager.setPage(_page);
         }
     }
