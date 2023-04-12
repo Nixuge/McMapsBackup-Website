@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SearchEngine as se } from '@/ts/search';
+import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 </script>
 
 <template>

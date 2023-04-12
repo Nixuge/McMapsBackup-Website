@@ -1,4 +1,4 @@
-import { Download, McMap } from "./mcmap";
+import { Download, McMap } from "./McMap";
 
 export const MAPS: Array<McMap> = [
     new McMap("Speed Builders", "map name here", "builder1, me, another one",

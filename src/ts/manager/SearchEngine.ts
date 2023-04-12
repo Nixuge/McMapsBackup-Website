@@ -1,28 +1,28 @@
 import { reactive, ref } from "vue";
-import { MAPS } from "./base_data"
-import { McMap } from "./mcmap";
+import { MAPS } from "../data/BaseData"
+import { McMap } from "../data/McMap";
 
 export class SearchEngine {
     private static search: string = ""
-    private static currentMaps: Array<McMap> = MAPS.slice(0);
+    public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
     public static currentMapsPages: any = ref({});
     public static currentPageIndexes: Array<number> = reactive([]);
 
     private static recalculateInsert() {
         // recalculate based on what currentMaps holds
-        for (let i = 0; i < this.currentMaps.length; i++) {
-            const map =  this.currentMaps[i];
+        for (let i = 0; i < this.currentMapsRawArray.length; i++) {
+            const map =  this.currentMapsRawArray[i];
             if (!(map.map_name.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
-                this.currentMaps.splice(i, 1)
+                this.currentMapsRawArray.splice(i, 1)
             }
         }
     }
     private static recalculateWhole() {
         // prolly not efficient but oh well
-        this.currentMaps.length = 0;
+        this.currentMapsRawArray.length = 0;
         MAPS.forEach(map => {
             if (map.map_name.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search)) {
-                this.currentMaps.push(map)
+                this.currentMapsRawArray.push(map)
             }
         });
     }
@@ -44,8 +44,8 @@ export class SearchEngine {
         this.currentMapsPages[_page] = []
 
         // split every 9 items
-        for (let i = 0; i < this.currentMaps.length; i++) {
-            const map = this.currentMaps[i];
+        for (let i = 0; i < this.currentMapsRawArray.length; i++) {
+            const map = this.currentMapsRawArray[i];
             this.currentMapsPages[_page].push(map)
             if ((i + 1) % 9 == 0) {
                 _page += 1
@@ -83,4 +83,8 @@ export class SearchEngine {
         this.generateCurrentMapsPages();
         // console.log(this.currentMapsPages);
     }
+}
+
+export class PageManager {
+    public static page = 1;
 }

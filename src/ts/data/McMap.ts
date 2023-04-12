@@ -1,4 +1,6 @@
+import router from "@/router";
 import { reactive } from "vue";
+import { SearchEngine } from "../manager/SearchEngine";
 
 export class Download {
     name: string
@@ -14,7 +16,7 @@ export class McMap {
     minigame: string
     map_name: string
     builders: string
-    id: string
+    url: string
     preview_url: string
     downloads: Array<Download>
 
@@ -24,7 +26,7 @@ export class McMap {
         this.builders = builders;
         this.preview_url = preview_url;
         this.downloads = downloads;
-        this.id = minigame + '_' + map_name;
+        this.url = minigame.toLowerCase().replace(" ", "") + '/' + map_name;
     }
 
     static fromJsonDict(map_data_dict: any) {
@@ -53,12 +55,22 @@ export const currentMap = reactive(new McMap(
 ))
 
 export function setCurrentMap(newMap: McMap) {
+    router.push("/" + newMap.url)
+    
     // Not the prettiest, thought i could reassign the reactive
     currentMap.minigame = newMap.minigame;
     currentMap.map_name = newMap.map_name;
     currentMap.builders = newMap.builders;
     currentMap.preview_url = newMap.preview_url;
-    currentMap.downloads = newMap.downloads;
-    currentMap.id = newMap.id;
-    
+    currentMap.downloads = newMap.downloads;    
+}
+
+export function searchForMap(minigame: string, mapname: string) {
+    const full_url = minigame + "/" + mapname;
+    SearchEngine.currentMapsRawArray.forEach(map => {
+        if (map.url === full_url) {
+            setCurrentMap(map);
+        };
+    });
+    return "owo";
 }

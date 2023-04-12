@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { currentMap } from '@/ts/mcmap';
+import { currentMap } from '@/ts/data/McMap';
 </script>
 
 <template>

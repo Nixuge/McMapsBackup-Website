@@ -13,7 +13,6 @@ defineProps<{
 <style scoped>
 .page_selector_button {
     border-radius: 10px;
-    /* border: 2px solid #000000; */
     height: 50px;
     width: 50px;
     min-width: 50px;
