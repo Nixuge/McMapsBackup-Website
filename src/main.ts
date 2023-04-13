@@ -19,4 +19,5 @@ TODO LEFT:
 - use computed
 - use animations (see base.css#bottom)
 - add tags to use in the search bar (eg. minigame:... builder:...)
+- "download all shown" button (w limit for how many elements)
 */
