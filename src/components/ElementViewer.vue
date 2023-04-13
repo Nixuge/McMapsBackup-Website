@@ -11,9 +11,13 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
             <h1 v-if="currentMap.downloads.length != 0">Downloads</h1>
             <ul>
                 <a v-for="download in currentMap.downloads" :href="download.url">
-                    <li v-text="download.name"/>
+                    <li v-text="download.name" />
                 </a>
             </ul>
+            <div v-if="currentMap.commentaries != undefined">
+                <h1>Additional info</h1>
+                <h2 v-text="currentMap.commentaries"></h2>
+            </div>
         </div>
     </div>
 </template>
@@ -33,17 +37,20 @@ img {
     border-radius: 8px 8px 0px 0px;
     /* 2px smaller than viewer's border radius to avoid background color artifacts */
 }
+
 h1 {
     margin: 0;
 }
+
 li {
     font-size: large;
 }
+
 a {
-  color: rgb(255, 168, 212);
-}
-a:visited {
-  color: hotpink;
+    color: rgb(255, 168, 212);
 }
 
+a:visited {
+    color: hotpink;
+}
 </style>

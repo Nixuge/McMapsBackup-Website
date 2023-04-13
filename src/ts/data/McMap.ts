@@ -1,7 +1,7 @@
 export class Download {
     name: string
     url: string
-    
+
     constructor(name: string, url: string) {
         this.name = name;
         this.url = url;
@@ -9,19 +9,11 @@ export class Download {
 }
 
 export class McMap {
-    minigame: string
-    map_name: string
-    builders: string
     url: string
-    preview_url: string
-    downloads: Array<Download>
 
-    constructor(minigame: string, map_name: string, builders: string, preview_url: string, downloads: Array<Download>) {
-        this.minigame = minigame;
-        this.map_name = map_name;
-        this.builders = builders;
-        this.preview_url = preview_url;
-        this.downloads = downloads;
+    constructor(public minigame: string, public map_name: string, public builders: string,
+        public preview_url: string, public downloads: Array<Download>,
+        public commentaries?: string) {
         this.url = minigame.toLowerCase().replace(" ", "") + '/' + map_name;
     }
 }

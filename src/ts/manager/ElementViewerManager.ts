@@ -13,13 +13,8 @@ export const currentMap = reactive(new McMap(
 ))
 
 export function setCurrentMap(newMap: McMap) {
-    // Not the prettiest, thought i could reassign the reactive
-    currentMap.minigame = newMap.minigame;
-    currentMap.map_name = newMap.map_name;
-    currentMap.builders = newMap.builders;
-    currentMap.preview_url = newMap.preview_url;
-    currentMap.downloads = newMap.downloads;
-    currentMap.url = newMap.url;
+    // currentMap = newMap, doesn't work bc of reactive()
+    Object.assign(currentMap, newMap)
     updateUrl();
 }
 
