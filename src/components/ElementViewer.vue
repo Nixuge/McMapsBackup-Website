@@ -4,17 +4,23 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
 
 <template>
     <div class="viewer">
-        <img :src="currentMap.preview_url">
+        <img :src="currentMap.getPreviewUrl()">
         <div class="text">
+            <h1 v-text="currentMap.minigame"></h1>
+            <hr>
             <h1 v-text="currentMap.map_name"></h1>
-            <h2 v-text="currentMap.builders"></h2>
-            <h1 v-if="currentMap.downloads.length != 0">Downloads</h1>
-            <ul>
-                <a v-for="download in currentMap.downloads" :href="download.url">
-                    <li v-text="download.name" />
-                </a>
-            </ul>
+            <h2 v-text="'Built by ' + currentMap.builders"></h2>
+            <hr>
+            <div v-if="currentMap.downloads.length != 0">
+                <h1>Downloads</h1>
+                <ul>
+                    <a v-for="download in currentMap.downloads" :href="currentMap.getDownloadUrl(download.url)">
+                        <li v-text="download.name" />
+                    </a>
+                </ul>
+            </div>
             <div v-if="currentMap.commentaries != undefined">
+                <hr>
                 <h1>Additional info</h1>
                 <h2 v-text="currentMap.commentaries"></h2>
             </div>

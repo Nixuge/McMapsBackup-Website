@@ -46,11 +46,13 @@ export class SearchEngine {
         // Split every 9 items
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map = this.currentMapsRawArray[i];
+            if (!this.currentPageIndexes.includes(_page)) {
+                this.currentMapsPages[_page] = []
+                this.currentPageIndexes.push(_page)
+            }
             this.currentMapsPages[_page].push(map)
             if ((i + 1) % 9 == 0) {
                 _page += 1
-                this.currentMapsPages[_page] = []
-                this.currentPageIndexes.push(_page)
             }
         }
 
@@ -72,7 +74,7 @@ export class SearchEngine {
 
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
-        this.search = event.target.value;
+        this.search = event.target.value.toLowerCase();
 
         // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
         // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole

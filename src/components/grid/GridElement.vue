@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
     <div class="grid_element" @click="setCurrentMap(map);">
-        <img :src="map.preview_url">
+        <img :src="map.getPreviewUrl()">
     </div>
 </template>
 
