@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import { MAPS } from "../data/BaseData"
 import { McMap } from "../data/McMap";
 import { PageManager } from "./PageManager";
+import { sanitize } from "../TextUtils";
 
 export class SearchEngine {
     private static search: string = ""
@@ -13,7 +14,7 @@ export class SearchEngine {
         // recalculate based on what currentMaps holds
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map =  this.currentMapsRawArray[i];
-            if (!(map.map_name.includes(this.search.toLowerCase().replace(" ", "")) || map.builders.includes(this.search.toLowerCase().replace(" ", "")) || map.minigame.includes(this.search.toLowerCase().replace(" ", "")))) {
+            if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
                 this.currentMapsRawArray.splice(i, 1)
             }
         }
@@ -22,7 +23,7 @@ export class SearchEngine {
         // prolly not efficient but oh well
         this.currentMapsRawArray.length = 0;
         MAPS.forEach(map => {
-            if (map.map_name.includes(this.search.toLowerCase().replace(" ", "")) || map.builders.includes(this.search.toLowerCase().replace(" ", "")) || map.minigame.includes(this.search.toLowerCase().replace(" ", ""))) {
+            if (map.sanitizedMapName.includes(this.search) || map.sanitizedBuilders.includes(this.search) || map.sanitizedMinigame.includes(this.search)) {
                 this.currentMapsRawArray.push(map)
             }
         });
@@ -74,18 +75,18 @@ export class SearchEngine {
 
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
-        this.search = event.target.value.toLowerCase().replace(" ", "");
+        this.search = sanitize(event.target.value);
 
         // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
         // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole
         // 
         // TODO?:  have recalculateWhole do it based on last input, & check from that
 
-        // if (event.inputType == "insertText") {
-            // this.recalculateInsert()
-        // } else {
+        if (event.inputType == "insertText")
+            this.recalculateInsert()
+        else
             this.recalculateWhole();
-        // }
+        
 
         this.update()
     }

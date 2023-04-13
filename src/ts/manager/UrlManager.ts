@@ -3,5 +3,5 @@ import { currentMap } from "./ElementViewerManager";
 import { PageManager } from "./PageManager";
 
 export function updateUrl() {
-    router.push(`/${PageManager.getPage()}/${currentMap.minigame}/${currentMap.map_name}`);
+    router.push(`/${PageManager.getPage()}/${currentMap.minigame}/${currentMap.mapName}`);
 }

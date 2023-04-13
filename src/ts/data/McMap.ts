@@ -11,9 +11,17 @@ export class Download {
 }
 
 export class McMap {
-    constructor(public minigame: string, public map_name: string, public builders: string,
+    public sanitizedMinigame: string;
+    public sanitizedMapName: string;
+    public sanitizedBuilders: string;
+
+    constructor(public minigame: string, public mapName: string, public builders: string,
         public downloads: Array<Download>, public id: number, public nano: boolean, 
-        public commentaries?: string) {}
+        public commentaries?: string) {
+            this.sanitizedMinigame = sanitize(minigame);
+            this.sanitizedMapName = sanitize(mapName);
+            this.sanitizedBuilders = sanitize(builders);
+        }
     
     private getBaseUrl(zip: boolean) {
         let base = "/static/"
@@ -35,7 +43,7 @@ export class McMap {
             return "https://hivebackup.github.io/static/previews/Lobbies/arcade-shuffle.png"
         }
 
-        const full_url = `${this.getBaseUrl(false)}${sanitize(this.map_name)}.png`
+        const full_url = `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`
         // return full_url
         return "https://hivebackup.github.io/static/previews/Lobbies/arcade-shuffle.png"
     }

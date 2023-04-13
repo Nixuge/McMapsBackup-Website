@@ -22,7 +22,7 @@ export function setCurrentMap(newMap: McMap) {
 
 export function searchForMap(minigame: string, mapname: string) {
     SearchEngine.currentMapsRawArray.forEach(map => {
-        if (map.minigame == minigame && map.map_name == mapname) {
+        if (map.minigame == minigame && map.mapName == mapname) {
             setCurrentMap(map);
         };
     });

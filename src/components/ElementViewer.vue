@@ -8,7 +8,7 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
         <div class="text" v-if="currentMap.minigame != ''">
             <h1 v-text="currentMap.minigame"></h1>
             <hr>
-            <h1 v-text="currentMap.map_name"></h1>
+            <h1 v-text="currentMap.mapName"></h1>
             <h2 v-text="'Built by ' + currentMap.builders"></h2>
             <hr>
             <div v-if="currentMap.downloads.length != 0">

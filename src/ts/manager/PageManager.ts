@@ -30,6 +30,7 @@ export class PageManager {
     }
 
     private static genPageListSimpleRange(lastIndex: number) {
+        // Used if 10 or less pages shown
         for (let i = 1; i <= lastIndex; i++) {
             if (i == this.getPage()) {
                 this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i, ButtonEffect.CURRENT));
@@ -41,6 +42,7 @@ export class PageManager {
     }
 
     private static genPageListComplicated(lastIndex: number) {
+        // Used if 11 or more pages shown
         const currentPage = this.getPage();
         let totalToDoAfter = 5;
 
@@ -67,10 +69,10 @@ export class PageManager {
             this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i));
         }
 
-        // balance out overflow
+        // balance out overflow by adding before
         if (overflow > 0) {
             for (let i = currentPage - 5; i > currentPage - 5 - overflow; i--) {
-                if (i < 1) 
+                if (i < 1)
                     break;
                 this.pageSelector.unshift(new PageButtonData(ButtonType.NORMAL, i));
             }
@@ -91,19 +93,16 @@ export class PageManager {
             this.genPageListSimpleRange(lastIndex)
         else
             this.genPageListComplicated(lastIndex)
-        
 
-        if (currentPage == 1)
-            this.pageSelector.unshift(new PageButtonData(ButtonType.PREVIOUS, undefined, ButtonEffect.DISABLED));
-        else
-            this.pageSelector.unshift(new PageButtonData(ButtonType.PREVIOUS));
-        
 
-        if (currentPage >= lastIndex)
-            this.pageSelector.push(new PageButtonData(ButtonType.NEXT, undefined, ButtonEffect.DISABLED));
-        else
-            this.pageSelector.push(new PageButtonData(ButtonType.NEXT));
-        
+        this.pageSelector.unshift(new PageButtonData(
+            ButtonType.PREVIOUS, undefined,
+            (currentPage <= 1) ? ButtonEffect.DISABLED : undefined));
+
+
+        this.pageSelector.push(new PageButtonData(
+            ButtonType.NEXT, undefined,
+            (currentPage >= lastIndex) ? ButtonEffect.DISABLED : undefined));
 
     }
 }
