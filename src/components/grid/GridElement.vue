@@ -19,7 +19,7 @@ defineProps<{
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
     border-radius: 10px;
     text-align: center;
-    width: 100%;
+    width: 95%;
 }
 .grid_element:hover {
     cursor: pointer;

@@ -13,7 +13,7 @@ export class SearchEngine {
         // recalculate based on what currentMaps holds
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map =  this.currentMapsRawArray[i];
-            if (!(map.map_name.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
+            if (!(map.map_name.includes(this.search.toLowerCase().replace(" ", "")) || map.builders.includes(this.search.toLowerCase().replace(" ", "")) || map.minigame.includes(this.search.toLowerCase().replace(" ", "")))) {
                 this.currentMapsRawArray.splice(i, 1)
             }
         }
@@ -22,7 +22,7 @@ export class SearchEngine {
         // prolly not efficient but oh well
         this.currentMapsRawArray.length = 0;
         MAPS.forEach(map => {
-            if (map.map_name.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search)) {
+            if (map.map_name.includes(this.search.toLowerCase().replace(" ", "")) || map.builders.includes(this.search.toLowerCase().replace(" ", "")) || map.minigame.includes(this.search.toLowerCase().replace(" ", ""))) {
                 this.currentMapsRawArray.push(map)
             }
         });
@@ -62,30 +62,30 @@ export class SearchEngine {
         }
     }
 
-    private static update() {
-        this.generateCurrentMapsPages();
-        PageManager.genPageListSelect();
-    }
-
     public static init() {
         this.recalculateWhole();
         this.update()
     }
 
+    private static update() {
+        this.generateCurrentMapsPages();
+        PageManager.genPageListSelect();
+    }
+
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
-        this.search = event.target.value.toLowerCase();
+        this.search = event.target.value.toLowerCase().replace(" ", "");
 
         // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
         // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole
         // 
         // TODO?:  have recalculateWhole do it based on last input, & check from that
 
-        if (event.inputType == "insertText") {
-            this.recalculateInsert()
-        } else {
+        // if (event.inputType == "insertText") {
+            // this.recalculateInsert()
+        // } else {
             this.recalculateWhole();
-        }
+        // }
 
         this.update()
     }

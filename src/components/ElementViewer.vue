@@ -5,7 +5,7 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
 <template>
     <div class="viewer">
         <img :src="currentMap.getPreviewUrl()">
-        <div class="text">
+        <div class="text" v-if="currentMap.minigame != ''">
             <h1 v-text="currentMap.minigame"></h1>
             <hr>
             <h1 v-text="currentMap.map_name"></h1>
@@ -24,6 +24,9 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
                 <h1>Additional info</h1>
                 <h2 v-text="currentMap.commentaries"></h2>
             </div>
+        </div>
+        <div class="text" v-else>
+            <h1>No map selected</h1>
         </div>
     </div>
 </template>
