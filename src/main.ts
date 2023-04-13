@@ -18,4 +18,6 @@ TODO LEFT:
 - handle the "minigame" button
 - mobile support (media queries prolly)
 - actually add the maps
+- use computed
+- use animations (see base.css#bottom)
 */

@@ -8,9 +8,13 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <template>
     <div class="grid_wrapper">
+        
         <div class="grid">
-            <GridElement v-for="current_map in se.currentMapsPages[pm.page.value]" :map="current_map" />
+            <!-- <TransitionGroup :css="false" @enter="onEnter" appear> -->
+                <GridElement v-for="current_map in se.currentMapsPages[pm.page.value]" :map="current_map" :key="current_map"/>
+            <!-- </TransitionGroup> -->
         </div>
+        
         <PageSelector />
     </div>
 </template>

@@ -4,7 +4,7 @@ import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 
 <template>
     <div class="input">
-        <input name="aa" placeholder="Search for a map here" @input="event => se.handleInputChange(event)">
+        <input name="Search Input" placeholder="Search for a map here" @input="event => se.handleInputChange(event)">
     </div>
 </template>
 

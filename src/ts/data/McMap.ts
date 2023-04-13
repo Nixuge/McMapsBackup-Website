@@ -11,5 +11,5 @@ export class Download {
 export class McMap {
     constructor(public minigame: string, public map_name: string, public builders: string,
         public preview_url: string, public downloads: Array<Download>,
-        public commentaries?: string) {}
+        public id: string, public commentaries?: string) {}
 }

@@ -9,7 +9,8 @@ export const currentMap = reactive(new McMap(
     "No maps selected",
     "",
     "https://hivebackup.github.io/static/previews/Gravity/pacman.png",
-    []
+    [],
+    "hello"
 ))
 
 export function setCurrentMap(newMap: McMap) {

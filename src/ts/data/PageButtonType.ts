@@ -8,18 +8,14 @@ import { PageManager } from "../manager/PageManager";
 
 // remade enum bc TS enums have too much limitations (number based)
 export class TYPE {
-    public static Normal = new TYPE("", this.toString)
-    public static Next = new TYPE(">", this.toString)
+    public static Normal = new TYPE("", this.toString) // See ../manager/PageManager.ts#42
+    public static Next = new TYPE(">", this.toString) // (dirtyTypeEnumFix())
     public static Previous = new TYPE("<", this.toString)
     //TODO: add "first" & "last"
 
     constructor(public text: string, public func: Function) {
         this.text = text;
         this.func = func;
-    }
-
-    toString() {
-        return this.func;
     }
 }
 
@@ -36,8 +32,8 @@ export class PageButtonData {
     }
 
     public call() {
-        // can't use this.type.func() directly,
-        // need to use apply(PageManager) to run it on the static instance
+        // can't use func() directly,
+        // need to use func.apply(PageManager) to run it on the static instance
         if (this.page != undefined) {
             this.type.func.apply(PageManager, [this.page])
         } else {

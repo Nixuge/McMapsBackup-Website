@@ -1,7 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router"
-import Home from "@/View.vue"
+import Home from "@/views/View.vue"
 
 const routes = [
+    {
+        path: "/api",
+        name: "Api",
+        component: () => import("@/views/Api.vue"),
+    },
     {
         path: "/",
         name: "HomeRaw",

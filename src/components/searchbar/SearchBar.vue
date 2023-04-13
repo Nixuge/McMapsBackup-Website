@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SearchSelector from './SearchSelector.vue'
 import SearchInput from './SearchInput.vue'
+import SearchButton from './SearchButton.vue'
 const minigame_options = [
     "minigame 1",
     "minigame 2",
@@ -12,6 +13,7 @@ const minigame_options = [
     <div class="searchbar">
         <SearchSelector name="minigame" :options="minigame_options" />
         <SearchInput />
+        <SearchButton text="Api" href="/api" />
     </div>
 </template>
 
@@ -20,7 +22,9 @@ const minigame_options = [
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    padding: 10px 0px 10px 10px; /* top right bottom left */
+    /* top right bottom left  */
+    border-radius: 10px;
+    padding: 10px;
     width: 100%;
     box-sizing: border-box; /* width + padding = 100% */
 
