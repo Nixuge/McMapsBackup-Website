@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PageSelectorButton from './PageSelectorButton.vue'
-import { SearchEngine as se } from '@/ts/manager/SearchEngine';
+import { PageManager as pm } from '@/ts/manager/PageManager';
 </script>
 
 <template>
     <div class="page_selector_wrapper">
         <div class="page_selector">
-            <PageSelectorButton v-for="pageNum in se.currentPageIndexes" :page_number="pageNum" />
+            <PageSelectorButton v-for="pageNum in pm.pageSelector" :pageButton="pageNum" />
         </div>
     </div>
 </template>

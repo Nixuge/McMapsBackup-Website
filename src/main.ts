@@ -17,4 +17,5 @@ TODO LEFT:
 - prod
 - handle the "minigame" button
 - mobile support (media queries prolly)
+- actually add the maps
 */

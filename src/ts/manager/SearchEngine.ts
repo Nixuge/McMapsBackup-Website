@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { MAPS } from "../data/BaseData"
 import { McMap } from "../data/McMap";
 import { PageManager } from "./PageManager";
@@ -60,31 +60,31 @@ export class SearchEngine {
         }
     }
 
+    private static update() {
+        this.generateCurrentMapsPages();
+        PageManager.genPageListSelect();
+    }
+
     public static init() {
         this.recalculateWhole();
-        this.generateCurrentMapsPages();
+        this.update()
     }
 
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
         this.search = event.target.value;
 
-        switch (event.inputType) {
-            case "insertText": // causes issues when ctrl+a ing & replacing :/
-                this.recalculateInsert(); // will maybe have to recalculate the whole thing anyways every time
-                break;
-            
-            case "deleteContentBackward": // may delete one or more chars
-            case "insertFromPaste": // may insert multiple chars/replace existing chars
-            case "historyUndo":
-                this.recalculateWhole();
-                break;
-            
-            default:
-                this.recalculateWhole();
-                break;
+        // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
+        // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole
+        // 
+        // TODO?:  have recalculateWhole do it based on last input, & check from that
+
+        if (event.inputType == "insertText") {
+            this.recalculateInsert()
+        } else {
+            this.recalculateWhole();
         }
 
-        this.generateCurrentMapsPages();
+        this.update()
     }
 }
