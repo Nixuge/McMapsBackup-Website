@@ -11,7 +11,7 @@ parseUrlArgs()
 <template>
     <SearchBar />
     <div id="grid_container">
-        <ElementViewer id="first_child" />
+        <ElementViewer />
         <SearchGrid />
     </div>
 </template>
@@ -22,10 +22,11 @@ parseUrlArgs()
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-gap: 10px;
+    margin-bottom: 0;
 
-    /* full height - margin heights - hotbar height */
+    /* full height (100%) - margin heights (20px) - html padding (5px) - hotbar height (2rem) */
     /* Aproximate but works quite well */
     /* + fuck css (why is height: 100% overflowing) */
-    height: calc(100% - 40px - 2rem)
+    height: calc(100% - 25px - 2rem)
 }
 </style>

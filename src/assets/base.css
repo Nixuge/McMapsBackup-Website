@@ -95,7 +95,18 @@ body,
 html {
     color: var(--color-text);
     height: 100%;
-    overflow: hidden;
+    /* overflow-x: hidden; */
+    /* overflow-y: auto; */
+    margin: 0;
+}
+
+#app {
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+body, html {
+    margin: 0;
 }
 
 body {
