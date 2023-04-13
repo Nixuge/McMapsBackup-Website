@@ -19,9 +19,8 @@ export function setCurrentMap(newMap: McMap) {
 }
 
 export function searchForMap(minigame: string, mapname: string) {
-    const full_url = minigame + "/" + mapname;
     SearchEngine.currentMapsRawArray.forEach(map => {
-        if (map.url === full_url) {
+        if (map.minigame == minigame && map.map_name == mapname) {
             setCurrentMap(map);
         };
     });
