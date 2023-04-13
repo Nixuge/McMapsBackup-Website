@@ -21,11 +21,21 @@ export class SearchEngine {
     }
     private static recalculateWhole() {
         // prolly not efficient but oh well
+
         this.currentMapsRawArray.length = 0;
+        
+        const nanoMode = this.search.includes("nano");
+        const nanoSearch = this.search.replace("nano", "");
+
         MAPS.forEach(map => {
-            if (map.sanitizedMapName.includes(this.search) || map.sanitizedBuilders.includes(this.search) || map.sanitizedMinigame.includes(this.search)) {
+            if (nanoMode && map.nano) {
+                if (map.sanitizedMapName.includes(nanoSearch) || map.sanitizedBuilders.includes(nanoSearch) || map.sanitizedMinigame.includes(nanoSearch)) {
+                    this.currentMapsRawArray.push(map)
+                }
+            
+            } else if (map.sanitizedMapName.includes(this.search) || map.sanitizedBuilders.includes(this.search) || map.sanitizedMinigame.includes(this.search)) {
                 this.currentMapsRawArray.push(map)
-            }
+            } 
         });
     }
 
@@ -81,11 +91,19 @@ export class SearchEngine {
         // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole
         // 
         // TODO?:  have recalculateWhole do it based on last input, & check from that
+        //
+        // ========== Edit (for now) ==========
+        // Due to numerous issues, and since CPUs are powerful enough nowadays, 
+        // recalculateWhole() is used everytime, even when just adding text.
+        // (note: even when spamming, this uses like 2% 
+        // of what the animated gradient background uses)
 
-        if (event.inputType == "insertText")
-            this.recalculateInsert()
-        else
-            this.recalculateWhole();
+        // if (event.inputType == "insertText")
+            // this.recalculateInsert()
+        // else
+            // this.recalculateWhole();
+        
+        this.recalculateWhole();
         
 
         this.update()

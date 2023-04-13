@@ -103,6 +103,7 @@ html {
 #app {
     box-sizing: border-box;
     padding: 5px;
+    padding-bottom: 10px; /* For some weird reason the bottom  */
 }
 
 body, html {

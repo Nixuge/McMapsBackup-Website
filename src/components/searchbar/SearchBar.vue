@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import SearchSelector from './SearchSelector.vue'
 import SearchInput from './SearchInput.vue'
 import SearchButton from './SearchButton.vue'
-const minigame_options = [
-    "minigame 1",
-    "minigame 2",
-    "all"
-]
+
 </script>
 
 <template>
     <div class="searchbar">
-        <SearchSelector name="minigame" :options="minigame_options" />
         <SearchInput />
+        <SearchButton text="Search help" href="/help" />
         <SearchButton text="Api" href="/api" />
     </div>
 </template>

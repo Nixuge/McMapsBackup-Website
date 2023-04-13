@@ -81,8 +81,6 @@ export class PageManager {
     }
 
     public static genPageListSelect() {
-        //TODO: actually generate "next", "previous", "last", "first" buttons here
-        // Will do once i've added more maps to the library
         this.pageSelector.length = 0;
         const indexes = SearchEngine.currentPageIndexes;
 

@@ -13,7 +13,7 @@ export class ButtonType {
     public static NORMAL = new ButtonType("", placeholder) // See ../manager/PageManager.ts#42
     public static NEXT = new ButtonType(">", placeholder) // (dirtyTypeEnumFix())
     public static PREVIOUS = new ButtonType("<", placeholder)
-    //TODO: add "first" & "last"
+    //Todo: maybe add first & last? but they don't seem to be needed
 
     constructor(public text: string, public func: Function) {
         this.text = text;

@@ -6,6 +6,7 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
     <div class="viewer">
         <img :src="currentMap.getPreviewUrl()">
         <div class="text" v-if="currentMap.minigame != ''">
+            <h1 v-if="currentMap.nano">Nano Game</h1>
             <h1 v-text="currentMap.minigame"></h1>
             <hr>
             <h1 v-text="currentMap.mapName"></h1>
@@ -52,7 +53,7 @@ h1 {
 }
 
 li {
-    font-size: large;
+    font-size: 150%
 }
 
 a {

@@ -3,31 +3,22 @@ import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 </script>
 
 <template>
-    <div class="input">
-        <input name="Search Input" placeholder="Search for a map here" @input="event => se.handleInputChange(event)">
-    </div>
+    <input name="Search Input" placeholder="Search for a map here" @input="event => se.handleInputChange(event)">
 </template>
 
 <style scoped>
-/* 
-* Because inputs have shitty cross-browser styling support
-* I'm just going to style the div around instead
-*/
+
 input {
+    font-size: 20px;
     width: 100%;
     box-sizing: border-box;
     background: transparent;
     border: none;
     box-shadow: none;
-    color: var(--text-color)
-}
-textarea:focus, input:focus{
-    outline: none;
+    color: var(--text-color);
 }
 
-.input {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%;
+textarea:focus, input:focus{
+    outline: none;
 }
 </style>

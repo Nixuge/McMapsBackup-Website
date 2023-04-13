@@ -15,9 +15,8 @@ app.mount('#app');
 /* 
 TODO LEFT:
 - prod
-- handle the "minigame" button
 - mobile support (media queries prolly)
-- actually add the maps
 - use computed
 - use animations (see base.css#bottom)
+- add tags to use in the search bar (eg. minigame:... builder:...)
 */

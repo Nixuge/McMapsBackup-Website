@@ -35,6 +35,5 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     justify-items: center;
     align-items: center;
     margin-bottom: 50px;
-    /* height: 90%; */
 }
 </style>

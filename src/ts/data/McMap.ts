@@ -40,11 +40,11 @@ export class McMap {
     public getPreviewUrl() {
         if (this.minigame == "") {
             // TODO: return a placeholder for invalid entries (eg. preview)
-            return "https://hivebackup.github.io/static/previews/Lobbies/arcade-shuffle.png"
+            return "https://hivebackup.github.io/static/previews/Lobbies/skywars.png"
         }
 
         const full_url = `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`
         // return full_url
-        return "https://hivebackup.github.io/static/previews/Lobbies/arcade-shuffle.png"
+        return "https://hivebackup.github.io/static/previews/Lobbies/block-party.png"
     }
 }
