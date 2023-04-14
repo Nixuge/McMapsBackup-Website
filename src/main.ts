@@ -1,12 +1,12 @@
-import { createApp } from 'vue'
-import App from '@/App.vue'
+import { createApp } from 'vue';
+import App from '@/App.vue';
 import { SearchEngine } from './ts/manager/SearchEngine';
 
-import router from './router'
+import router from './router';
 
-import './assets/base.css'
+import './assets/base.css';
 
-SearchEngine.init()
+SearchEngine.init();
 
 const app = createApp(App);
 app.use(router);

@@ -10,9 +10,9 @@ function placeholder() {}
 
 // remade enum bc TS enums have too much limitations (number based)
 export class ButtonType {
-    public static NORMAL = new ButtonType("", placeholder) // See ../manager/PageManager.ts#42
-    public static NEXT = new ButtonType(">", placeholder) // (dirtyTypeEnumFix())
-    public static PREVIOUS = new ButtonType("<", placeholder)
+    public static NORMAL = new ButtonType("", placeholder); // See ../manager/PageManager.ts#42
+    public static NEXT = new ButtonType(">", placeholder); // (dirtyTypeEnumFix())
+    public static PREVIOUS = new ButtonType("<", placeholder);
     //Todo: maybe add first & last? but they don't seem to be needed
 
     constructor(public text: string, public func: Function) {
@@ -28,7 +28,7 @@ export enum ButtonEffect {
 
 export class PageButtonData {
     public text: string;
-    public effect?: ButtonEffect
+    public effect?: ButtonEffect;
 
     constructor(public type: ButtonType, public page?: number, effect?: ButtonEffect) {
         this.type = type;
@@ -46,9 +46,9 @@ export class PageButtonData {
         // can't use func() directly,
         // need to use func.apply(PageManager) to run it on the static instance
         if (this.page != undefined) {
-            this.type.func.apply(PageManager, [this.page])
+            this.type.func.apply(PageManager, [this.page]);
         } else {
-            this.type.func.apply(PageManager)
+            this.type.func.apply(PageManager);
         }
     }
 }

@@ -16,7 +16,7 @@ export class SearchEngine {
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map =  this.currentMapsRawArray[i];
             if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
-                this.currentMapsRawArray.splice(i, 1)
+                this.currentMapsRawArray.splice(i, 1);
             }
         }
     }
@@ -35,13 +35,14 @@ export class SearchEngine {
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
         const nanoTag = tagNode.getTag("nano");
+        const wantsNano = (nanoTag == undefined) ? undefined : textToBool(nanoTag.value);
+        
         const gameTag = tagNode.getTag("game");
         const builderTag = tagNode.getTag("builder");
         const remaining = tagNode.getRemaining();
 
         for (const map of MAPS) {
             if (nanoTag != undefined) {
-                const wantsNano = textToBool(nanoTag.value);
                 // Skip only if both tags aren't the same
                 if (!((map.nano && wantsNano) || (!map.nano && !wantsNano))) {
                     continue;
@@ -55,9 +56,9 @@ export class SearchEngine {
             }
             
             if (remaining != "" && !map.sanitizedMapName.includes(remaining)) {
-                continue
+                continue;
             }
-            this.currentMapsRawArray.push(map)
+            this.currentMapsRawArray.push(map);
         }
         
     }
@@ -83,7 +84,7 @@ export class SearchEngine {
                 this.currentPageLastIndex = _page;
                 this.currentMapsPages[_page] = [];
             }
-            this.currentMapsPages[_page].push(map)
+            this.currentMapsPages[_page].push(map);
             if ((i + 1) % 9 == 0) {
                 _page += 1;
             }

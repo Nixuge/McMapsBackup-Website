@@ -24,27 +24,27 @@ export class McMap {
         }
     
     private getBaseUrl(zip: boolean) {
-        let base = "/static/"
-        base += (zip) ? "zip/" : "img/"
+        let base = "/static/";
+        base += (zip) ? "zip/" : "img/";
         if (this.nano){
-            base += "nano/"
+            base += "nano/";
         }
-        base += sanitize(this.minigame) + "/"
-        return base
+        base += sanitize(this.minigame) + "/";
+        return base;
     }
 
     public getDownloadUrl(filename: string) {
-        return this.getBaseUrl(true) + filename
+        return this.getBaseUrl(true) + filename;
     }
 
     public getPreviewUrl() {
         if (this.minigame == "") {
             // TODO: return a placeholder for invalid entries (eg. preview)
-            return "https://hivebackup.github.io/static/previews/Lobbies/skywars.png"
+            return "https://hivebackup.github.io/static/previews/Lobbies/skywars.png";
         }
 
-        const full_url = `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`
+        const full_url = `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`;
         // return full_url
-        return "https://hivebackup.github.io/static/previews/Lobbies/block-party.png"
+        return "https://hivebackup.github.io/static/previews/Lobbies/block-party.png";
     }
 }

@@ -10,13 +10,10 @@ export function parseUrlArgs() {
     
     if (page != null) {
         let num = Number.parseInt(page.toString());
-        PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num
+        PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num;
     }
 
-    if (minigame != null) {
-        //TODO: SET MINIGAME
-    }
     if (mapname != null) {
-        searchForMap(minigame.toString(), mapname.toString())
+        searchForMap(minigame.toString(), mapname.toString());
     }
 }

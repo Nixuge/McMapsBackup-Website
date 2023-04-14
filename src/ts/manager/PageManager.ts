@@ -6,7 +6,7 @@ import { PageButtonData, ButtonType, ButtonEffect } from "../data/PageButtonType
 // Java OOP flashbacks
 export class PageManager {
     public static page = ref(1);
-    public static pageSelector: Array<PageButtonData> = reactive([new PageButtonData(ButtonType.NORMAL, 1)])
+    public static pageSelector: Array<PageButtonData> = reactive([new PageButtonData(ButtonType.NORMAL, 1)]);
 
     public static setPage(_page: number) {
         this.page.value = _page;
@@ -37,7 +37,6 @@ export class PageManager {
             } else {
                 this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i));
             }
-
         }
     }
 
@@ -87,9 +86,9 @@ export class PageManager {
         const currentPage = this.getPage();
 
         if (lastIndex < 11)
-            this.genPageListSimpleRange(lastIndex)
+            this.genPageListSimpleRange(lastIndex);
         else
-            this.genPageListComplicated(lastIndex)
+            this.genPageListComplicated(lastIndex);
 
 
         this.pageSelector.unshift(new PageButtonData(
@@ -106,8 +105,9 @@ export class PageManager {
 
 watch(PageManager.page, () => {
     // works for reactivity tracking
-    PageManager.genPageListSelect()
-})
+    // TODO: rework by watching the URL instead
+    PageManager.genPageListSelect();
+});
 
 // Basically did a loop import between PageButtonType & PageManager
 // & I couldn't set those functions by default so just replacing them

@@ -23,10 +23,10 @@ import SearchButton from './SearchButton.vue'
     width: 100%;
     box-sizing: border-box; /* width + padding = 100% */
 
-    background-color: var(--dark-transparent)
+    background-color: var(--dark-transparent);
 
 }
 .searchbar:hover {
-    background-color: var(--dark-transparent-darker)
+    background-color: var(--dark-transparent-darker);
 }
 </style>

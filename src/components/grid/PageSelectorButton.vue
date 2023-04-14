@@ -24,7 +24,7 @@ defineProps<{
 
 .disabled {
     background: transparent !important;
-    color: var(--color-border-hover)
+    color: var(--color-border-hover);
 }
 
 .page_selector_button {

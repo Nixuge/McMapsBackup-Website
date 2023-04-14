@@ -6,21 +6,21 @@ export class TagsManager {
         let tagNode = new TagNode();
 
         if (!search.includes(":")) {
-            tagNode.addRemaining(search);
+            tagNode.addRemaining(sanitize(search));
             return tagNode;
         }
 
-        const parts = search.split(" ")
+        const parts = search.split(" ");
 
         for (const part of parts) {
             if (!part.includes(":")) {
-                tagNode.addRemaining(part)
-                continue
+                tagNode.addRemaining(part);
+                continue;
             }
-            const splittedTag = part.split(":")
+            const splittedTag = part.split(":");
             tagNode.addTag(
                 new Tag(sanitize(splittedTag[0]), sanitize(splittedTag[1]))
-            )
+            );
         }
 
         // tagNode.getTags().forEach(element => {

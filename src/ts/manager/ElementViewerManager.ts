@@ -5,18 +5,13 @@ import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
 export const currentMap = reactive(new McMap(
-    "",
-    "No maps selected",
-    "",
-    [],
-    0,
-    false,
-    "hello"
-))
+    "", "", "",
+    [], 0, false
+));
 
 export function setCurrentMap(newMap: McMap) {
     // currentMap = newMap, doesn't work bc of reactive()
-    Object.assign(currentMap, newMap)
+    Object.assign(currentMap, newMap);
     updateUrl();
 }
 

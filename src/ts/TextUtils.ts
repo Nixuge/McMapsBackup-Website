@@ -22,5 +22,5 @@ export function sanitizeSearch(text: string) {
 
 const trueValues = ["true", "1", "yes"];
 export function textToBool(text: string) {
-    return trueValues.includes(text)
+    return trueValues.includes(text);
 }
