@@ -104,6 +104,9 @@ export class PageManager {
     }
 
     public static onScroll(event: any) {
+        if (!isHovering.value)
+            return;
+        
         if (event.deltaY < 0)
             this.setPage(this.getPage() + 1)
         else
