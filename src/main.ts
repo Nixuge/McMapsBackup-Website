@@ -15,7 +15,6 @@ app.mount('#app');
 /* 
 TODO LEFT:
 - prod
-- use computed
 - use animations (see base.css#bottom)
 - "download all shown" button (w limit for how many elements) -> unsure
 */

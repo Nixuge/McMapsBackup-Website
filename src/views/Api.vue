@@ -18,7 +18,7 @@ import SearchButton from '@/components/searchbar/SearchButton.vue'
     <h2>To get the preview image (use "img" in the url):</h2>
     <h2>[sanitized mapname].png </h2>
     <h2>To get a map download (use "zip" in the url):</h2>
-    <h2>[download url (value in dict) from the downloads dict].zip </h2>
+    <h2>[download url (value in dict) from the downloads dict]</h2>
     <br>
     <h1>URL examples:</h1>
     <h2><a href="/static/zip/thebridges/seretopia.zip">/static/zip/thebridges/seretopia.zip</a> (Seretopia map from Bridges)</h2>

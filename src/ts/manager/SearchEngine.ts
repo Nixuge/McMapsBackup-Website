@@ -48,16 +48,13 @@ export class SearchEngine {
                     continue;
                 }
             }
-            if (gameTag != undefined && !map.sanitizedMinigame.includes(gameTag.value)) {
+
+            if ((gameTag != undefined && !map.sanitizedMinigame.includes(gameTag.value)) ||
+                (builderTag != undefined && !map.sanitizedBuilders.includes(builderTag.value)) ||
+                (remaining != "" && !map.sanitizedMapName.includes(remaining))) {
                 continue;
             }
-            if (builderTag != undefined && !map.sanitizedBuilders.includes(builderTag.value)) {
-                continue;
-            }
-            
-            if (remaining != "" && !map.sanitizedMapName.includes(remaining)) {
-                continue;
-            }
+
             this.currentMapsRawArray.push(map);
         }
         
@@ -104,6 +101,9 @@ export class SearchEngine {
     private static update() {
         this.generateCurrentMapsPages();
         PageManager.genPageListSelect();
+        if (PageManager.getPage() > this.currentPageLastIndex) {
+            PageManager.setPage(this.currentPageLastIndex)
+        }
     }
 
     //TODO: handle "select" change
