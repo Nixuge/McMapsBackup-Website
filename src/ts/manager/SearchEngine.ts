@@ -30,7 +30,7 @@ export class SearchEngine {
 
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
-        this.search = sanitize(this.search) 
+        this.search = sanitize(this.search);
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't

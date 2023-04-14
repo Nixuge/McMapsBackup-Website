@@ -1,6 +1,5 @@
 import { reactive } from "vue";
 import { McMap } from "../data/McMap";
-import router from "@/router";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
