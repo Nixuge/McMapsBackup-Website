@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PageSelectorButton from './PageSelectorButton.vue'
-import { PageManager as pm } from '@/ts/manager/PageManager';
+import { PageManager as pm, isHovering } from '@/ts/manager/PageManager';
 </script>
 
 <template>
     <div class="page_selector_wrapper">
-        <div class="page_selector">
-            <PageSelectorButton v-for="pageNum in pm.pageSelector" :pageButton="pageNum" />
+        <div class="page_selector" @mouseover="isHovering = true" @mouseleave="isHovering = false" >
+            <PageSelectorButton v-for="pageNum in pm.pageSelector" :pageButton="pageNum"/>
         </div>
     </div>
 </template>

@@ -9,7 +9,7 @@ export class SearchEngine {
     private static search: string = "";
     public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
     public static currentMapsPages: any = reactive({});
-    public static currentPageLastIndex: number = 1;
+    public static currentLastPageIndex: number = 1;
 
     private static recalculateInsert() {
         // recalculate based on what currentMaps holds
@@ -64,10 +64,10 @@ export class SearchEngine {
         // Didn't bother with optimization on this one tbh, always clearing & redoing
 
         // Clear the old pages
-        for (let i = 0; i < this.currentPageLastIndex; i++) {
+        for (let i = 0; i < this.currentLastPageIndex; i++) {
             delete this.currentMapsPages[i];
         }
-        this.currentPageLastIndex = 1;
+        this.currentLastPageIndex = 1;
 
         // Set the initial page to both the dict & the list
         let _page = 1;
@@ -77,8 +77,8 @@ export class SearchEngine {
         // Split every 9 items
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map = this.currentMapsRawArray[i];
-            if (this.currentPageLastIndex != _page) {
-                this.currentPageLastIndex = _page;
+            if (this.currentLastPageIndex != _page) {
+                this.currentLastPageIndex = _page;
                 this.currentMapsPages[_page] = [];
             }
             this.currentMapsPages[_page].push(map);
@@ -101,8 +101,8 @@ export class SearchEngine {
     private static update() {
         this.generateCurrentMapsPages();
         PageManager.genPageListSelect();
-        if (PageManager.getPage() > this.currentPageLastIndex) {
-            PageManager.setPage(this.currentPageLastIndex)
+        if (PageManager.getPage() > this.currentLastPageIndex) {
+            PageManager.setPage(this.currentLastPageIndex)
         }
     }
 

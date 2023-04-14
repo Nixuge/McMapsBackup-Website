@@ -9,6 +9,8 @@ export class PageManager {
     public static pageSelector: Array<PageButtonData> = reactive([new PageButtonData(ButtonType.NORMAL, 1)]);
 
     public static setPage(_page: number) {
+        if (_page > SearchEngine.currentLastPageIndex || _page < 1)
+            return;
         this.page.value = _page;
         updateUrl();
     }
@@ -82,7 +84,7 @@ export class PageManager {
     public static genPageListSelect() {
         this.pageSelector.length = 0;
 
-        const lastIndex = SearchEngine.currentPageLastIndex;
+        const lastIndex = SearchEngine.currentLastPageIndex;
         const currentPage = this.getPage();
 
         if (lastIndex < 11)
@@ -99,9 +101,21 @@ export class PageManager {
         this.pageSelector.push(new PageButtonData(
             ButtonType.NEXT, undefined,
             (currentPage >= lastIndex) ? ButtonEffect.DISABLED : undefined));
+    }
 
+    public static onScroll(event: any) {
+        if (event.deltaY < 0)
+            this.setPage(this.getPage() + 1)
+        else
+            this.setPage(this.getPage() - 1)
+        
+        
     }
 }
+
+export let isHovering = ref(false);
+
+addEventListener("wheel", (event) => { PageManager.onScroll(event) });
 
 watch(PageManager.page, () => {
     // works for reactivity tracking
