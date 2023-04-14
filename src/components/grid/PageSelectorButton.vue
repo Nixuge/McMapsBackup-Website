@@ -34,7 +34,7 @@ defineProps<{
     border-radius: 10px;
     height: 50px;
     width: 50px;
-    min-width: 50px;
+    min-width: 20px;
     margin-left: 10px;
     margin-right: 10px;
     background-color: var(--color-border);
