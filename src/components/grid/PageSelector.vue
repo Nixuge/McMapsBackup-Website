@@ -13,21 +13,27 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <style scoped>
 .page_selector_wrapper {
-    position: absolute;
+    /* Needed to anchor at bottom of the page, see Grid.vue */
+    margin-top: auto;
+
+    /* Center & allow overflow in sub element */
     display: flex;
-    justify-content: center;
-    /* bottom: 5px; */
     width: 100%;
-    overflow: auto;
+    justify-content: center;
+
+    /* Needed, otherwise Safari just hides it (thanks Safari) */
+    min-height: 4em;
 }
 
 .page_selector {
+    /* Padding balanced by min-height in parent element */
+    padding-top: 7px;
+    overflow: auto;
+
+    /* Normal theming */
     display: flex;
-    padding-top: 4px;
-    padding-bottom: 4px;
     border-radius: 10px;
     background-color: var(--dark-transparent-darker);
     text-align: center;
-    overflow: auto;
 }
 </style>

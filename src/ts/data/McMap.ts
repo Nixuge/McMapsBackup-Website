@@ -40,6 +40,7 @@ export class McMap {
     public getPreviewUrl() {
         if (this.minigame == "")
             return "/static/img/unselected.png";
-        return `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`;
+        // return `${this.getBaseUrl(false)}${sanitize(this.mapName)}.png`;
+        return `https://hivebackup.github.io/static/previews/Gravity/aquamarine.png`;
     }
 }

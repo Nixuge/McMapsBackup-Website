@@ -21,17 +21,23 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <style scoped>
 .grid_wrapper {
-    position: relative;
+    /* Needed to anchor at bottom of the page, see PageSelector.vue */
+    display: flex;
+    flex-direction: column;
+    /* Padding so that the PageSelector has some padding */
+    padding-bottom: 5px;
+
     background-color: var(--dark-transparent);
     border-radius: 10px;
     width: 100%;
     overflow: auto;
+    
 }
 .grid {
     display: grid;
     /* grid-template-columns: 1fr 1fr 1fr; */
     grid-template-rows: 1fr 1fr 1fr;
-    margin: 20px;
+    margin: 15px;
     grid-gap: 20px;
     justify-items: center;
     align-items: center;
