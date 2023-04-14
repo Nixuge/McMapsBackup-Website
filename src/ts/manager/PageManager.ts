@@ -106,19 +106,19 @@ export class PageManager {
     public static onScroll(event: any) {
         if (!isHovering.value)
             return;
-        
+
+        event.preventDefault()
         if (event.deltaY < 0)
             this.setPage(this.getPage() + 1)
         else
             this.setPage(this.getPage() - 1)
-        
-        
     }
 }
 
 export let isHovering = ref(false);
 
-addEventListener("wheel", (event) => { PageManager.onScroll(event) });
+// {passive: false} Needed to preventDefault()
+addEventListener("wheel", (event) => { PageManager.onScroll(event) }, {passive: false}); 
 
 watch(PageManager.page, () => {
     // works for reactivity tracking
