@@ -30,4 +30,7 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 .searchbar:hover {
     background-color: var(--dark-transparent-darker);
 }
+.searchbar > * {
+    padding-right: 5px;
+}
 </style>

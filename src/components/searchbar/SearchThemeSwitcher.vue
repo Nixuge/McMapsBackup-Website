@@ -10,6 +10,6 @@ import { switchTheme, themeIconClass } from '@/ts/utils/ThemeSetter';
 
 <style scoped>
     div {
-        width: 40px;
+        width: 25px;
     }
 </style>
