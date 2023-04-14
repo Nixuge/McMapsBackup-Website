@@ -7,7 +7,7 @@ import SearchButton from '@/components/searchbar/SearchButton.vue'
     <h1>Search help</h1>
     <br>
     <h1>Tags:</h1>
-    <h2>minigame:[minigame name here] -> lets you select maps from a specific minigame</h2>
+    <h2>game:[minigame name here] -> lets you select maps from a specific minigame</h2>
     <h2>builder:[builder name here] -> lets you select maps built by a specific builder</h2>
     <h2>nano:[true or false] -> lets you either choose only nano games or only non-nano games</h2>
     <br>

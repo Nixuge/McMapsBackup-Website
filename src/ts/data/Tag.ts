@@ -1,6 +1,9 @@
 export class Tag {
     public type: string;
-    constructor(name: string, public value: string) {
+    public value: string;
+
+    constructor(name: string, value: string) {
+        this.value = value.toLowerCase();
         this.type = Tag.tagFromString(name);
     }
 
@@ -46,5 +49,20 @@ export class TagNode {
 
     public getRemaining() {
         return this.remaining;
+    }
+
+    public hasTag(tagname: string) {
+        for (const tag of this.tagList) {
+            if (tag.type == tagname) 
+                return true;
+        }
+        return false;
+    }
+    public getTag(tagname: string) {
+        for (const tag of this.tagList) {
+            if (tag.type == tagname) 
+                return tag;
+        }
+        return undefined;
     }
 }
