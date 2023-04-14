@@ -2,10 +2,12 @@ import { reactive } from "vue";
 import { MAPS } from "../data/BaseData"
 import { McMap } from "../data/McMap";
 import { PageManager } from "./PageManager";
-import { sanitize } from "../TextUtils";
+import { sanitize, sanitizeSearch } from "../TextUtils";
+import { TagsManager } from "./TagsManager";
 
 export class SearchEngine {
     private static search: string = ""
+    private static searchTags: {}
     public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
     public static currentMapsPages: any = reactive({});
     public static currentPageLastIndex: number = 1;
@@ -19,13 +21,16 @@ export class SearchEngine {
             }
         }
     }
+
     private static recalculateWhole() {
         // prolly not efficient but oh well
 
         this.currentMapsRawArray.length = 0;
+
+        const tagNode = TagsManager.getNewTags(this.search)
+        const tags = tagNode.getTags()
+        // for ()
         
-        const nanoMode = this.search.includes("nano");
-        const nanoSearch = this.search.replace("nano", "");
 
         MAPS.forEach(map => {
             if (nanoMode && map.nano) {
@@ -84,7 +89,7 @@ export class SearchEngine {
 
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
-        this.search = sanitize(event.target.value);
+        this.search = sanitizeSearch(event.target.value);
 
         // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
         // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole

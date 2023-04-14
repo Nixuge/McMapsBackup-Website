@@ -25,15 +25,32 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     background-color: var(--dark-transparent);
     border-radius: 10px;
     width: 100%;
+    overflow: auto;
 }
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr; */
     grid-template-rows: 1fr 1fr 1fr;
     margin: 20px;
     grid-gap: 20px;
     justify-items: center;
     align-items: center;
-    margin-bottom: 50px;
 }
+
+@media screen and (max-width: 849px){
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media screen and (min-width: 850px){
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (min-width: 1250px){
+    .grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 </style>

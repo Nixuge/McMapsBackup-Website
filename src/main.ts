@@ -15,9 +15,7 @@ app.mount('#app');
 /* 
 TODO LEFT:
 - prod
-- mobile support (media queries prolly)
 - use computed
 - use animations (see base.css#bottom)
-- add tags to use in the search bar (eg. minigame:... builder:...)
-- "download all shown" button (w limit for how many elements)
+- "download all shown" button (w limit for how many elements) -> unsure
 */

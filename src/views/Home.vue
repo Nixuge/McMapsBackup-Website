@@ -20,7 +20,7 @@ parseUrlArgs()
 <style scoped>
 #grid_container {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    /* grid-template-columns: 1fr 3fr; */
     grid-gap: 10px;
     margin-bottom: 0;
 
@@ -28,5 +28,23 @@ parseUrlArgs()
     /* Aproximate but works quite well */
     /* + fuck css (why is height: 100% overflowing) */
     height: calc(100% - 25px - 2rem)
+}
+
+@media screen and (max-width: 849px) {
+    #grid_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    #grid_container {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+@media screen and (min-width: 1250px) {
+    #grid_container {
+        grid-template-columns: 1fr 3fr;
+    }
 }
 </style>

@@ -16,7 +16,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 5px;
+    /* bottom: 5px; */
     width: 100%;
     overflow: auto;
 }

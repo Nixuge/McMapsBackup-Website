@@ -8,3 +8,14 @@ export function sanitize(text: string) {
     }
     return newText;
 }
+
+const validChars2 = "abcdefghijklmnopqrstuvwxyz0123456789: "
+export function sanitizeSearch(text: string) {
+    let newText = ""
+    for (const char of text.toLowerCase()) {
+        if (validChars2.includes(char)) {
+            newText += char;
+        }
+    }
+    return newText;
+}

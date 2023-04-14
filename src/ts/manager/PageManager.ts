@@ -47,7 +47,7 @@ export class PageManager {
         let totalToDoAfter = 5;
 
         // before current page
-        for (let i = currentPage - 5; i < currentPage; i++) {
+        for (let i = currentPage - 4; i < currentPage; i++) {
             if (i < 1) {
                 totalToDoAfter++;
                 continue;
@@ -82,8 +82,8 @@ export class PageManager {
 
     public static genPageListSelect() {
         this.pageSelector.length = 0;
-        const lastIndex = SearchEngine.currentPageLastIndex;
 
+        const lastIndex = SearchEngine.currentPageLastIndex;
         const currentPage = this.getPage();
 
         if (lastIndex < 11)

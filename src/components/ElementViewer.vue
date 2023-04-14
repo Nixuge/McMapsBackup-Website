@@ -40,6 +40,7 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
 .viewer {
     background-color: var(--dark-transparent);
     border-radius: 10px;
+    overflow: auto;
 }
 
 img {
