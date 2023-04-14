@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { McMap } from "../data/McMap";
+import { McMap } from "@/ts/data/McMap";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 

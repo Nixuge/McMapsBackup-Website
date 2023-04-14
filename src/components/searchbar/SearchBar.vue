@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SearchInput from './SearchInput.vue'
 import SearchButton from './SearchButton.vue'
-
+import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 </script>
 
 <template>
@@ -9,6 +9,7 @@ import SearchButton from './SearchButton.vue'
         <SearchInput />
         <SearchButton text="Search help" href="/help" />
         <SearchButton text="Api" href="/api" />
+        <SearchThemeSwitcher />
     </div>
 </template>
 

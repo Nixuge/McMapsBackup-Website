@@ -1,5 +1,5 @@
-import { sanitize } from "../TextUtils";
-import { Tag, TagNode } from "../data/Tag";
+import { sanitize } from "@/ts/utils/TextUtils";
+import { Tag, TagNode } from "@/ts/data/Tag";
 
 export class TagsManager {
     public static getNewTags(search: string) {

@@ -1,8 +1,8 @@
 import { reactive } from "vue";
-import { MAPS } from "../data/BaseData"
-import { McMap } from "../data/McMap";
+import { MAPS } from "@/ts/data/BaseData"
+import { McMap } from "@/ts/data/McMap";
 import { PageManager } from "./PageManager";
-import { textToBool, sanitizeSearch, sanitize } from "../TextUtils";
+import { textToBool, sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
 import { TagsManager } from "./TagsManager";
 
 export class SearchEngine {

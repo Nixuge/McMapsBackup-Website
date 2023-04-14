@@ -1,4 +1,4 @@
-import { PageManager } from "../manager/PageManager";
+import { PageManager } from "@/ts/manager/PageManager";
 
 // export enum TYPES {
 //     NORMAL = undefined,

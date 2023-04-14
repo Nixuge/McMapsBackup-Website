@@ -1,7 +1,7 @@
 import { reactive, ref, watch, watchEffect } from "vue";
 import { updateUrl } from "./UrlManager";
 import { SearchEngine } from "./SearchEngine";
-import { PageButtonData, ButtonType, ButtonEffect } from "../data/PageButtonType";
+import { PageButtonData, ButtonType, ButtonEffect } from "@/ts/data/PageButtonType";
 
 // Java OOP flashbacks
 export class PageManager {

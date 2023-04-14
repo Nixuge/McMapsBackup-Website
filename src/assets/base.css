@@ -11,12 +11,12 @@
 
     --vt-c-indigo: #2c3e50;
 
-    --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-    --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+    --vt-c-divider-light-1: rgba(17, 17, 17, 0.29);
+    --vt-c-divider-light-2: rgba(47, 47, 47, 0.12);
     --vt-c-divider-dark-1: rgba(96, 96, 96, 0.65);
     --vt-c-divider-dark-2: rgba(84, 84, 84, 0.40);
 
-    --vt-c-text-light-1: var(--vt-c-indigo);
+    --vt-c-text-light-1: rgba(255, 255, 255, 0.889);
     --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
     --vt-c-text-dark-1: var(--vt-c-white);
     --vt-c-text-dark-2: rgba(235, 235, 235, 0.889);
@@ -24,7 +24,7 @@
     --section-gap: 160px;
 }
 
-:root {
+:root.light {
     --color-background: var(--vt-c-white);
     --color-background-soft: var(--vt-c-white-soft);
     --color-background-mute: var(--vt-c-white-mute);
@@ -42,25 +42,24 @@
     --dark-transparent-darker: rgba(50, 50, 50, .4);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: var(--vt-c-black);
-        --color-background-soft: var(--vt-c-black-soft);
-        --color-background-mute: var(--vt-c-black-mute);
+:root, :root.dark {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
 
-        --color-border: var(--vt-c-divider-dark-2);
-        --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
 
-        --color-heading: var(--vt-c-text-dark-1);
-        --color-text: var(--vt-c-text-dark-2);
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
 
-        --background-gradient-color: #024a93;
-        --background-gradient-image: linear-gradient(62deg, #034540 0%, #72207C 100%);
+    --background-gradient-color: #024a93;
+    --background-gradient-image: linear-gradient(62deg, #034540 0%, #72207C 100%);
 
-        --dark-transparent: rgba(50, 50, 50, .4);
-        --dark-transparent-darker: rgba(50, 50, 50, .5);
-    }
+    --dark-transparent: rgba(50, 50, 50, .5);
+    --dark-transparent-darker: rgba(50, 50, 50, .6);
 }
+
 
 @keyframes fadeInFromNone {
     0% {
@@ -78,13 +77,16 @@
         opacity: 1;
     }
 }
+
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -103,10 +105,12 @@ html {
 #app {
     box-sizing: border-box;
     padding: 5px;
-    padding-bottom: 10px; /* For some weird reason the bottom  */
+    padding-bottom: 10px;
+    /* For some weird reason the bottom doesn't have a padding w padding: 5px; only */
 }
 
-body, html {
+body,
+html {
     margin: 0;
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  text: string,
-  href: string
+    text: string,
+    href: string
 }>()
 </script>
 
@@ -12,7 +12,6 @@ defineProps<{
 </template>
 <style scoped>
 .button {
-  white-space: nowrap;
-  padding-left: 10px;
+    white-space: nowrap;
 }
 </style>

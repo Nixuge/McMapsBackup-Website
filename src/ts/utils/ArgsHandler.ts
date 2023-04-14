@@ -1,6 +1,6 @@
 import router from "@/router";
-import { searchForMap } from "./manager/ElementViewerManager";
-import { PageManager } from "./manager/PageManager";
+import { searchForMap } from "@/ts/manager/ElementViewerManager";
+import { PageManager } from "@/ts/manager/PageManager";
 
 export function parseUrlArgs() {
     const params = router.currentRoute.value.params;
