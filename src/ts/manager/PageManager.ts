@@ -82,9 +82,8 @@ export class PageManager {
 
     public static genPageListSelect() {
         this.pageSelector.length = 0;
-        const indexes = SearchEngine.currentPageIndexes;
+        const lastIndex = SearchEngine.currentPageLastIndex;
 
-        const lastIndex = indexes[indexes.length - 1];
         const currentPage = this.getPage();
 
         if (lastIndex < 11)

@@ -8,7 +8,7 @@ export class SearchEngine {
     private static search: string = ""
     public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
     public static currentMapsPages: any = reactive({});
-    public static currentPageIndexes: Array<number> = reactive([]);
+    public static currentPageLastIndex: number = 1;
 
     private static recalculateInsert() {
         // recalculate based on what currentMaps holds
@@ -43,23 +43,22 @@ export class SearchEngine {
         // Didn't bother with optimization on this one tbh, always clearing & redoing
 
         // Clear the old pages
-        this.currentPageIndexes.forEach(index => {
-            delete this.currentMapsPages[index];
-        });
-        this.currentPageIndexes.length = 0
+        for (let i = 0; i < this.currentPageLastIndex; i++) {
+            delete this.currentMapsPages[i];
+        }
+        this.currentPageLastIndex = 1
 
         // Set the initial page to both the dict & the list
         let _page = 1;
 
-        this.currentPageIndexes.push(_page);
         this.currentMapsPages[_page] = []
 
         // Split every 9 items
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map = this.currentMapsRawArray[i];
-            if (!this.currentPageIndexes.includes(_page)) {
+            if (this.currentPageLastIndex != _page) {
+                this.currentPageLastIndex = _page;
                 this.currentMapsPages[_page] = []
-                this.currentPageIndexes.push(_page)
             }
             this.currentMapsPages[_page].push(map)
             if ((i + 1) % 9 == 0) {
