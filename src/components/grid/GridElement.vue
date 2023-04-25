@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <div class="grid_element" @click="setCurrentMap(map);">
+    <div class="grid_element fade" @click="setCurrentMap(map);">
         <img :src="map.getPreviewUrl()">
     </div>
 </template>

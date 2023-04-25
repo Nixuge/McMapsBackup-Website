@@ -17,7 +17,9 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     So if I just want to disable the leaving one's display at 49% and enable
     the appearing one at 51% I can't.
     Setting height/margin/padding to 0 "works" but still leaves a small gap.
- -->
+    
+    For now going along with just the "fade" css class in GridElement
+-->
 
 <template>
     <div class="grid_wrapper fade">
