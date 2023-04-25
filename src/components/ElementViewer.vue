@@ -1,33 +1,37 @@
 <script setup lang="ts">
+import TST from '@/components/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMap } from '@/ts/manager/ElementViewerManager';
 </script>
 
 <template>
-    <div class="viewer">
+    <div class="viewer fade" id="element-viewer">
         <img :src="currentMap.getPreviewUrl()">
         <div class="text" v-if="currentMap.minigame != ''">
-            <h1 v-if="currentMap.nano">Nano Game</h1>
-            <h1 v-text="currentMap.minigame"></h1>
+            <TST><h1 :key="+currentMap.nano" v-if="currentMap.nano">Nano Game</h1></TST>
+            
+            <TST><h1 :key="currentMap.minigame">{{ currentMap.minigame }}</h1></TST>
             <hr>
-            <h1 v-text="currentMap.mapName"></h1>
-            <h2 v-text="'Built by ' + currentMap.builders"></h2>
+            <TST><h1 :key="currentMap.mapName">{{ currentMap.mapName }}</h1></TST>
+            <TST><h2 :key="currentMap.builders">{{ 'Built by ' + currentMap.builders }}</h2></TST>
             <hr>
-            <div v-if="currentMap.downloads.length != 0">
+            <TST><div :key="currentMap.downloads.toString()" v-if="currentMap.downloads.length != 0">
                 <h1>Downloads</h1>
                 <ul>
                     <a v-for="download in currentMap.downloads" :href="currentMap.getDownloadUrl(download.url)">
-                        <li v-text="download.name" />
+                        <li>{{ download.name }}</li>
                     </a>
                 </ul>
-            </div>
-            <div v-if="currentMap.commentaries != undefined">
+            </div></TST>
+            
+            
+            <TST><div :key="currentMap.commentaries" v-if="currentMap.commentaries != undefined">
                 <hr>
                 <h1>Additional info</h1>
-                <h2 v-text="currentMap.commentaries"></h2>
-            </div>
+                <h2>{{ currentMap.commentaries }}</h2>
+            </div></TST>
         </div>
         <div class="text" v-else>
-            <h1>No map selected</h1>
+            <TST><h1>No map selected</h1></TST>
         </div>
     </div>
 </template>

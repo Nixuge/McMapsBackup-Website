@@ -42,7 +42,8 @@
     --dark-transparent-darker: rgba(50, 50, 50, .4);
 }
 
-:root, :root.dark {
+:root,
+:root.dark {
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
@@ -122,42 +123,7 @@ body {
     font-family: 'Nunito', Helvetica, Arial, sans-serif;
 }
 
-* {
+.fade {
     animation: fadeInFromNone 0.3s ease-out;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
 }
-
-/* Disabled below: made for the <Animation> tag, which seems to have issues */
-/* to even recognize things from the vue wiki somehow, will use JS for it tho prolly */
-/* 
-@keyframes fadeInToNone2 {
-    0% {
-        opacity: 1;
-        display: block;
-    }
-    45% {
-        opacity: 0;
-        display: none;
-    }
-
-    100% {
-        opacity: 0;
-        display: none;
-    }
-}
-
-@keyframes fadeInFromNone2 {
-    0% {
-        opacity: 0;
-        display: none;
-    }
-    55% {
-        opacity: 0;
-        display: none;
-    }
-
-    100% {
-        opacity: 1;
-        display: block;
-    }
-} */

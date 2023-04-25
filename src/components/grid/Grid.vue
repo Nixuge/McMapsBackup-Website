@@ -7,7 +7,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 </script>
 
 <template>
-    <div class="grid_wrapper">
+    <div class="grid_wrapper fade">
         
         <div class="grid">
             <!-- <TransitionGroup :css="false" @enter="onEnter" appear> -->
