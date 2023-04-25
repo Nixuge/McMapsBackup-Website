@@ -12,7 +12,7 @@ import { currentMap } from '@/ts/manager/ElementViewerManager';
 
 <template>
     <div class="viewer fade" id="element-viewer">
-        <img :src="currentMap.getPreviewUrl()">
+        <TST><img :key="+currentMap.id" :src="currentMap.getPreviewUrl()"></TST>
         <div class="text" v-if="currentMap.minigame != ''">
             <TST><h1 :key="+currentMap.nano" v-if="currentMap.nano">Nano Game</h1></TST>
             
