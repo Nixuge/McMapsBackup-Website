@@ -47,7 +47,7 @@ function leave() {
 
 @keyframes bounce-in {
     0% {
-        transform: translateX(500px);
+        transform: translateX(110%);
     }
 
     100% {
@@ -61,7 +61,7 @@ function leave() {
     }
 
     100% {
-        transform: translateX(-500px);
+        transform: translateX(-110%);
     }
 }
 </style>
