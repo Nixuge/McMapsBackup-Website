@@ -3,6 +3,13 @@ import TST from '@/components/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMap } from '@/ts/manager/ElementViewerManager';
 </script>
 
+<!-- 
+    This is quite a lot of transitions
+    but I wanted something fancy, so here they are.
+    Doubt much performance is lost, transforms
+    should be GPU accelerated anyways. 
+-->
+
 <template>
     <div class="viewer fade" id="element-viewer">
         <img :src="currentMap.getPreviewUrl()">

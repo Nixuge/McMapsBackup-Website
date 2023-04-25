@@ -10,6 +10,9 @@ function updateElem() {
 }
 
 // TS not happy w the way I wanted to do things
+// Note: if an elements finished to enter before another one, this may
+// still cause the scrollbar to show
+// but minor glitch, not worth the time rn
 function enter() {
     if (elementViewerStyle === undefined) {
         updateElem();
@@ -26,7 +29,9 @@ function leave() {
 }
 </script>
 <template>
-    <Transition name="bounce" mode="out-in" appear @after-enter="enter" @before-leave="leave">
+    <Transition name="bounce" mode="out-in" 
+    @after-enter="enter" @before-leave="leave"
+    appear>
         <slot></slot>
     </Transition>
 </template>
