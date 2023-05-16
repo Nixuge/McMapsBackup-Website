@@ -23,6 +23,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <template>
     <div class="grid_wrapper fade">
+        <h1>Send DMCA inquiries @ dmca@nixuge.me</h1>
         <h1>Got some free time and want to take a lot of screenshots to replace the missing ones?<br>Dm me on telegram @Nixuge/discord Nixu#1022</h1>
         <div class="grid">
             <!-- <TransitionGroup name="cc" appear> -->
