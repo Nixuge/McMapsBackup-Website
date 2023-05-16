@@ -5,10 +5,14 @@ import SearchButton from '@/components/searchbar/SearchButton.vue'
 <template>
     <SearchButton text="Go back home?" href="/" /> <!-- Using SearchBar elements for here smh -->
     <br>
+    <h1>Download for everything:</h1>
+    <h2><a href="/static/maps.zip">Feel free to hit on that bandwidth</a></h2>
+    <br>
     <h1>API endpoints</h1>
     <h2>As this is basically serverless (everything is done client-side), the only api endpoint is the full json for the
         maps</h2>
-        <h4>Which is located at <a href="/static/maps.json">/static/maps.json</a></h4>
+        <h4>Which is <span class="smol">(NOT YET BUT WILL SOON BE)</span> located at <a href="/static/maps.json">/static/maps.json</a></h4>
+    
     <h2>Here's some info for the preview & download URLs, as the json doesn't include full pathes</h2>
     <br>
     <h1>The base URL is the following:</h1>
@@ -21,9 +25,9 @@ import SearchButton from '@/components/searchbar/SearchButton.vue'
     <h2>[download url (value in dict) from the downloads dict]</h2>
     <br>
     <h1>URL examples:</h1>
-    <h2><a href="/static/zip/thebridges/seretopia.zip">/static/zip/thebridges/seretopia.zip</a> (Seretopia map from Bridges)</h2>
-    <h2><a href="/static/zip/nano/zombiesurvival/nano/boscage.zip">/static/zip/nano/zombiesurvival/nano/boscage.zip</a> (Boscage map from Nano Game's Zombie Survival)</h2>
-    <h2><a href="/static/img/nano/zombiesurvival/nano/boscage.png">/static/img/nano/zombiesurvival/nano/boscage.png</a> (Boscage preview from Nano Game's Zombie Survival)</h2>
+    <h2><a href="/static/zip/thebridges/seretopia_base.zip">/static/zip/thebridges/seretopia_base.zip</a> (Seretopia map from Bridges, base version without the bridges)</h2>
+    <h2><a href="/static/zip/nano/zombiesurvival/boscage.zip">/static/zip/nano/zombiesurvival/boscage.zip</a> (Boscage map from Nano Game's Zombie Survival)</h2>
+    <h2><a href="/static/img/nano/zombiesurvival/boscage.png">/static/img/nano/zombiesurvival/boscage.png</a> (Boscage preview from Nano Game's Zombie Survival)</h2>
     <br>
     <h1>Sanitize function used:</h1>
     <h2>
@@ -51,5 +55,8 @@ h4 {
 }
 a {
     color: #fff;
+}
+.smol {
+    font-size: 10px;
 }
 </style>

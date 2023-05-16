@@ -9,6 +9,8 @@ parseUrlArgs()
 </script>
 
 <template>
+    <h1 class="info">DMCA inquiries -> dmca@nixuge.me</h1>
+    <h1 class="info">Got some free time and want to take a lot of screenshots to replace the missing ones? Dm me on telegram @Nixuge/discord Nixu#1022</h1>
     <SearchBar />
     <div id="grid_container">
         <ElementViewer />
@@ -46,5 +48,9 @@ parseUrlArgs()
     #grid_container {
         grid-template-columns: 1fr 3fr;
     }
+}
+.info {
+    padding: 0;
+    margin: 0;
 }
 </style>
