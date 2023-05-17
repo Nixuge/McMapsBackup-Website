@@ -13,6 +13,16 @@ const routes = [
         component: () => import("@/views/Help.vue"),
     },
     {
+        path: "/dmca",
+        name: "DMCA",
+        component: () => import("@/views/Dmca.vue"),
+    },
+    {
+        path: "/contribute",
+        name: "Contribute",
+        component: () => import("@/views/Contribute.vue"),
+    },
+    {
         path: "/",
         name: "HomeRaw",
         component: Home,
