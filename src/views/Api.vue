@@ -53,7 +53,9 @@ h2,
 h4 {
     margin: 0;
 }
-a {
+
+a,
+a:visited {
     color: #fff;
 }
 .smol {

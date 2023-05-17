@@ -52,6 +52,8 @@ parseUrlArgs()
     padding: 0;
     margin: 0;
 }
+
+a,
 a:visited {
     color: #fff
 }
