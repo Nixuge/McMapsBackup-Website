@@ -4,8 +4,8 @@ import SearchButton from '@/components/searchbar/SearchButton.vue'
 
 <template>
     <SearchButton text="Go back home?" href="/" />
+    <br><br>
     <div class="center">
-        <br>
         <h1>Send DMCA inquiries to dmca@nixuge.me</h1>
         <br>
         <h1>Make SURE your email gets sent, as some providers don't seem to like Cloudflare proxied emails.</h1>

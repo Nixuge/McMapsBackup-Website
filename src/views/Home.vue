@@ -9,8 +9,7 @@ parseUrlArgs()
 </script>
 
 <template>
-    <h1 class="info"><router-link to="/dmca">DMCA</router-link>  <router-link to="/dmca" style="float:right; padding-right: 50px">Help contribute to missing screenshots</router-link></h1>
-    <h1 class="info">Got some free time and want to take a lot of screenshots to replace the missing ones? Dm me on telegram @Nixuge/discord Nixu#1022</h1>
+    <h1 class="info"><router-link to="/contribute">Help contribute to missing screenshots</router-link>  <router-link to="/dmca" style="float:right; padding-right: 50px">DMCA</router-link></h1>
     <SearchBar />
     <div id="grid_container">
         <ElementViewer />
