@@ -9,7 +9,6 @@ parseUrlArgs()
 </script>
 
 <template>
-    <h1 class="info"><router-link to="/contribute">Help contribute to missing screenshots</router-link>  <router-link to="/dmca" style="float:right; padding-right: 50px">DMCA</router-link></h1>
     <SearchBar />
     <div id="grid_container">
         <ElementViewer />
@@ -51,10 +50,5 @@ parseUrlArgs()
 .info {
     padding: 0;
     margin: 0;
-}
-
-a,
-a:visited {
-    color: #fff
 }
 </style>

@@ -23,6 +23,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <template>
     <div class="grid_wrapper fade">
+        <h1 class="info"><router-link to="/contribute">Help contribute to missing screenshots</router-link>  <router-link to="/dmca" style="float:right">DMCA</router-link></h1>
         <div class="grid">
             <!-- <TransitionGroup name="cc" appear> -->
             <GridElement v-for="current_map in se.currentMapsPages[pm.page.value]" :map="current_map"
@@ -74,6 +75,19 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     .grid {
         grid-template-columns: 1fr 1fr 1fr;
     }
+}
+
+a,
+a:visited {
+    color: #fff
+}
+
+.info {
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
 }
 
 /* .cc-enter-active {
