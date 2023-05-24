@@ -8,7 +8,7 @@ const K: Array<string> = [
     "Alien Invasion",
     "Bacon Brawl",
     "Block Hunt",
-    "Cake Wars Duos",
+    "Cake Wars Solo Duos",
     "Bomb Lobbers",
     "Cake Wars Standard",
     "Castle Assault",
