@@ -1,13 +1,17 @@
 // This file should reference everything from the currently selected server.
 
 import { ServerMap } from "@/ts/data/ServerMap";
+import { TagNode } from "@/ts/data/Tag";
+
 import { grabTags, isMapGood, validTags } from "./mineplex/MineplexSearch";
-import { TagNode } from "../data/Tag";
+import { MAPS } from "./mineplex/MineplexData";
 
-export let allServerMaps: ServerMap[] = [];
+import { defineAsyncComponent } from "vue";
 
+export let allServerMaps: ServerMap[] = MAPS;
 export let serverValidTags: string[] = validTags;
 
 export let tagsGrabber: (tagNode: TagNode) => void = grabTags;
 export let mapMatcher: Function = isMapGood;
 
+export let ElementViewerComponent = defineAsyncComponent(() =>import('./mineplex/MineplexComponent.vue'));
