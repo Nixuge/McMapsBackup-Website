@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router"
-import Home from "@/views/Home.vue"
+import Root from "@/views/Root.vue"
+import Server from "@/views/Server.vue"
 
 const routes = [
     {
@@ -24,28 +25,33 @@ const routes = [
     },
     {
         path: "/",
-        name: "HomeRaw",
-        component: Home,
+        name: "Root",
+        component: Root,
     },
     {
-        path: "/:page",
-        name: "HomePage",
-        component: Home,
+        path: "/:server",
+        name: "Server",
+        component: Server,
     },
     {
-        path: "/:page/:minigame",
-        name: "HomePageMinigame",
-        component: Home,
+        path: "/:server/:page",
+        name: "ServerPage",
+        component: Server,
     },
     {
-        path: "/:page/:minigame/:mapname",
-        name: "HomeFull",
-        component: Home,
+        path: "/:server/:page/:minigame",
+        name: "ServerMinigame",
+        component: Server,
+    },
+    {
+        path: "/:server/:page/:minigame/:mapname",
+        name: "ServerFull",
+        component: Server,
     },
     {
         path: "/:pathMatch(.*)*",
-        name: "HomeCatchAll",
-        component: Home,
+        name: "RootCatchAll",
+        component: Root,
     }
 ];
 

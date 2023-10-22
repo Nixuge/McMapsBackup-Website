@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TST from '@/components/transitions/TextSlideTransitionElementViewer.vue'
+import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMap } from '@/ts/manager/ElementViewerManager';
 </script>
 
