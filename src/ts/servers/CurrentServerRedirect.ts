@@ -15,3 +15,6 @@ export let tagsGrabber: (tagNode: TagNode) => void = grabTags;
 export let mapMatcher: Function = isMapGood;
 
 export let ElementViewerComponent = defineAsyncComponent(() =>import('./mineplex/MineplexComponent.vue'));
+
+// TODO left:
+// on URL change, proper URL changes, currentServerManager (somewhere or here?), refactor

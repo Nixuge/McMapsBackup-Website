@@ -2,8 +2,8 @@ import { reactive } from "vue";
 import { ServerMap } from "@/ts/data/ServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
-import { TagsManager } from "./TagsManager";
 import { allServerMaps, mapMatcher, tagsGrabber } from "@/ts/servers/CurrentServerRedirect";
+import { TagNode } from "../data/Tag";
 
 
 export class SearchEngine {
@@ -27,7 +27,7 @@ export class SearchEngine {
 
         this.currentMapsRawArray.length = 0;
 
-        const tagNode = TagsManager.getNewTags(this.search);
+        const tagNode = TagNode.newFromSearch(this.search);
 
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
