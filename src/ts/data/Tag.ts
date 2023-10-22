@@ -1,3 +1,5 @@
+import { serverValidTags } from "@/ts/servers/CurrentServerRedirect";
+
 export class Tag {
     public type: string;
     public value: string;
@@ -8,28 +10,17 @@ export class Tag {
     }
 
     public static tagFromString(name: string) {
-        if (validTags.includes(name)) 
+        if (serverValidTags.includes(name)) 
             return name;
         return "invalid";
     }
 }
 
-// Fuck TS enums
-const validTags = [
-    "invalid",
-    "game",
-    "builder",
-    "nano"
-]
-// export enum TagType {
-//     INVALID = "invalid",
-//     MINIGAME = "minigame",
-//     BUILDER = "builder",
-//     NANO = "nano"
-// }
+export type OptionalTag = Tag | undefined;
+
 
 export class TagNode {
-    private tagList: Array<Tag>;
+    private tagList: Tag[];
     private remaining: string;
     constructor() {
         this.tagList = [];

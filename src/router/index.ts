@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router"
 import Root from "@/views/Root.vue"
-import Server from "@/views/Server.vue"
+
+const ServerLazy = () => import("@/views/Server.vue");
 
 const routes = [
     {
@@ -31,22 +32,22 @@ const routes = [
     {
         path: "/:server",
         name: "Server",
-        component: Server,
+        component: ServerLazy,
     },
     {
         path: "/:server/:page",
         name: "ServerPage",
-        component: Server,
+        component: ServerLazy,
     },
     {
         path: "/:server/:page/:minigame",
         name: "ServerMinigame",
-        component: Server,
+        component: ServerLazy,
     },
     {
         path: "/:server/:page/:minigame/:mapname",
         name: "ServerFull",
-        component: Server,
+        component: ServerLazy,
     },
     {
         path: "/:pathMatch(.*)*",

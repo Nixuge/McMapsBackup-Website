@@ -1,7 +1,8 @@
-import { Download as D, McMap as M } from "./McMap";
+import { MineplexMap as M } from "./MineplexMap";
+import { Download as D } from "@/ts/data/ServerMap";
 
 const Z = "Main download";
-const K: Array<string> = [
+const K: string[] = [
     "The Bridges",
     "Turf Wars",
     "Speed Builders",
@@ -73,7 +74,7 @@ const K: Array<string> = [
     "AAAAAAAA! Spleef",
 ];
 
-export const MAPS: Array<M> = [
+export const MAPS: M[] = [
     new M(K[0], "Seretopia", "Intoxicating, JollyGreenGamer & skreb", [new D("Base download", "seretopia_base.zip"), new D("Bridges download", "seretopia_bridges.zip")], 0, false),
     new M(K[0], "Shifty Mineshafts", "Mineplex Build Team", [new D("Base download", "shiftymineshafts_base.zip"), new D("Bridges download", "shiftymineshafts_bridges.zip")], 1, false),
     new M(K[0], "Shroomsville", "Dutty & PyxllCreates", [new D("Base download", "shroomsville_base.zip"), new D("Bridges download", "shroomsville_bridges.zip")], 2, false),

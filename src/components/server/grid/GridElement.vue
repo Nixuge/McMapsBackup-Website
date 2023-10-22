@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { McMap } from '@/ts/data/McMap';
+import { ServerMap } from '@/ts/data/ServerMap';
 import { setCurrentMap } from '@/ts/manager/ElementViewerManager';
 
 defineProps<{
-  map: McMap
+  map: ServerMap;
 }>()
 </script>
 

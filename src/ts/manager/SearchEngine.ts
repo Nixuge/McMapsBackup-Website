@@ -1,25 +1,26 @@
 import { reactive } from "vue";
-import { MAPS } from "@/ts/data/BaseData"
-import { McMap } from "@/ts/data/McMap";
+import { ServerMap } from "@/ts/data/ServerMap";
 import { PageManager } from "./PageManager";
-import { textToBool, sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
+import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
 import { TagsManager } from "./TagsManager";
+import { allServerMaps, mapMatcher, tagsGrabber } from "@/ts/servers/CurrentServerRedirect";
+
 
 export class SearchEngine {
     private static search: string = "";
-    public static currentMapsRawArray: Array<McMap> = MAPS.slice(0);
+    public static currentMapsRawArray: ServerMap[] = allServerMaps.slice(0);
     public static currentMapsPages: any = reactive({});
     public static currentLastPageIndex: number = 1;
 
-    private static recalculateInsert() {
-        // recalculate based on what currentMaps holds
-        for (let i = 0; i < this.currentMapsRawArray.length; i++) {
-            const map =  this.currentMapsRawArray[i];
-            if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
-                this.currentMapsRawArray.splice(i, 1);
-            }
-        }
-    }
+    // private static recalculateInsert() {
+    //     // recalculate based on what currentMaps holds
+    //     for (let i = 0; i < this.currentMapsRawArray.length; i++) {
+    //         const map =  this.currentMapsRawArray[i];
+    //         if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
+    //             this.currentMapsRawArray.splice(i, 1);
+    //         }
+    //     }
+    // }
 
     private static recalculateWhole() {
         // prolly not efficient but oh well
@@ -34,28 +35,12 @@ export class SearchEngine {
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
-        const nanoTag = tagNode.getTag("nano");
-        const wantsNano = (nanoTag == undefined) ? undefined : textToBool(nanoTag.value);
-        
-        const gameTag = tagNode.getTag("game");
-        const builderTag = tagNode.getTag("builder");
-        const remaining = tagNode.getRemaining();
+        tagsGrabber(tagNode)
 
-        for (const map of MAPS) {
-            if (nanoTag != undefined) {
-                // Skip only if both tags aren't the same
-                if (!((map.nano && wantsNano) || (!map.nano && !wantsNano))) {
-                    continue;
-                }
-            }
 
-            if ((gameTag != undefined && !map.sanitizedMinigame.includes(gameTag.value)) ||
-                (builderTag != undefined && !map.sanitizedBuilders.includes(builderTag.value)) ||
-                (remaining != "" && !map.sanitizedMapName.includes(remaining))) {
-                continue;
-            }
-
-            this.currentMapsRawArray.push(map);
+        for (const map of allServerMaps) {
+            if (mapMatcher(map))
+                this.currentMapsRawArray.push(map);
         }
         
     }

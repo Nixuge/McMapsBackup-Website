@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
-import { SearchEngine } from './ts/manager/SearchEngine';
 
 import router from './router';
 
@@ -8,7 +7,8 @@ import './assets/base.css';
 import './assets/icons.css';
 // import './ts/utils/ThemeSetter';
 
-SearchEngine.init();
+// import { SearchEngine } from './ts/manager/SearchEngine';
+// SearchEngine.init();
 
 
 

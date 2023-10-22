@@ -1,14 +1,13 @@
 import { reactive } from "vue";
-import { McMap } from "@/ts/data/McMap";
+import { DefaultServerMap, ServerMap, } from "@/ts/data/ServerMap";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
-export const currentMap = reactive(new McMap(
-    "", "", "",
-    [], 0, false
+export const currentMap: ServerMap = reactive(new DefaultServerMap(
+    "", "", [], -1
 ));
 
-export function setCurrentMap(newMap: McMap) {
+export function setCurrentMap<T extends ServerMap>(newMap: T) {
     // currentMap = newMap, doesn't work bc of reactive()
     Object.assign(currentMap, newMap);
     updateUrl();

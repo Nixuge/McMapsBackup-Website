@@ -12,7 +12,7 @@ class GoThrougher {
     private current_string_listindex: number;
     private current_string: string;
     private char_index: number;
-    private strings: Array<string> = [
+    private strings: string[] = [
                     "game:thebridges Seretopia",
                     "builder:powh",
                     "nano:true game:gladiators Cavern"

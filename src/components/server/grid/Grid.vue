@@ -23,7 +23,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 <template>
     <div class="grid_wrapper fade">
-        <h1 class="info"><a href="https://discord.gg/RecgHVxKuk">Discord</a>  <router-link to="/contribute">Help contribute to missing screenshots</router-link>  <router-link to="/dmca" style="float:right">DMCA</router-link></h1>
+        <!-- <h1 class="info"><a href="https://discord.gg/RecgHVxKuk">Discord</a>  <router-link to="/contribute">Help contribute to missing screenshots</router-link>  <router-link to="/dmca" style="float:right">DMCA</router-link></h1> -->
         <div class="grid">
             <!-- <TransitionGroup name="cc" appear> -->
             <GridElement v-for="current_map in se.currentMapsPages[pm.page.value]" :map="current_map"
