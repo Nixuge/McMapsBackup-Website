@@ -8,8 +8,6 @@ import './assets/icons.css';
 // import './ts/utils/ThemeSetter';
 
 import { SearchEngine } from './ts/manager/SearchEngine';
-SearchEngine.init();
-
 
 
 const app = createApp(App);

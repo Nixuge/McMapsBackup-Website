@@ -2,13 +2,14 @@ import { reactive } from "vue";
 import { ServerMap } from "@/ts/server/ServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
-import { allServerMaps, serverMapSearcher } from "@/ts/server/CurrentServerRedirect";
+import { serverSearcher } from "@/ts/server/CurrentServer";
 import { TagNode } from "../data/Tag";
 
 
 export class SearchEngine {
     private static search: string = "";
-    public static currentMapsRawArray: ServerMap[] = allServerMaps.slice();
+    private static allServerMaps: ServerMap[] = [];
+    public static currentMapsRawArray: ServerMap[] = [];
     public static currentMapsPages: any = reactive({});
     public static currentLastPageIndex: number = 1;
 
@@ -35,11 +36,11 @@ export class SearchEngine {
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
-        serverMapSearcher.grabTags(tagNode)
+        serverSearcher.grabTags(tagNode)
 
 
-        for (const map of allServerMaps) {
-            if (serverMapSearcher.isMapGood(map))
+        for (const map of this.allServerMaps) {
+            if (serverSearcher.isMapGood(map))
                 this.currentMapsRawArray.push(map);
         }
         
@@ -78,7 +79,8 @@ export class SearchEngine {
         }
     }
 
-    public static init() {
+    public static init(allServerMaps: ServerMap[]) {
+        this.allServerMaps = allServerMaps;
         this.recalculateWhole();
         this.update();
     }

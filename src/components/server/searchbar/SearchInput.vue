@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { SearchEngine as se } from '@/ts/manager/SearchEngine';
-import { serverMapSearcher } from '@/ts/server/CurrentServerRedirect';
+import { serverSearcher } from '@/ts/server/CurrentServer';
 import { IServerSearch } from '@/ts/server/IServerSearch';
 import { onMounted } from 'vue';
 
 let inputelement: HTMLInputElement;
 onMounted(() => {
     inputelement = document.getElementById("searchinput") as HTMLInputElement;
-    new GoThrougher(serverMapSearcher).run();    
+    new GoThrougher(serverSearcher).run();    
 });
 
 class GoThrougher {

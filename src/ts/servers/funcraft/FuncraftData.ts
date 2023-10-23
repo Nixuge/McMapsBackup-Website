@@ -18,7 +18,7 @@ const K: Array<string> = [
     "SurvivalGames"
 ];
 
-export const MAPS: Array<M> = [
+export const FUNCRAFT_MAPS: Array<M> = [
     new M(K[0], "Lobby Survival Games", [new D(Z, "survival_games.zip")], 0),
     new M(K[0], "Lobby Skywars", [new D(Z, "skywars.zip")], 1),
     new M(K[0], "Lobby Rush", [new D("Téléchargement 1", "rush1.zip"), new D("Téléchargement 2", "rush2.zip")], 2),
