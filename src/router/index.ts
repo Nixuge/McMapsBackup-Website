@@ -1,5 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router"
-import Home from "@/views/Home.vue"
+import Root from "@/views/Root.vue"
+
+const ServerLazy = () => import("@/views/Server.vue");
 
 const routes = [
     {
@@ -24,28 +26,33 @@ const routes = [
     },
     {
         path: "/",
-        name: "HomeRaw",
-        component: Home,
+        name: "Root",
+        component: Root,
     },
     {
-        path: "/:page",
-        name: "HomePage",
-        component: Home,
+        path: "/:server",
+        name: "Server",
+        component: ServerLazy,
     },
     {
-        path: "/:page/:minigame",
-        name: "HomePageMinigame",
-        component: Home,
+        path: "/:server/:page",
+        name: "ServerPage",
+        component: ServerLazy,
     },
     {
-        path: "/:page/:minigame/:mapname",
-        name: "HomeFull",
-        component: Home,
+        path: "/:server/:page/:minigame",
+        name: "ServerMinigame",
+        component: ServerLazy,
+    },
+    {
+        path: "/:server/:page/:minigame/:mapname",
+        name: "ServerFull",
+        component: ServerLazy,
     },
     {
         path: "/:pathMatch(.*)*",
-        name: "HomeCatchAll",
-        component: Home,
+        name: "RootCatchAll",
+        component: Root,
     }
 ];
 

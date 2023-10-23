@@ -1,3 +1,6 @@
+import { serverSearcher } from "@/ts/server/CurrentServer";
+import { sanitize } from "@/ts/utils/TextUtils";
+
 export class Tag {
     public type: string;
     public value: string;
@@ -8,28 +11,17 @@ export class Tag {
     }
 
     public static tagFromString(name: string) {
-        if (validTags.includes(name)) 
+        if (serverSearcher.validTags.includes(name)) 
             return name;
         return "invalid";
     }
 }
 
-// Fuck TS enums
-const validTags = [
-    "invalid",
-    "game",
-    "builder",
-    "nano"
-]
-// export enum TagType {
-//     INVALID = "invalid",
-//     MINIGAME = "minigame",
-//     BUILDER = "builder",
-//     NANO = "nano"
-// }
+export type OptionalTag = Tag | undefined;
+
 
 export class TagNode {
-    private tagList: Array<Tag>;
+    private tagList: Tag[];
     private remaining: string;
     constructor() {
         this.tagList = [];
@@ -64,5 +56,34 @@ export class TagNode {
                 return tag;
         }
         return undefined;
+    }
+
+    public static newFromSearch(search: string) {
+        let tagNode = new TagNode();
+
+        if (!search.includes(":")) {
+            tagNode.addRemaining(sanitize(search));
+            return tagNode;
+        }
+
+        const parts = search.split(" ");
+
+        for (const part of parts) {
+            if (!part.includes(":")) {
+                tagNode.addRemaining(part);
+                continue;
+            }
+            const splittedTag = part.split(":");
+            tagNode.addTag(
+                new Tag(sanitize(splittedTag[0]), sanitize(splittedTag[1]))
+            );
+        }
+
+        // tagNode.getTags().forEach(element => {
+        //     console.log(element.type.toString() + " of val " + element.value);
+        // });
+        // console.log("remaining: " + tagNode.getRemaining());
+        
+        return tagNode;
     }
 }

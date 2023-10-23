@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchButton from '@/components/searchbar/SearchButton.vue'
+import SearchButton from '@/components/server/searchbar/SearchButton.vue'
 </script>
 
 <template>

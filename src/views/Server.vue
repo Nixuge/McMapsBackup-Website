@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ElementViewer from '@/components/ElementViewer.vue'
-import SearchBar from '@/components/searchbar/SearchBar.vue'
-import SearchGrid from '@/components/grid/Grid.vue'
-import { parseUrlArgs } from '@/ts/utils/ArgsHandler.js';
+import ElementViewer from '@/components/server/ElementViewer.vue'
+import SearchBar from '@/components/server/searchbar/SearchBar.vue'
+import SearchGrid from '@/components/server/grid/Grid.vue'
+import { parseUrlArgs } from '@/ts/manager/UrlManager';
 
 parseUrlArgs()
 

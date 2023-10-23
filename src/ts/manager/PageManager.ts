@@ -3,10 +3,9 @@ import { updateUrl } from "./UrlManager";
 import { SearchEngine } from "./SearchEngine";
 import { PageButtonData, ButtonType, ButtonEffect } from "@/ts/data/PageButtonType";
 
-// Java OOP flashbacks
 export class PageManager {
     public static page = ref(1);
-    public static pageSelector: Array<PageButtonData> = reactive([new PageButtonData(ButtonType.NORMAL, 1)]);
+    public static pageSelector: PageButtonData[] = reactive([new PageButtonData(ButtonType.NORMAL, 1)]);
 
     public static setPage(_page: number) {
         if (_page > SearchEngine.currentLastPageIndex || _page < 1)

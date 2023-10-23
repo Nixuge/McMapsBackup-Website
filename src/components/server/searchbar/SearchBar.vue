@@ -9,6 +9,7 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
         <SearchInput />
         <SearchButton text="Search help" href="/help" />
         <SearchButton text="Api" href="/api" />
+        <SearchButton text="Root" href="/" />
         <SearchThemeSwitcher />
     </div>
 </template>
