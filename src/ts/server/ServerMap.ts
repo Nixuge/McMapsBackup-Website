@@ -28,7 +28,7 @@ export abstract class ServerMap {
     }
     
     public getPreviewUrl() {
-        const prefix = (process.env.NODE_ENV == "development") ? "https://mineplex.nixuge.me" : "";
+        const prefix = (process.env.NODE_ENV == "development") ? "https://maps.nixuge.me" : "";
         if (this.minigame == "")
             return prefix + "/static/img/unselected.png";
         return `${prefix}${this.getBaseUrl(false)}${this.sanitizedMapName}.png`;

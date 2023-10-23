@@ -4,13 +4,13 @@ import ServerEntry from './ServerEntry.vue'
 
 <template>
     <div>
-        <h1>Welcome to Nixuge's Minecraft Archives</h1>
+        <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
         <div id="buttongrid">
-            <ServerEntry serverName="Mineplex" serverUrl="mineplex" />
-            <ServerEntry serverName="Funcraft" serverUrl="funcraft" />
-            <ServerEntry serverName="OneCube" serverUrl="onecube" />
-            <ServerEntry serverName="HiveMC" serverUrl="hive" />
-            <ServerEntry serverName="lunar.gg" serverUrl="lunar" />
+            <ServerEntry serverName="Mineplex" serverUrl="mineplex" thumbnailName="mineplex.webp" death="16/05/2023" />
+            <ServerEntry serverName="Funcraft" serverUrl="funcraft" thumbnailName="funcraft.jpg" death="26/08/2023"/>
+            <ServerEntry serverName="OneCube" serverUrl="onecube" thumbnailName="onecube.jpg" death="28/04/2023"/>
+            <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023"/>
+            <ServerEntry serverName="lunar.gg" serverUrl="lunar" thumbnailName="lunar.png" death="01/06/2023"/>
         </div>
     </div>
 </template>
@@ -21,24 +21,11 @@ h1 {
     font-size: 300%;
 }
 #buttongrid {
-    padding-top: 2%;
     margin: auto;
     width: 70%;
+    padding-top: 2%;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     justify-content: center;
-    /* align-items: center; */
-    /* align-content: space-between */
-}
-/* #buttongrid:after {
-  display: block;
-  content: " placeholder ";
-  margin: 10px;
-  flex: 999 999 auto;
-} */
-.item {
-  flex: 0 0 auto;
-  margin: 10px;
 }
 </style>
