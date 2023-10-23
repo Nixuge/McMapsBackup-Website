@@ -44,7 +44,7 @@ parseUrlArgs()
 
 @media screen and (min-width: 1250px) {
     #grid_container {
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 2.5fr; /* apparently you can use 2.5? 3 is too high */
     }
 }
 .info {
