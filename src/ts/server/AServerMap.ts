@@ -10,7 +10,7 @@ export class Download {
 
 import { sanitize } from "@/ts/utils/TextUtils";
 
-export abstract class ServerMap {
+export abstract class AServerMap {
     public sanitizedMinigame: string;
     public sanitizedMapName: string;
 
@@ -38,7 +38,7 @@ export abstract class ServerMap {
 // Default implementation of the getBaseUrl
 // May be added into the abstract class above.
 // Only case where this isn't used as of now is mineplex w its nanos
-export class DefaultServerMap extends ServerMap{
+export class DefaultAServerMap extends AServerMap{
     getBaseUrl(file: boolean): string {
         let base = "/static/";
         base += (file) ? "zip/" : "img/";

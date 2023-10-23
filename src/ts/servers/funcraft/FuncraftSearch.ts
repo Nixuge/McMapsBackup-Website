@@ -1,8 +1,8 @@
 // Could extend SearchEngine instead
 
-import { OptionalTag, Tag, TagNode } from "@/ts/data/Tag";
+import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { FuncraftMap } from "./FuncraftMap";
-import { IServerSearch } from "@/ts/data/IServerSearch";
+import { IServerSearch } from "@/ts/server/IServerSearch";
 
 
 export class FuncraftSearch implements IServerSearch<FuncraftMap> {

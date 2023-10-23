@@ -1,14 +1,14 @@
 import { reactive } from "vue";
-import { ServerMap } from "@/ts/data/ServerMap";
+import { AServerMap } from "@/ts/server/AServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
-import { allServerMaps, mapSearcher } from "@/ts/servers/CurrentServerRedirect";
+import { allAServerMaps, mapSearcher } from "@/ts/server/CurrentServerRedirect";
 import { TagNode } from "../data/Tag";
 
 
 export class SearchEngine {
     private static search: string = "";
-    public static currentMapsRawArray: ServerMap[] = allServerMaps.slice(0);
+    public static currentMapsRawArray: AServerMap[] = allAServerMaps.slice(0);
     public static currentMapsPages: any = reactive({});
     public static currentLastPageIndex: number = 1;
 
@@ -38,7 +38,7 @@ export class SearchEngine {
         mapSearcher.grabTags(tagNode)
 
 
-        for (const map of allServerMaps) {
+        for (const map of allAServerMaps) {
             if (mapSearcher.isMapGood(map))
                 this.currentMapsRawArray.push(map);
         }

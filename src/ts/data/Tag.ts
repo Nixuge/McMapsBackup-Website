@@ -1,4 +1,4 @@
-import { mapSearcher } from "@/ts/servers/CurrentServerRedirect";
+import { mapSearcher } from "@/ts/server/CurrentServerRedirect";
 import { sanitize } from "@/ts/utils/TextUtils";
 
 export class Tag {

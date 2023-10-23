@@ -4,6 +4,7 @@ import { PageManager } from "@/ts/manager/PageManager";
 
 export function parseUrlArgs() {
     const params = router.currentRoute.value.params;
+    const server = params.server;
     const page = params.page;
     const minigame = params.minigame;
     const mapname = params.mapname;

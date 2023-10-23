@@ -3,7 +3,7 @@
 import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { textToBool } from "@/ts/utils/TextUtils";
 import { MineplexMap } from "./MineplexMap";
-import { IServerSearch } from "@/ts/data/IServerSearch";
+import { IServerSearch } from "@/ts/server/IServerSearch";
 
 
 export class MineplexSearch implements IServerSearch<MineplexMap> {

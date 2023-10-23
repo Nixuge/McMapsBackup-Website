@@ -1,5 +1,5 @@
 import { FuncraftMap as M } from "./FuncraftMap";
-import { Download as D } from "@/ts/data/ServerMap";
+import { Download as D } from "@/ts/server/AServerMap";
 
 const Z = "Téléchargement principal";
 const K: Array<string> = [
