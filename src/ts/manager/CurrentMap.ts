@@ -1,13 +1,13 @@
-import { reactive } from "vue";
-import { DefaultServerMap, ServerMap, } from "@/ts/server/ServerMap";
+import { ref } from "vue";
+import { EmptyServerMap, ServerMap, } from "@/ts/server/ServerMap";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
-export let currentMap = reactive({map: new DefaultServerMap()});
+export let currentMap = ref(new EmptyServerMap());
 
 export function setCurrentMap<T extends ServerMap>(newMap: T) {
-    // currentMap.map = newMap;
-    Object.assign(currentMap.map, newMap);
+    // Object.assign(currentMap.value, newMap);
+    currentMap.value = newMap;
     updateUrl();
 }
 

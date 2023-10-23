@@ -7,7 +7,7 @@ import { TagNode } from "../data/Tag";
 
 
 export class SearchEngine {
-    private static search: string = "";
+    public static search: string = "";
     private static allServerMaps: ServerMap[] = [];
     public static currentMapsRawArray: ServerMap[] = [];
     public static currentMapsPages: any = reactive({});

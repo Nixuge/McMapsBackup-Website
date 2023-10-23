@@ -11,7 +11,7 @@ import { SearchEngine } from "@/ts/manager/SearchEngine";
 import { IServerMeta } from "./IServerMeta";
 import { updateUrl } from "../manager/UrlManager";
 import { setCurrentMap } from "../manager/CurrentMap";
-import { DefaultServerMap } from "./ServerMap";
+import { EmptyServerMap } from "./ServerMap";
 
 export function setServer(serverName: string) {
     // const metaClassLoader = SERVER_METAS.get(serverName);
@@ -30,7 +30,7 @@ export function setServer(serverName: string) {
     ElementViewerComponent = serverMeta.elementViewerComponent;
 
     SearchEngine.init(serverMeta.serverMaps);
-    setCurrentMap(new DefaultServerMap());
+    setCurrentMap(new EmptyServerMap());
     updateUrl();
 }
 

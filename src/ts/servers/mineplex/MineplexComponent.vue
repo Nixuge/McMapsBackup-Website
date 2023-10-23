@@ -2,8 +2,11 @@
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMap as CM } from '@/ts/manager/CurrentMap';
 import { MineplexMap } from './MineplexMap';
+import { computed } from 'vue';
 
-let currentMap = CM.map as MineplexMap;
+const currentMap = computed(() => {
+  return CM.value as MineplexMap;
+})
 </script>
 
 <template>

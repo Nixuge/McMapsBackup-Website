@@ -21,7 +21,7 @@ export abstract class ServerMap {
             this.sanitizedMapName = sanitize(mapName);
         }
 
-    abstract getBaseUrl(file: boolean): string;
+    abstract getBaseUrl(file: boolean): string; 
 
     public getDownloadUrl(filename: string) {
         return this.getBaseUrl(true) + filename;
@@ -36,15 +36,13 @@ export abstract class ServerMap {
 }
 
 
-// Default implementation of the getBaseUrl
+// Empty implementation of the ServerMap
 // Made only for the "nothing selected" map, which doesn't call getBaseUrl anyways.
-export class DefaultServerMap extends ServerMap {
+export class EmptyServerMap extends ServerMap {
     constructor() {
-        super("", "", [], -5);
-        console.log("init");
-        
+        super("", "", [], -1);
     }
-    getBaseUrl(_: boolean): string {        
+    getBaseUrl(_: boolean): string {
         return "";
     }
 }; 

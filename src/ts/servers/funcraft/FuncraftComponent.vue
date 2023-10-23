@@ -2,8 +2,11 @@
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMap as CM } from '@/ts/manager/CurrentMap';
 import { FuncraftMap } from './FuncraftMap';
+import { computed } from 'vue';
 
-let currentMap = CM.map as FuncraftMap;
+const currentMap = computed(() => {
+  return CM.value as FuncraftMap;
+})
 </script>
 
 

@@ -8,7 +8,7 @@ export class FuncraftMap extends ServerMap {
             super(minigame, mapName, downloads, id, commentaries)
         }
 
-    getBaseUrl(file: boolean): string {
+    getBaseUrl(file: boolean): string {        
         let base = "/static/funcraft/";
         base += (file) ? "zip/" : "img/";
         base += this.sanitizedMinigame + "/";

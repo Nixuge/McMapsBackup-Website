@@ -12,9 +12,9 @@ export class MineplexMap extends ServerMap {
             this.sanitizedBuilders = sanitize(builders);
         }
     
-    getBaseUrl(zip: boolean) {
+    getBaseUrl(file: boolean): string {
         let base = "/static/mineplex/";
-        base += (zip) ? "zip/" : "img/";
+        base += (file) ? "zip/" : "img/";
         if (this.nano){
             base += "nano/";
         }

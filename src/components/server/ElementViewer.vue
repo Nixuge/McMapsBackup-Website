@@ -7,7 +7,7 @@ import { ElementViewerComponent } from '@/ts/server/CurrentServer';
 
 <template>
     <div class="viewer fade" id="element-viewer">
-        <TST><img :key="+currentMap.map.id" :src="currentMap.map.getPreviewUrl()"></TST>
+        <TST><img :key="+currentMap.id" :src="currentMap.getPreviewUrl()"></TST>
         <ElementViewerComponent />
     </div>
 </template>
