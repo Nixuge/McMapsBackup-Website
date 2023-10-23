@@ -1,31 +1,25 @@
 <script setup lang="ts">
+
 let elementViewerStyle: CSSStyleDeclaration | undefined = undefined;
-function updateElem() {
-    if (elementViewerStyle === undefined) {
-        const elementViewerElement = document.getElementById("element-viewer")
-        if (elementViewerElement != null ) {
-            elementViewerStyle = elementViewerElement.style
-        }
-    }
+
+// Technically can't crash, as this is called only when element-viewer is already mounted 
+function changeOverflowX(overflow: string) {
+    if (elementViewerStyle === undefined)
+        elementViewerStyle = document.getElementById("element-viewer")?.style;
+    // @ts-ignore
+    elementViewerStyle.overflowX = overflow;
 }
 
-// TS not happy w the way I wanted to do things
-// Note: if an elements finished to enter before another one, this may
-// still cause the scrollbar to show
-// but minor glitch, not worth the time rn
+let runningAnimations = 0;
 function enter() {
-    if (elementViewerStyle === undefined) {
-        updateElem();
-        return;
-    }
-    elementViewerStyle.overflowX = "auto"
+    runningAnimations--;
+    if (runningAnimations === 0)
+        changeOverflowX("auto")
+    
 }
 function leave() {
-    if (elementViewerStyle === undefined) {
-        updateElem();
-        return;
-    }
-    elementViewerStyle.overflowX = "hidden"
+    runningAnimations++
+    changeOverflowX("hidden")
 }
 </script>
 <template>
