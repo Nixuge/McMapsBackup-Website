@@ -11,13 +11,15 @@ onMounted(() => {
 
 class GoThrougher {
     private current_string_listindex: number;
-    private current_string: string = "";
+    private current_string: string;
     private char_index: number;
-    private example_strings: string[] = [];
+    private example_strings: string[];
     
     constructor() {
         this.current_string_listindex = 0;
         this.char_index = 0;
+        this.example_strings = serverSearcher.exampleStrings;
+        this.current_string = this.example_strings[this.current_string_listindex];
     }
 
     private delay(ms: number) {
@@ -34,15 +36,15 @@ class GoThrougher {
     }
 
     // A bit dirty but oh well
-    private async waitForServerSearch() {
-        while (serverSearcher === undefined)
-            await this.delay(10);
-        this.example_strings = serverSearcher.exampleStrings;
-        this.current_string = this.example_strings[this.current_string_listindex];
-    }
+    // private async waitForServerSearch() {
+    //     while (serverSearcher === undefined)
+    //         await this.delay(10);
+    //     this.example_strings = serverSearcher.exampleStrings;
+    //     this.current_string = this.example_strings[this.current_string_listindex];
+    // }
     
     public async run() {
-        await this.waitForServerSearch();
+        // await this.waitForServerSearch();
         
         while (!false) {
             await this.goThrough();
