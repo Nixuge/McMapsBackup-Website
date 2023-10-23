@@ -4,10 +4,12 @@ let elementViewerStyle: CSSStyleDeclaration | undefined = undefined;
 
 // Technically can't crash, as this is called only when element-viewer is already mounted 
 function changeOverflowX(overflow: string) {
+    console.log("WhereIsThis 1?");
     if (elementViewerStyle === undefined)
         elementViewerStyle = document.getElementById("element-viewer")?.style;
     // @ts-ignore
     elementViewerStyle.overflowX = overflow;
+    console.log("WhereIsThis 2?");
 }
 
 let runningAnimations = 0;
