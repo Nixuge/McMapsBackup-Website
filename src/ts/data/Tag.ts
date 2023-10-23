@@ -1,4 +1,4 @@
-import { mapSearcher } from "@/ts/server/CurrentServerRedirect";
+import { serverMapSearcher } from "@/ts/server/CurrentServerRedirect";
 import { sanitize } from "@/ts/utils/TextUtils";
 
 export class Tag {
@@ -11,7 +11,7 @@ export class Tag {
     }
 
     public static tagFromString(name: string) {
-        if (mapSearcher.validTags.includes(name)) 
+        if (serverMapSearcher.validTags.includes(name)) 
             return name;
         return "invalid";
     }

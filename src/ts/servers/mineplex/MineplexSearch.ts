@@ -8,14 +8,19 @@ import { IServerSearch } from "@/ts/server/IServerSearch";
 
 export class MineplexSearch implements IServerSearch<MineplexMap> {
     public validTags: string[] = ["game", "builder", "nano"];
+    public exampleStrings: string[] = [
+        "game:thebridges Seretopia",
+        "builder:powh",
+        "nano:true game:gladiators Cavern"
+    ];
 
-    nanoTag: OptionalTag;
-    wantsNano: boolean | undefined;
+    private nanoTag: OptionalTag;
+    private wantsNano: boolean | undefined;
 
-    gameTag: OptionalTag;
-    builderTag: OptionalTag;
+    private gameTag: OptionalTag;
+    private builderTag: OptionalTag;
 
-    remaining: string = "";
+    private remaining: string = "";
 
     public grabTags(tagNode: TagNode) {
         this.nanoTag = tagNode.getTag("nano");

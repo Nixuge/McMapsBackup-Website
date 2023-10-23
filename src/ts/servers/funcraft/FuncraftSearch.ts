@@ -7,11 +7,16 @@ import { IServerSearch } from "@/ts/server/IServerSearch";
 
 export class FuncraftSearch implements IServerSearch<FuncraftMap> {
     public validTags: string[] = ["jeu", "variante"];
+    public exampleStrings: string[] = [
+        "jeu:skywars variante:solo Atlantis",
+        "jeu:infecté Mars",
+        "jeu:hikabrain variante:1v1"
+    ];
 
-    gameTag: OptionalTag;
-    variantTag: OptionalTag;
+    private gameTag: OptionalTag;
+    private variantTag: OptionalTag;
     
-    remaining: string = "";
+    private remaining: string = "";
 
     public grabTags(tagNode: TagNode) {
         this.gameTag = tagNode.getTag("jeu");

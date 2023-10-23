@@ -1,13 +1,13 @@
 import { reactive } from "vue";
-import { DefaultAServerMap, AServerMap, } from "@/ts/server/AServerMap";
+import { DefaultServerMap, ServerMap, } from "@/ts/server/ServerMap";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
-export const currentMapRawType: AServerMap = reactive(new DefaultAServerMap(
+export const currentMapRawType: ServerMap = reactive(new DefaultServerMap(
     "", "", [], -1
 ));
 
-export function setCurrentMap<T extends AServerMap>(newMap: T) {
+export function setCurrentMap<T extends ServerMap>(newMap: T) {
     // currentMap = newMap, doesn't work bc of reactive()
     Object.assign(currentMapRawType, newMap);
     updateUrl();

@@ -1,26 +1,25 @@
 <script setup lang="ts">
 import { SearchEngine as se } from '@/ts/manager/SearchEngine';
+import { serverMapSearcher } from '@/ts/server/CurrentServerRedirect';
+import { IServerSearch } from '@/ts/server/IServerSearch';
 import { onMounted } from 'vue';
 
 let inputelement: HTMLInputElement;
 onMounted(() => {
     inputelement = document.getElementById("searchinput") as HTMLInputElement;
-    new GoThrougher().run()
+    new GoThrougher(serverMapSearcher).run();    
 });
 
 class GoThrougher {
     private current_string_listindex: number;
     private current_string: string;
     private char_index: number;
-    private strings: string[] = [
-                    "game:thebridges Seretopia",
-                    "builder:powh",
-                    "nano:true game:gladiators Cavern"
-                ];
+    private example_strings: string[];
     
-    constructor() {
+    constructor(serverSearch: IServerSearch<any>) {
+        this.example_strings = serverSearch.exampleStrings;
         this.current_string_listindex = 0;
-        this.current_string = this.strings[this.current_string_listindex]
+        this.current_string = this.example_strings[this.current_string_listindex]
         this.char_index = 0;
     }
 
@@ -29,12 +28,12 @@ class GoThrougher {
     }
 
     private nextString() {
-        if (this.current_string_listindex >= this.strings.length - 1)
+        if (this.current_string_listindex >= this.example_strings.length - 1)
             this.current_string_listindex = 0;
         else
             this.current_string_listindex += 1;
         
-        this.current_string = this.strings[this.current_string_listindex];
+        this.current_string = this.example_strings[this.current_string_listindex];
     }
     
     public async run() {

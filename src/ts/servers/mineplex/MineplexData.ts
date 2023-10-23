@@ -1,5 +1,5 @@
 import { MineplexMap as M } from "./MineplexMap";
-import { Download as D } from "@/ts/server/AServerMap";
+import { Download as D } from "@/ts/server/ServerMap";
 
 const Z = "Main download";
 const K: string[] = [

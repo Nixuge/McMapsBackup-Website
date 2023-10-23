@@ -1,8 +1,8 @@
 import { sanitize } from "@/ts/utils/TextUtils";
-import { Download, AServerMap } from "@/ts/server/AServerMap"
+import { Download, ServerMap } from "@/ts/server/ServerMap"
 
 
-export class MineplexMap extends AServerMap {
+export class MineplexMap extends ServerMap {
     public sanitizedBuilders: string;
 
     constructor(minigame: string, mapName: string, public builders: string,

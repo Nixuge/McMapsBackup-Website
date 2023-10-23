@@ -1,6 +1,6 @@
-import { Download, AServerMap } from "@/ts/server/AServerMap";
+import { Download, ServerMap } from "@/ts/server/ServerMap";
 
-export class FuncraftMap extends AServerMap {
+export class FuncraftMap extends ServerMap {
 
     constructor(minigame: string, mapName: string,
         downloads: Download[], id: number, public variant?: string, 

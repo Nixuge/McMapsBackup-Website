@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { AServerMap } from '@/ts/server/AServerMap';
+import { ServerMap } from '@/ts/server/ServerMap';
 import { setCurrentMap } from '@/ts/manager/CurrentMap';
 
 defineProps<{
-  map: AServerMap;
+  map: ServerMap;
 }>()
 </script>
 
