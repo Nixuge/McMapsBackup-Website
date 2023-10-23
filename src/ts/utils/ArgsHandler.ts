@@ -1,5 +1,5 @@
 import router from "@/router";
-import { searchForMap } from "@/ts/manager/ElementViewerManager";
+import { searchForMap } from "@/ts/manager/CurrentMap";
 import { PageManager } from "@/ts/manager/PageManager";
 
 export function parseUrlArgs() {

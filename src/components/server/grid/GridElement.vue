@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ServerMap } from '@/ts/data/ServerMap';
-import { setCurrentMap } from '@/ts/manager/ElementViewerManager';
+import { setCurrentMap } from '@/ts/manager/CurrentMap';
 
 defineProps<{
   map: ServerMap;

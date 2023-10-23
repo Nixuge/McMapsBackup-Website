@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
-import { currentMapRawType } from '@/ts/manager/ElementViewerManager';
+import { currentMapRawType } from '@/ts/manager/CurrentMap';
 import { ElementViewerComponent } from '@/ts/servers/CurrentServerRedirect';
 </script>
 

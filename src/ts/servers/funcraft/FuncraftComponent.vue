@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
 import { currentMapRawType } from '@/ts/manager/CurrentMap';
-import { MineplexMap } from './MineplexMap';
+import { FuncraftMap } from './FuncraftMap';
 
-let currentMap = currentMapRawType as MineplexMap;
+const currentMap = currentMapRawType as FuncraftMap;
 </script>
+
 
 <template>
     <div class="text" v-if="currentMap.minigame != ''">
-        <TST><h1 :key="+currentMap.nano" v-if="currentMap.nano">Nano Game</h1></TST>
-        
         <TST><h1 :key="currentMap.minigame">{{ currentMap.minigame }}</h1></TST>
         <hr>
         <TST><h1 :key="currentMap.mapName">{{ currentMap.mapName }}</h1></TST>
-        <TST><h2 :key="currentMap.builders">{{ 'Built by ' + currentMap.builders }}</h2></TST>
         <hr>
         <TST><div :key="currentMap.downloads.toString()" v-if="currentMap.downloads.length != 0">
-            <h1>Downloads</h1>
+            <h1>Téléchargements:</h1>
             <ul>
                 <a v-for="download in currentMap.downloads" :href="currentMap.getDownloadUrl(download.url)">
                     <li>{{ download.name }}</li>
@@ -27,12 +25,12 @@ let currentMap = currentMapRawType as MineplexMap;
         
         <TST><div :key="currentMap.commentaries" v-if="currentMap.commentaries != undefined">
             <hr>
-            <h1>Additional info</h1>
+            <h1>Infos additionelles</h1>
             <h2>{{ currentMap.commentaries }}</h2>
         </div></TST>
     </div>
     <div class="text" v-else>
-        <TST><h1>No map selected</h1></TST>
+        <TST><h1>Aucune map sélectionnée</h1></TST>
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 import router from "@/router";
-import { currentMapRawType } from "./ElementViewerManager";
+import { currentMapRawType } from "./CurrentMap";
 import { PageManager } from "./PageManager";
 
 export function updateUrl() {
