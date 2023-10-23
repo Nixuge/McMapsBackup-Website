@@ -13,20 +13,24 @@ function changeOverflowX(overflow: string) {
 }
 
 let runningAnimations = 0;
-function enter() {
+function enter(a: string) {
+    console.log(a);
+    
+    console.log("WhereIsThis enter");
     runningAnimations--;
     if (runningAnimations === 0)
-        changeOverflowX("auto")
+        changeOverflowX("auto");
     
 }
 function leave() {
-    runningAnimations++
-    changeOverflowX("hidden")
+    console.log("WhereIsThis leave");
+    runningAnimations++;
+    changeOverflowX("hidden");
 }
 </script>
 <template>
     <Transition name="bounce" mode="out-in" 
-    @after-enter="enter" @before-leave="leave"
+    @after-enter="enter('a')" @before-leave="leave"
     appear>
         <slot></slot>
     </Transition>
