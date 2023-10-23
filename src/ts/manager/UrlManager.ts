@@ -14,7 +14,7 @@ export function updateUrl() {
     router.push(fullUrl);
 }
 
-export function parseUrlArgs() {
+export async function parseUrlArgs() {
     const params = router.currentRoute.value.params;
     const server = params.server;
     const page = params.page;
@@ -26,7 +26,7 @@ export function parseUrlArgs() {
     PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num;        
 
     if (server != null) {
-        setServer(server as string);
+        await setServer(server as string);
     }
 
     if (mapname != null) {
