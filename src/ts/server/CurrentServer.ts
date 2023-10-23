@@ -2,17 +2,18 @@
 import router from "@/router";
 
 import { IServerSearch } from "./IServerSearch";
+import { IServerMeta } from "./IServerMeta";
+import { EmptyServerMap } from "./ServerMap";
 
 import { MineplexMeta } from "@/ts/servers/mineplex/MineplexMeta";
-import { FuncraftMeta } from "../servers/funcraft/FuncraftMeta";
+import { FuncraftMeta } from "@/ts/servers/funcraft/FuncraftMeta";
+import { OnecubeMeta } from "@/ts/servers/onecube/OnecubeMeta";
+import { HiveMeta } from "@/ts/servers/hive/HiveMeta";
 
 import { SearchEngine } from "@/ts/manager/SearchEngine";
 
-import { IServerMeta } from "./IServerMeta";
-import { updateUrl } from "../manager/UrlManager";
-import { setCurrentMap } from "../manager/CurrentMap";
-import { EmptyServerMap } from "./ServerMap";
-import { OnecubeMeta } from "../servers/onecube/OnecubeMeta";
+import { updateUrl } from "@/ts/manager/UrlManager";
+import { setCurrentMap } from "@/ts/manager/CurrentMap";
 
 export function setServer(serverName: string) {
     // const metaClassLoader = SERVER_METAS.get(serverName);
@@ -41,9 +42,10 @@ export function setServer(serverName: string) {
 // Tried multiple things, including the beforeCreate mount,
 // but this does not support async calls and so does not support this.
 export const SERVER_METAS: Map<String, any> = new Map();
-SERVER_METAS.set("mineplex", MineplexMeta)
+SERVER_METAS.set("mineplex", MineplexMeta);
 SERVER_METAS.set("funcraft", FuncraftMeta);
-SERVER_METAS.set("onecube", OnecubeMeta)
+SERVER_METAS.set("onecube", OnecubeMeta);
+SERVER_METAS.set("hive", HiveMeta)
 // SERVER_METAS.set("mineplex", async () => {const {MineplexMeta} = await import("@/ts/servers/mineplex/MineplexMeta"); return MineplexMeta})
 // SERVER_METAS.set("funcraft", async () => {const {FuncraftMeta} = await import("@/ts/servers/funcraft/FuncraftMeta"); return FuncraftMeta});
 

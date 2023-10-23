@@ -8,27 +8,28 @@ import { IServerSearch } from "@/ts/server/IServerSearch";
 export class OnecubeSearch implements IServerSearch<OnecubeMap> {
     public validTags: string[] = ["jeu", "variante"];
     public exampleStrings: string[] = [
-        "jeu:skywars variante:solo Atlantis",
-        "jeu:infecté Mars",
-        "jeu:hikabrain variante:1v1"
+        "" //TODO
     ];
 
-    private gameTag: OptionalTag;
-    private variantTag: OptionalTag;
+    // private gameTag: OptionalTag;
+    // private variantTag: OptionalTag;
     
-    private remaining: string = "";
+    // private remaining: string = "";
 
     public grabTags(tagNode: TagNode) {
-        this.gameTag = tagNode.getTag("jeu");
-        this.variantTag = tagNode.getTag("variante");
-        this.remaining = tagNode.getRemaining();
+        // this.gameTag = tagNode.getTag("jeu");
+        // this.variantTag = tagNode.getTag("variante");
+        // this.remaining = tagNode.getRemaining();
+        // TODO
     }
     public isMapGood(map: OnecubeMap) {
-        if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
-            (this.variantTag != undefined && (map.variant == undefined || !map.variant.includes(this.variantTag.value))) ||
-            (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
-            return false;
-        }
+        // if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
+        //     (this.variantTag != undefined && (map.variant == undefined || !map.variant.includes(this.variantTag.value))) ||
+        //     (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
+        //     return false;
+        // }
+        // return true;
+        // TODO
         return true;
     }
 }
