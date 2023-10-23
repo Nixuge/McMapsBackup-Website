@@ -3,20 +3,26 @@ defineProps<{
     serverName: string,
     serverUrl: string,
     thumbnailName: string,
-    death: string
+    death: string,
+    country: string
 }>()
 
 const BASE_URL = (process.env.NODE_ENV == "development") ? 
-    "https://maps.nixuge.me/static/server_thumbnails/" : 
-    "/static/server_thumbnails/";
+    "https://maps.nixuge.me/static/" : 
+    "static/";
+
+const THUMB_URL = BASE_URL + "server_thumbnails/";
+const FLAG_URL = BASE_URL + "flags/";
+
 </script>
 
 <template>
     <div class="serverentry" v-on:click="$router.push('/' + serverUrl + '/')" >
-        <img class="servericon" :src="BASE_URL + thumbnailName">
+        <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
-            <img class="deathicon" :src="BASE_URL + 'death.png'">
+            <img class="deathicon" :src="THUMB_URL + 'death.png'">
             <span class="deathtext" v-text="death"></span>
+            <img class="flagicon" :src="FLAG_URL + country + '.png'">
         </div>
         <button v-text="serverName" />
 
@@ -63,5 +69,12 @@ const BASE_URL = (process.env.NODE_ENV == "development") ?
     .deathtext {
         color: #ff5353;
         font-weight: bold;
+    }
+
+    .flagicon {
+        float: right;
+        margin-right: 5px;
+        transform: translateY(3px); /* Annoying image being 2px offcenter */
+        border-radius: 50px;
     }
 </style>
