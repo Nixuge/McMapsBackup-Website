@@ -6,10 +6,10 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 
 <template>
     <div class="searchbar fade">
+        <SearchButton text=" < " href="/" />
         <SearchInput />
         <SearchButton text="Search help" href="/help" />
         <SearchButton text="Api" href="/api" />
-        <SearchButton text="Root" href="/" />
         <SearchThemeSwitcher />
     </div>
 </template>

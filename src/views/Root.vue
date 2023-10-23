@@ -7,8 +7,3 @@ import ServerSelector from '@/components/selector/ServerSelector.vue'
 <template>
     <ServerSelector />
 </template>
-
-
-<style scoped>
-
-</style>

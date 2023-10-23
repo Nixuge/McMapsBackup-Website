@@ -14,4 +14,13 @@ defineProps<{
 .button {
     white-space: nowrap;
 }
+
+button {
+    cursor: pointer;
+    background: #ffffff30;
+    border-radius: 5px;
+    border: 0px;
+    color: #fff;
+    font-size: large;
+}
 </style>
