@@ -47,7 +47,6 @@ class GoThrougher {
     
     public async run() {
         await this.waitForServerSearch();
-        console.log("hi");
         
         while (!false) {
             await this.goThrough();

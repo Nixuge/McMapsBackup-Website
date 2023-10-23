@@ -78,11 +78,6 @@ export class TagNode {
                 new Tag(sanitize(splittedTag[0]), sanitize(splittedTag[1]))
             );
         }
-
-        // tagNode.getTags().forEach(element => {
-        //     console.log(element.type.toString() + " of val " + element.value);
-        // });
-        // console.log("remaining: " + tagNode.getRemaining());
         
         return tagNode;
     }
