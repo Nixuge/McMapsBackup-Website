@@ -12,8 +12,8 @@ const currentMap = computed(() => {
 
 <template>
     <div class="text">
-        <h1>Not yet implemented !</h1>
-        <h2>The maps unfortunately aren't uploaded yet. Send me a message @ one of the contacts on <a href="https://nixuge.me">nixuge.me</a> if you really need the maps.</h2>
+        <TST><h1>Not yet implemented !</h1></TST>
+        <TST><h2>The maps unfortunately aren't uploaded yet. Send me a message @ one of the contacts on <a href="https://nixuge.me">nixuge.me</a> if you really need the maps.</h2></TST>
     </div>
 </template>
 

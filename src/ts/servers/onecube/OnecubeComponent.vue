@@ -35,6 +35,7 @@ const currentMap = computed(() => {
     </div>
     <div class="text" v-else>
         <TST><h1>Aucune map sélectionnée</h1></TST>
+        <TST><h2>Il est possible que le téléchargement de certaines maps ne marche pas actuellement.</h2></TST>
     </div>
 </template>
 

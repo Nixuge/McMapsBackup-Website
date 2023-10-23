@@ -12,8 +12,8 @@ const currentMap = computed(() => {
 
 <template>
     <div class="text">
-        <h1>Not yet implemented !</h1>
-        <h2>Please visit <a href="https://hivebackup.github.io">hivebackup.github.io</a> for the time being.</h2>
+        <TST><h1>Not yet implemented !</h1></TST>
+        <TST><h2>Please visit <a href="https://hivebackup.github.io">hivebackup.github.io</a> for the time being.</h2></TST>
     </div>
 </template>
 
