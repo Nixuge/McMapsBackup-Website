@@ -1,11 +1,11 @@
 // Could extend SearchEngine instead
 
 import { OptionalTag, TagNode } from "@/ts/data/Tag";
-import { HiveMap } from "./HiveMap";
+import { LunarMap } from "./LunarMap";
 import { IServerSearch } from "@/ts/server/IServerSearch";
 
 
-export class HiveSearch implements IServerSearch<HiveMap> {
+export class LunarSearch implements IServerSearch<LunarMap> {
     public validTags: string[] = []; // TODO
     public exampleStrings: string[] = [
         "" // TODO
@@ -15,7 +15,7 @@ export class HiveSearch implements IServerSearch<HiveMap> {
     public grabTags(tagNode: TagNode) {
         // TODO
     }
-    public isMapGood(map: HiveMap) {
+    public isMapGood(map: LunarMap) {
         // TODO
         return true;
     }
