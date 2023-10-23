@@ -12,6 +12,7 @@ import { IServerMeta } from "./IServerMeta";
 import { updateUrl } from "../manager/UrlManager";
 import { setCurrentMap } from "../manager/CurrentMap";
 import { EmptyServerMap } from "./ServerMap";
+import { OnecubeMeta } from "../servers/onecube/OnecubeMeta";
 
 export function setServer(serverName: string) {
     // const metaClassLoader = SERVER_METAS.get(serverName);
@@ -42,6 +43,7 @@ export function setServer(serverName: string) {
 export const SERVER_METAS: Map<String, any> = new Map();
 SERVER_METAS.set("mineplex", MineplexMeta)
 SERVER_METAS.set("funcraft", FuncraftMeta);
+SERVER_METAS.set("onecube", OnecubeMeta)
 // SERVER_METAS.set("mineplex", async () => {const {MineplexMeta} = await import("@/ts/servers/mineplex/MineplexMeta"); return MineplexMeta})
 // SERVER_METAS.set("funcraft", async () => {const {FuncraftMeta} = await import("@/ts/servers/funcraft/FuncraftMeta"); return FuncraftMeta});
 
