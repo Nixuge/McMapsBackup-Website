@@ -1,4 +1,5 @@
 // This file should reference everything from the currently selected server.
+import router from "@/router";
 
 import { IServerSearch } from "./IServerSearch";
 
@@ -7,23 +8,22 @@ import { FuncraftMeta } from "@/ts/servers/funcraft/FuncraftMeta";
 
 import { SearchEngine } from "@/ts/manager/SearchEngine";
 
-import { defineAsyncComponent, reactive } from "vue";
 import { IServerMeta } from "./IServerMeta";
 import { updateUrl } from "../manager/UrlManager";
 
 export function setServer(serverName: string) {
     let metaClass = SERVER_METAS.get(serverName);
-
-    serverSubUrl = serverName;
-
+    if (metaClass === undefined) {
+        router.push('/');
+        return;        
+    }
+    
     serverMeta = new metaClass();
-    
+    serverSubUrl = serverMeta.subUrl; // could just be = serverName but this makes things more consistent;
     serverSearcher = new serverMeta.serverSearcher();
-    
     ElementViewerComponent = serverMeta.elementViewerComponent;
 
     SearchEngine.init(serverMeta.serverMaps);
-
     updateUrl();
 }
 
@@ -39,7 +39,3 @@ export let serverMeta: IServerMeta;
 
 export let ElementViewerComponent: any;
 
-
-
-// TODO left:
-// on URL change, proper URL changes, currentServerManager (somewhere or here?), refactor

@@ -13,7 +13,7 @@ export class MineplexMap extends ServerMap {
         }
     
     getBaseUrl(zip: boolean) {
-        let base = "/static/";
+        let base = "/static/mineplex/";
         base += (zip) ? "zip/" : "img/";
         if (this.nano){
             base += "nano/";
