@@ -3,13 +3,11 @@ import { DefaultServerMap, ServerMap, } from "@/ts/server/ServerMap";
 import { SearchEngine } from "./SearchEngine";
 import { updateUrl } from "./UrlManager";
 
-export const currentMapRawType: ServerMap = reactive(new DefaultServerMap(
-    "", "", [], -1
-));
+export let currentMap = reactive({map: new DefaultServerMap()});
 
 export function setCurrentMap<T extends ServerMap>(newMap: T) {
-    // currentMap = newMap, doesn't work bc of reactive()
-    Object.assign(currentMapRawType, newMap);
+    // currentMap.map = newMap;
+    Object.assign(currentMap.map, newMap);
     updateUrl();
 }
 

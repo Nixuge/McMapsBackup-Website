@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
-import { currentMapRawType } from '@/ts/manager/CurrentMap';
+import { currentMap as CM } from '@/ts/manager/CurrentMap';
 import { MineplexMap } from './MineplexMap';
 
-let currentMap = currentMapRawType as MineplexMap;
+let currentMap = CM.map as MineplexMap;
 </script>
 
 <template>

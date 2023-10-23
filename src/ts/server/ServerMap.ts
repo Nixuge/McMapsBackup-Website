@@ -37,13 +37,14 @@ export abstract class ServerMap {
 
 
 // Default implementation of the getBaseUrl
-// May be added into the abstract class above.
-// Only case where this isn't used as of now is mineplex w its nanos
-export class DefaultServerMap extends ServerMap{
-    getBaseUrl(file: boolean): string {
-        let base = "/static/";
-        base += (file) ? "zip/" : "img/";
-        base += this.sanitizedMinigame + "/";
-        return base;
+// Made only for the "nothing selected" map, which doesn't call getBaseUrl anyways.
+export class DefaultServerMap extends ServerMap {
+    constructor() {
+        super("", "", [], -5);
+        console.log("init");
+        
+    }
+    getBaseUrl(_: boolean): string {        
+        return "";
     }
 }; 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
-import { currentMapRawType } from '@/ts/manager/CurrentMap';
+import { currentMap } from '@/ts/manager/CurrentMap';
 import { ElementViewerComponent } from '@/ts/server/CurrentServer';
 </script>
 
 
 <template>
     <div class="viewer fade" id="element-viewer">
-        <TST><img :key="+currentMapRawType.id" :src="currentMapRawType.getPreviewUrl()"></TST>
+        <TST><img :key="+currentMap.map.id" :src="currentMap.map.getPreviewUrl()"></TST>
         <ElementViewerComponent />
     </div>
 </template>

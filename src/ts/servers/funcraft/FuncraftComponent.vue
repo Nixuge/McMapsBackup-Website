@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import TST from '@/components/server/transitions/TextSlideTransitionElementViewer.vue'
-import { currentMapRawType } from '@/ts/manager/CurrentMap';
+import { currentMap as CM } from '@/ts/manager/CurrentMap';
 import { FuncraftMap } from './FuncraftMap';
 
-const currentMap = currentMapRawType as FuncraftMap;
+let currentMap = CM.map as FuncraftMap;
 </script>
 
 

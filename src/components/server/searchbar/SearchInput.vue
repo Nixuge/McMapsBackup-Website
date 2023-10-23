@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 import { serverSearcher } from '@/ts/server/CurrentServer';
-import { IServerSearch } from '@/ts/server/IServerSearch';
 import { onMounted } from 'vue';
 
 let inputelement: HTMLInputElement;
 onMounted(() => {
     inputelement = document.getElementById("searchinput") as HTMLInputElement;
-    new GoThrougher(serverSearcher).run();    
+    new GoThrougher().run();    
 });
 
 class GoThrougher {
     private current_string_listindex: number;
-    private current_string: string;
+    private current_string: string = "";
     private char_index: number;
-    private example_strings: string[];
+    private example_strings: string[] = [];
     
-    constructor(serverSearch: IServerSearch<any>) {
-        this.example_strings = serverSearch.exampleStrings;
+    constructor() {
         this.current_string_listindex = 0;
-        this.current_string = this.example_strings[this.current_string_listindex]
         this.char_index = 0;
     }
 
@@ -35,8 +32,18 @@ class GoThrougher {
         
         this.current_string = this.example_strings[this.current_string_listindex];
     }
+
+    // A bit dirty but oh well
+    private async waitForServerSearch() {
+        while (serverSearcher === undefined)
+            await this.delay(10);
+        this.example_strings = serverSearcher.exampleStrings;
+        this.current_string = this.example_strings[this.current_string_listindex];
+    }
     
     public async run() {
+        await this.waitForServerSearch();
+        
         while (!false) {
             await this.goThrough();
             await this.delay(2000);
@@ -63,8 +70,6 @@ class GoThrougher {
         }
     }
 }
-
-
 
 </script>
 

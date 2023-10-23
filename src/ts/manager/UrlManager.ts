@@ -1,15 +1,17 @@
 import router from "@/router";
-import { currentMapRawType, searchForMap } from "@/ts/manager/CurrentMap";
+import { currentMap, searchForMap } from "@/ts/manager/CurrentMap";
 import { PageManager } from "@/ts/manager/PageManager";
 import { serverSubUrl, setServer } from "@/ts/server/CurrentServer";
 
 
 export function updateUrl() {
+    console.log("hi");
+    
     let fullUrl = `/${serverSubUrl}/${PageManager.getPage()}/`
-    if (currentMapRawType.minigame)
-        fullUrl += currentMapRawType.minigame;
-    if (currentMapRawType.mapName)
-        fullUrl += currentMapRawType.mapName;
+    if (currentMap.map.minigame)
+        fullUrl += currentMap.map.minigame + "/";
+    if (currentMap.map.mapName)
+        fullUrl += currentMap.map.mapName;
 
     router.push(fullUrl);
 }
