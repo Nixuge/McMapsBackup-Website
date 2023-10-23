@@ -2,26 +2,28 @@
 
 import { OptionalTag, Tag, TagNode } from "@/ts/data/Tag";
 import { FuncraftMap } from "./FuncraftMap";
+import { IServerSearch } from "@/ts/data/IServerSearch";
 
 
-export const validTags: string[] = ["jeu", "variante"];
+export class FuncraftSearch implements IServerSearch<FuncraftMap> {
+    public validTags: string[] = ["jeu", "variante"];
 
-let gameTag: OptionalTag;
-let variantTag: OptionalTag;
+    gameTag: OptionalTag;
+    variantTag: OptionalTag;
+    
+    remaining: string = "";
 
-let remaining: string;
-
-export function grabTags(tagNode: TagNode) {
-    gameTag = tagNode.getTag("jeu");
-    variantTag = tagNode.getTag("variante");
-    remaining = tagNode.getRemaining();
-}
-
-export function isMapGood(map: FuncraftMap) {
-    if ((gameTag != undefined && !map.sanitizedMinigame.includes(gameTag.value)) ||
-        (variantTag != undefined && (map.variant == undefined || !map.variant.includes(variantTag.value))) ||
-        (remaining != "" && !map.sanitizedMapName.includes(remaining))) {
-        return false;
+    public grabTags(tagNode: TagNode) {
+        this.gameTag = tagNode.getTag("jeu");
+        this.variantTag = tagNode.getTag("variante");
+        this.remaining = tagNode.getRemaining();
     }
-    return true;
+    public isMapGood(map: FuncraftMap) {
+        if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
+            (this.variantTag != undefined && (map.variant == undefined || !map.variant.includes(this.variantTag.value))) ||
+            (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
+            return false;
+        }
+        return true;
+    }
 }

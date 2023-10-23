@@ -7,8 +7,8 @@ import './assets/base.css';
 import './assets/icons.css';
 // import './ts/utils/ThemeSetter';
 
-// import { SearchEngine } from './ts/manager/SearchEngine';
-// SearchEngine.init();
+import { SearchEngine } from './ts/manager/SearchEngine';
+SearchEngine.init();
 
 
 

@@ -2,7 +2,7 @@ import { reactive } from "vue";
 import { ServerMap } from "@/ts/data/ServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
-import { allServerMaps, mapMatcher, tagsGrabber } from "@/ts/servers/CurrentServerRedirect";
+import { allServerMaps, mapSearcher } from "@/ts/servers/CurrentServerRedirect";
 import { TagNode } from "../data/Tag";
 
 
@@ -35,11 +35,11 @@ export class SearchEngine {
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
-        tagsGrabber(tagNode)
+        mapSearcher.grabTags(tagNode)
 
 
         for (const map of allServerMaps) {
-            if (mapMatcher(map))
+            if (mapSearcher.isMapGood(map))
                 this.currentMapsRawArray.push(map);
         }
         
