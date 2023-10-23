@@ -21,6 +21,7 @@ export function parseUrlArgs() {
     const minigame = params.minigame;
     const mapname = params.mapname;
     
+    // Same as SearchInput.vue's inputelement, may be adapted to be cached between servers
     let num = Number.parseInt(page as string);
     PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num;        
 

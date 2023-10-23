@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import ServerButton from './ServerButton.vue'
+import ServerEntry from './ServerEntry.vue'
 </script>
 
 <template>
     <div>
         <h1>Welcome to Nixuge's Minecraft Archives</h1>
         <div id="buttongrid">
-            <ServerButton serverName="Mineplex" serverUrl="mineplex" />
-            <ServerButton serverName="Funcraft" serverUrl="funcraft" />
-            <ServerButton serverName="OneCube" serverUrl="onecube" />
-            <ServerButton serverName="HiveMC" serverUrl="hive" />
-            <ServerButton serverName="lunar.gg" serverUrl="lunar" />
+            <ServerEntry serverName="Mineplex" serverUrl="mineplex" />
+            <ServerEntry serverName="Funcraft" serverUrl="funcraft" />
+            <ServerEntry serverName="OneCube" serverUrl="onecube" />
+            <ServerEntry serverName="HiveMC" serverUrl="hive" />
+            <ServerEntry serverName="lunar.gg" serverUrl="lunar" />
         </div>
     </div>
 </template>

@@ -7,7 +7,10 @@ import './assets/base.css';
 import './assets/icons.css';
 // import './ts/utils/ThemeSetter';
 
-import { SearchEngine } from './ts/manager/SearchEngine';
+// This may seem unneccesary, but there's a 99% chance you're going to click on one of the buttons
+// if you visit the website, and if the server view isn't preloaded, it'll take ~200ms to load.
+function preloadView() { import('./views/Server.vue'); }
+preloadView();
 
 
 const app = createApp(App);
