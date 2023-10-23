@@ -21,13 +21,11 @@ export function parseUrlArgs() {
     const minigame = params.minigame;
     const mapname = params.mapname;
     
+    let num = Number.parseInt(page as string);
+    PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num;        
+
     if (server != null) {
         setServer(server as string);
-    }
-
-    if (page != null) {
-        let num = Number.parseInt(page.toString());
-        PageManager.page.value = (num < 1 || Number.isNaN(num))? 1 : num;
     }
 
     if (mapname != null) {
