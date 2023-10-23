@@ -18,6 +18,7 @@ import { ElementViewerComponent } from '@/ts/server/CurrentServer';
     background-color: var(--dark-transparent);
     border-radius: 10px;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 img {

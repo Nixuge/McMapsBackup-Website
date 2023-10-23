@@ -1,37 +1,8 @@
 <script setup lang="ts">
 
-let elementViewerStyle: CSSStyleDeclaration | undefined = undefined;
-
-// Technically can't crash, as this is called only when element-viewer is already mounted 
-function changeOverflowX(overflow: string) {
-    console.log("WhereIsThis 1?");
-    if (elementViewerStyle === undefined)
-        elementViewerStyle = document.getElementById("element-viewer")?.style;
-    // @ts-ignore
-    elementViewerStyle.overflowX = overflow;
-    console.log("WhereIsThis 2?");
-}
-
-let runningAnimations = 0;
-function enter(a: string) {
-    console.log(a);
-    
-    console.log("WhereIsThis enter");
-    runningAnimations--;
-    if (runningAnimations === 0)
-        changeOverflowX("auto");
-    
-}
-function leave() {
-    console.log("WhereIsThis leave");
-    runningAnimations++;
-    changeOverflowX("hidden");
-}
 </script>
 <template>
-    <Transition name="bounce" mode="out-in" 
-    @after-enter="enter('a')" @before-leave="leave"
-    appear>
+    <Transition name="bounce" mode="out-in" appear>
         <slot></slot>
     </Transition>
 </template>
