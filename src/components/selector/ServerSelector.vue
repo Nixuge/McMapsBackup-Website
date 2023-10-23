@@ -22,10 +22,20 @@ h1 {
 }
 #buttongrid {
     margin: auto;
-    width: 70%;
     padding-top: 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+@media screen and (max-width: 849px) {
+    #buttongrid {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    #buttongrid {
+        width: 80%;
+    }
 }
 </style>
