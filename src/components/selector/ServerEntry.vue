@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ClickableIcon } from '@/ts/data/ClickableIcon';
-import { onMounted } from 'vue';
 
 const props = defineProps<{
     serverName: string,
@@ -19,10 +18,10 @@ const WEBSITES_URL = BASE_URL + "websites/";
 const THUMB_URL = BASE_URL + "server_thumbnails/";
 const FLAG_URL = BASE_URL + "flags/";
 
-function redirect(invite: string | undefined) {
-    if (invite === undefined)
+function redirect(link: string | undefined) {
+    if (link === undefined)
         return;
-    window.location.href = "https://discord.gg/" + invite;   
+    window.location.href = link;
 }
 
 // Have things go from right to left.
