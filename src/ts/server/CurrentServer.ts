@@ -11,6 +11,8 @@ import { updateUrl } from "@/ts/manager/UrlManager";
 import { setCurrentMap } from "@/ts/manager/CurrentMap";
 import { defineAsyncComponent, shallowRef } from "vue";
 
+const emptyComponent = defineAsyncComponent(() => import('@/ts/server/EmptyComponent.vue'));
+
 export async function setServer(serverName: string) {
     const metaClassLoader = SERVER_METAS[serverName];
 
@@ -47,10 +49,7 @@ export const SERVER_METAS: MetaMap = {
 }
 
 
-const emptyComponent = defineAsyncComponent(() => import('@/ts/server/EmptyComponent.vue'));
-
 export let serverSubUrl: string = "";
-
 export let serverSearcher: IServerSearch<any>;
 export let serverMeta: IServerMeta;
 
