@@ -4,7 +4,8 @@ defineProps<{
     serverUrl: string,
     thumbnailName: string,
     death: string,
-    country: string
+    country: string,
+    discord?: string
 }>()
 
 const BASE_URL = (process.env.NODE_ENV == "development") ? 
@@ -14,10 +15,16 @@ const BASE_URL = (process.env.NODE_ENV == "development") ?
 const THUMB_URL = BASE_URL + "server_thumbnails/";
 const FLAG_URL = BASE_URL + "flags/";
 
+function redirect(invite: string | undefined) {
+    if (invite === undefined)
+        return;
+    window.location.href = "https://discord.gg/" + invite;   
+}
 </script>
 
 <template>
-    <div class="serverentry" v-on:click="$router.push('/' + serverUrl + '/')" >
+    <div class="serverentry" @click="$router.push('/' + serverUrl + '/')" >
+        <img class="discordicon" v-if="discord !== undefined"  @click.stop="redirect(discord)" :src="BASE_URL + 'discord.png'">
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
             <img class="deathicon" :src="THUMB_URL + 'death.png'">
@@ -25,11 +32,20 @@ const FLAG_URL = BASE_URL + "flags/";
             <img class="flagicon" :src="FLAG_URL + country + '.png'">
         </div>
         <button v-text="serverName" />
-
     </div>
 </template>
 
 <style scoped>
+    .discordicon {
+        position: absolute;
+        width: 50px;
+        margin-top: 140px;
+        margin-left: 140px;
+        background: rgba(0, 0, 0, 0.727);
+        border-radius: 10px;
+        padding: 11px 5px 11px 5px; /* Wider so adapting to make it a square*/
+        cursor: pointer;
+    }
     .serverentry {
         margin: 20px;
         padding: 10px;
@@ -45,8 +61,9 @@ const FLAG_URL = BASE_URL + "flags/";
         border-radius: 20px;
     }
     button {
+        color: #ffffff;
         font-size: 250%;
-        background: rgb(214, 214, 214);
+        background: rgba(0, 0, 0, 0.302);
         border-radius: 15px;
         padding: 8px;
         border: transparent;

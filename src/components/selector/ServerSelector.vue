@@ -4,10 +4,10 @@ import ServerEntry from './ServerEntry.vue'
 
 <template>        
     <div id="buttongrid" class="fade">
-        <ServerEntry serverName="Mineplex" serverUrl="mineplex" thumbnailName="mineplex.webp" death="16/05/2023" country="us" />
+        <ServerEntry serverName="Mineplex" serverUrl="mineplex" thumbnailName="mineplex.webp" death="16/05/2023" country="us" discord="RecgHVxKuk" />
         <ServerEntry serverName="Funcraft" serverUrl="funcraft" thumbnailName="funcraft.jpg" death="26/08/2023" country="fr" />
         <ServerEntry serverName="Onecube" serverUrl="onecube" thumbnailName="onecube.jpg" death="28/04/2023" country="fr" />
-        <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023" country="gb" />
+        <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023" country="gb" discord="PEtgk4TSEF" />
         <ServerEntry serverName="lunar.gg" serverUrl="lunar" thumbnailName="lunar.png" death="01/06/2023" country="us" />
     </div>
 </template>
