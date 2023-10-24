@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ClickableIcon } from '@/ts/data/ClickableIcon';
-
+// Note about iconLinks:
+// They were originally done with an array of a class called ClickableIcon (ClickableIcon[]).
+// However, found out the Vue compiler doesn't handle class instanciations in component props,
+// and throws an error in prod (but not in dev lol), so switched to good old arrays.
 const props = defineProps<{
     serverName: string,
     serverUrl: string,
     thumbnailName: string,
     death: string,
     country: string,
-    iconLinks?: ClickableIcon[]
+    iconLinks?: [string, string, string][]
 }>()
 
 const BASE_URL = (process.env.NODE_ENV == "development") ? 
@@ -33,7 +35,7 @@ const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (
 <template>
     <div class="serverentry" @click="$router.push('/' + serverUrl + '/')" >
         <div class="iconlinkswrap" v-if="iconLinks !== undefined">
-            <img class="iconlink" v-for="icon in iconLinks" @click.stop="redirect(icon.link)" :src="WEBSITES_URL + icon.image" :alt="icon.alt">
+            <img class="iconlink" v-for="icon in iconLinks" @click.stop="redirect(icon[0])" :src="WEBSITES_URL + icon[1]" :alt="icon[2]">
         </div>
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
