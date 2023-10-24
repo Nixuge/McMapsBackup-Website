@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
 import ServerSelector from '@/components/selector/ServerSelector.vue'
-import Infos from '@/components/selector/Infos.vue'
+import InfoList from '@/components/selector/infos/InfoList.vue'
 
 </script>
 
 <template>
     <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
-    <!-- <Infos /> -->
+    <InfoList />
     <ServerSelector />
 </template>
 

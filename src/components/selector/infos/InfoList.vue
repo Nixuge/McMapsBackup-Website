@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import Info from './Info.vue'
 
 </script>
 
 <template>
     <div id="infos" class="fade">
-
+        <Info>aaa</Info>
     </div>
 </template>
 
