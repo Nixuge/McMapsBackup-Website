@@ -41,7 +41,7 @@ function redirect(invite: string | undefined) {
         width: 50px;
         margin-top: 140px;
         margin-left: 140px;
-        background: rgba(0, 0, 0, 0.727);
+        background: #131313;
         border-radius: 10px;
         padding: 11px 5px 11px 5px; /* Wider so adapting to make it a square*/
         cursor: pointer;
@@ -61,9 +61,8 @@ function redirect(invite: string | undefined) {
         border-radius: 20px;
     }
     button {
-        color: #ffffff;
         font-size: 250%;
-        background: rgba(0, 0, 0, 0.302);
+        background: rgb(214,214,214);
         border-radius: 15px;
         padding: 8px;
         border: transparent;

@@ -7,7 +7,7 @@ import Infos from '@/components/selector/Infos.vue'
 
 <template>
     <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
-    <Infos />
+    <!-- <Infos /> -->
     <ServerSelector />
 </template>
 
