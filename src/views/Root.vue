@@ -7,7 +7,7 @@ import InfoList from '@/components/selector/infos/InfoList.vue'
 
 <template>
     <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
-    <InfoList />
+    <!-- <InfoList /> -->
     <ServerSelector />
 </template>
 
