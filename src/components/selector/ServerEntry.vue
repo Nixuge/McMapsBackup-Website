@@ -1,17 +1,21 @@
 <script setup lang="ts">
-defineProps<{
+import { ClickableIcon } from '@/ts/data/ClickableIcon';
+import { onMounted } from 'vue';
+
+const props = defineProps<{
     serverName: string,
     serverUrl: string,
     thumbnailName: string,
     death: string,
     country: string,
-    discord?: string
+    iconLinks?: ClickableIcon[]
 }>()
 
 const BASE_URL = (process.env.NODE_ENV == "development") ? 
     "https://maps.nixuge.me/static/" : 
     "static/";
 
+const WEBSITES_URL = BASE_URL + "websites/";
 const THUMB_URL = BASE_URL + "server_thumbnails/";
 const FLAG_URL = BASE_URL + "flags/";
 
@@ -20,11 +24,18 @@ function redirect(invite: string | undefined) {
         return;
     window.location.href = "https://discord.gg/" + invite;   
 }
+
+// Have things go from right to left.
+// To adapt if I change the padding.
+// Currently 65 = 50(img) + 2x5(padding) + 5 (margin-left)
+const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (props.iconLinks.length - 1))) + "px";
 </script>
 
 <template>
     <div class="serverentry" @click="$router.push('/' + serverUrl + '/')" >
-        <img class="discordicon" v-if="discord !== undefined"  @click.stop="redirect(discord)" :src="BASE_URL + 'discord.png'">
+        <div class="iconlinkswrap" v-if="iconLinks !== undefined">
+            <img class="iconlink" v-for="icon in iconLinks" @click.stop="redirect(icon.link)" :src="WEBSITES_URL + icon.image" :alt="icon.alt">
+        </div>
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
             <img class="deathicon" :src="THUMB_URL + 'death.png'">
@@ -36,15 +47,21 @@ function redirect(invite: string | undefined) {
 </template>
 
 <style scoped>
-    .discordicon {
+    .iconlinkswrap {
         position: absolute;
-        width: 50px;
         margin-top: 140px;
-        margin-left: 140px;
+        margin-left: v-bind("marginLeft");
+        /* Could just invert when I define the objects lmao */
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .iconlink {
+        width: 50px;
         background: #131313;
         border-radius: 10px;
-        padding: 11px 5px 11px 5px; /* Wider so adapting to make it a square*/
+        padding: 5px;
         cursor: pointer;
+        margin-right: 5px;
     }
     .serverentry {
         margin: 20px;

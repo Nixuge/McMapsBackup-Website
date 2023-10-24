@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { ClickableIcon } from '@/ts/data/ClickableIcon';
 import ServerEntry from './ServerEntry.vue'
 </script>
 
 <template>        
     <div id="buttongrid" class="fade">
-        <ServerEntry serverName="Mineplex" serverUrl="mineplex" thumbnailName="mineplex.webp" death="16/05/2023" country="us" discord="RecgHVxKuk" />
+        <ServerEntry serverName="Mineplex" serverUrl="mineplex" thumbnailName="mineplex.webp" death="16/05/2023" country="us" :iconLinks="[new ClickableIcon('https://discord.gg/RecgHVxKuk', 'discord.png', 'MineplexBackup\'s Discord')]" />
         <ServerEntry serverName="Funcraft" serverUrl="funcraft" thumbnailName="funcraft.jpg" death="26/08/2023" country="fr" />
         <ServerEntry serverName="Onecube" serverUrl="onecube" thumbnailName="onecube.jpg" death="28/04/2023" country="fr" />
-        <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023" country="gb" discord="PEtgk4TSEF" />
+        <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023" country="gb" :iconLinks="[new ClickableIcon('https://discord.gg/PEtgk4TSEF', 'discord.png', 'HiveBackup\'s Discord'), new ClickableIcon('https://discord.gg/dd', 'disdcord.png', 'dfdf\'s Discord')]" />
         <ServerEntry serverName="lunar.gg" serverUrl="lunar" thumbnailName="lunar.png" death="01/06/2023" country="us" />
     </div>
 </template>
