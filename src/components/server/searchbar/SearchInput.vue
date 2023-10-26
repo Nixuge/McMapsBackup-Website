@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SearchEngine, SearchEngine as se } from '@/ts/manager/SearchEngine';
+import { SearchEngine as se } from '@/ts/manager/SearchEngine';
 import { serverSearcher } from '@/ts/server/CurrentServer';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 let inputelement: HTMLInputElement;
 onMounted(() => {
@@ -9,8 +9,10 @@ onMounted(() => {
     new GoThrougher().run();
 
     // May be removed or adapted to support 1 saved search query/server
-    inputelement.value = SearchEngine.search;
+    inputelement.value = se.search;
 });
+
+const autocompleteOffset = computed(() => se.autocompleteOffset.value + "px")
 
 class GoThrougher {
     private current_string_listindex: number;
@@ -79,12 +81,26 @@ class GoThrougher {
 
 <template>
     <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)">
+    <ul id="searchtagautocomplete" v-if="se.autocompleteValues.value !== undefined">
+        <li class="autocompletevalue" v-for="completion of se.autocompleteValues.value">{{ completion }}</li>
+    </ul>
 </template>
 
 <style scoped>
 
+#searchtagautocomplete {
+    border-radius: 5px;
+    background: rgba(26, 26, 26, 0.852);
+    list-style: none;
+    padding: 0 5px 0 5px;
+}
+.autocompletevalue:hover {
+    cursor: pointer;
+}
+
 input {
     font-size: 20px;
+    font-family: 'Nunito', Helvetica, Arial, sans-serif;
     width: 100%;
     box-sizing: border-box;
     background: transparent;
@@ -95,5 +111,10 @@ input {
 
 textarea:focus, input:focus{
     outline: none;
+}
+#searchtagautocomplete {
+    position: absolute;
+    top: 30px;
+    left: v-bind("autocompleteOffset");
 }
 </style>

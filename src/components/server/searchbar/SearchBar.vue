@@ -5,7 +5,7 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 </script>
 
 <template>
-    <div class="searchbar fade">
+    <div class="fade" id="searchbar">
         <SearchButton text=" < " href="/" />
         <SearchInput />
         <SearchButton text="Search help" href="/help" />
@@ -15,7 +15,7 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 </template>
 
 <style scoped>
-.searchbar {
+#searchbar {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -28,10 +28,10 @@ import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
     background-color: var(--dark-transparent);
 
 }
-.searchbar:hover {
+#searchbar:hover {
     background-color: var(--dark-transparent-darker);
 }
-.searchbar > * {
+#searchbar > * {
     padding-right: 5px;
 }
 </style>

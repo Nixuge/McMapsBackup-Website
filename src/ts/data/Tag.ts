@@ -44,15 +44,18 @@ export class TagNode {
     }
 
     public hasTag(tagname: string) {
-        for (const tag of this.tagList) {
-            if (tag.type == tagname) 
-                return true;
-        }
-        return false;
+        return this.getTag(tagname) !== undefined
     }
     public getTag(tagname: string) {
         for (const tag of this.tagList) {
             if (tag.type == tagname) 
+                return tag;
+        }
+        return undefined;
+    }
+    public getEmptyTag() { // Used for auto tag complete popup
+        for (const tag of this.tagList) {
+            if (tag.value == "") 
                 return tag;
         }
         return undefined;

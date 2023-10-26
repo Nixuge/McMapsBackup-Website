@@ -1,18 +1,19 @@
-import { reactive } from "vue";
+import { Ref, reactive, ref } from "vue";
 import { ServerMap } from "@/ts/server/ServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
 import { serverSearcher } from "@/ts/server/CurrentServer";
-import { TagNode } from "../data/Tag";
+import { OptionalTag, Tag, TagNode } from "../data/Tag";
 
 
 export class SearchEngine {
     public static search: string = "";
     private static allServerMaps: ServerMap[] = [];
-    private static allTags: string[] = [];
     public static currentMapsRawArray: ServerMap[] = [];
     public static currentMapsPages: any = reactive({});
     public static currentLastPageIndex: number = 1;
+    public static autocompleteOffset = ref(0);
+    public static autocompleteValues: Ref<string[] | undefined> = ref(undefined);
 
     // private static recalculateInsert() {
     //     // recalculate based on what currentMaps holds
@@ -24,6 +25,23 @@ export class SearchEngine {
     //     }
     // }
 
+    private static dummyElement = document.createElement('span');
+    private static showTagAutocompletePopup(tag: OptionalTag) {
+        if (tag === undefined) {
+            this.autocompleteValues.value = undefined;
+            return;
+        }
+        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
+        this.dummyElement.textContent = inputElement.value;
+        
+        document.body.appendChild(SearchEngine.dummyElement);
+        const offset = inputElement.offsetLeft + SearchEngine.dummyElement.offsetWidth;
+        document.body.removeChild(SearchEngine.dummyElement);
+
+        this.autocompleteOffset.value = offset;
+        this.autocompleteValues.value = serverSearcher.validTags.get(tag.type)
+      }
+
     private static recalculateWhole() {
         // prolly not efficient but oh well
 
@@ -31,13 +49,15 @@ export class SearchEngine {
 
         const tagNode = TagNode.newFromSearch(this.search);
 
+        this.showTagAutocompletePopup(tagNode.getEmptyTag());
+        
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
         this.search = sanitize(this.search);
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
-        serverSearcher.grabTags(tagNode)
+        serverSearcher.grabTags(tagNode);
 
 
         for (const map of this.allServerMaps) {
@@ -79,8 +99,12 @@ export class SearchEngine {
         }
     }
 
-    public static init(allServerMaps: ServerMap[], validTags: string[]) {
+    public static init(allServerMaps: ServerMap[]) {
         this.allServerMaps = allServerMaps;
+
+        this.dummyElement.style.fontSize = "20px";
+        this.dummyElement.style.height = "20px";
+        this.dummyElement.style.visibility = 'hidden';
         
         this.recalculateWhole();
         this.update();
@@ -112,7 +136,9 @@ export class SearchEngine {
         // if (event.inputType == "insertText")
             // this.recalculateInsert()
         // else
-            // this.recalculateWhole();        
+            // this.recalculateWhole();       
+        console.log(event);
+         
         
         this.recalculateWhole();
         this.update();
