@@ -39,7 +39,7 @@ export class SearchEngine {
         document.body.removeChild(SearchEngine.dummyElement);
 
         this.autocompleteOffset.value = offset;
-        this.autocompleteValues.value = serverSearcher.validTags.get(tag.type)
+        this.autocompleteValues.value = serverSearcher?.validTags.get(tag.type)
       }
 
     private static recalculateWhole() {
@@ -57,11 +57,11 @@ export class SearchEngine {
         
         // Note: wanted to do smth better with a dict w a function
         // but since everything is just a tiny bit different I can't
-        serverSearcher.grabTags(tagNode);
+        serverSearcher?.grabTags(tagNode);
 
 
         for (const map of this.allServerMaps) {
-            if (serverSearcher.isMapGood(map))
+            if (serverSearcher?.isMapGood(map))
                 this.currentMapsRawArray.push(map);
         }
     }
@@ -103,7 +103,7 @@ export class SearchEngine {
         this.allServerMaps = allServerMaps;
 
         this.dummyElement.style.fontSize = "20px";
-        this.dummyElement.style.height = "20px";
+        this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
         this.dummyElement.style.visibility = 'hidden';
         
         this.recalculateWhole();

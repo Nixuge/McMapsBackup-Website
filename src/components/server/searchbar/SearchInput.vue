@@ -93,6 +93,8 @@ class GoThrougher {
     background: rgba(26, 26, 26, 0.852);
     list-style: none;
     padding: 0 5px 0 5px;
+    max-height: 90%;
+    overflow: auto;
 }
 .autocompletevalue:hover {
     cursor: pointer;

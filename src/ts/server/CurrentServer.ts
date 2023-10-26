@@ -11,8 +11,7 @@ import { updateUrl } from "@/ts/manager/UrlManager";
 import { setCurrentMap } from "@/ts/manager/CurrentMap";
 import { defineAsyncComponent, shallowRef } from "vue";
 
-const emptyComponent = defineAsyncComponent(() => import('@/ts/server/EmptyComponent.vue'));
-
+const emptyComponent = defineAsyncComponent(() => import('@/ts/server/default/EmptyComponent.vue'));
 export async function setServer(serverName: string) {
     const metaClassLoader = SERVER_METAS[serverName];
 
@@ -23,7 +22,8 @@ export async function setServer(serverName: string) {
 
     // Not 100% needed but a bit cleaner
     ElementViewerComponent.value = emptyComponent;
-
+    // Needed, otherwise autocomplete may show results from previous instance
+    serverSearcher = undefined;
 
     const metaClass = await metaClassLoader();
 
@@ -50,7 +50,7 @@ export const SERVER_METAS: MetaMap = {
 
 
 export let serverSubUrl: string = "";
-export let serverSearcher: IServerSearch<any>;
+export let serverSearcher: IServerSearch<any> | undefined;
 export let serverMeta: IServerMeta;
 
 export let ElementViewerComponent: any = shallowRef(emptyComponent);
