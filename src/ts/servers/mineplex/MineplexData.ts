@@ -1,3 +1,4 @@
+import { ITagsMeta } from "@/ts/server/IServerMeta";
 import { MineplexMap as M } from "./MineplexMap";
 import { Download as D } from "@/ts/server/ServerMap";
 
@@ -1366,3 +1367,9 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[68], "Mesa Canyon", "MCCharity & Cousinss", [new D(Z, "mesacanyon.zip")], 6919, true),
     new M(K[68], "Snowball", "percis", [new D(Z, "snowball.zip")], 6920, true),
 ];
+
+export const MINEPLEX_TAGS: ITagsMeta = new Map(Object.entries({
+    "game": K,
+    "builder": [], //Too many builders, leaving it empty here
+    "nano": ["true", "false"] 
+}))

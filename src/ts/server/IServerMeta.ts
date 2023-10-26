@@ -8,3 +8,5 @@ export interface IServerMeta {
     serverMaps: ServerMap[];
     elementViewerComponent: Function;
 }
+
+export type ITagsMeta = Map<string, string[]>;

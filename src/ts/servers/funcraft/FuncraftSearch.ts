@@ -3,10 +3,12 @@
 import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { FuncraftMap } from "./FuncraftMap";
 import { IServerSearch } from "@/ts/server/IServerSearch";
+import { ITagsMeta } from "@/ts/server/IServerMeta";
+import { FUNCRAFT_TAGS } from "./FuncraftData";
 
 
 export class FuncraftSearch implements IServerSearch<FuncraftMap> {
-    public validTags: string[] = ["jeu", "variante"];
+    public validTags: ITagsMeta = FUNCRAFT_TAGS;
     public exampleStrings: string[] = [
         "jeu:skywars variante:solo Atlantis",
         "jeu:infecté Mars",

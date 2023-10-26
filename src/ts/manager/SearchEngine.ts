@@ -9,6 +9,7 @@ import { TagNode } from "../data/Tag";
 export class SearchEngine {
     public static search: string = "";
     private static allServerMaps: ServerMap[] = [];
+    private static allTags: string[] = [];
     public static currentMapsRawArray: ServerMap[] = [];
     public static currentMapsPages: any = reactive({});
     public static currentLastPageIndex: number = 1;
@@ -43,7 +44,6 @@ export class SearchEngine {
             if (serverSearcher.isMapGood(map))
                 this.currentMapsRawArray.push(map);
         }
-        
     }
 
     private static generateCurrentMapsPages() {
@@ -79,8 +79,9 @@ export class SearchEngine {
         }
     }
 
-    public static init(allServerMaps: ServerMap[]) {
+    public static init(allServerMaps: ServerMap[], validTags: string[]) {
         this.allServerMaps = allServerMaps;
+        
         this.recalculateWhole();
         this.update();
     }
@@ -111,7 +112,7 @@ export class SearchEngine {
         // if (event.inputType == "insertText")
             // this.recalculateInsert()
         // else
-            // this.recalculateWhole();
+            // this.recalculateWhole();        
         
         this.recalculateWhole();
         this.update();

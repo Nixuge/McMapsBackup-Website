@@ -4,10 +4,12 @@ import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { textToBool } from "@/ts/utils/TextUtils";
 import { MineplexMap } from "./MineplexMap";
 import { IServerSearch } from "@/ts/server/IServerSearch";
+import { ITagsMeta } from "@/ts/server/IServerMeta";
+import { MINEPLEX_TAGS } from "./MineplexData";
 
 
 export class MineplexSearch implements IServerSearch<MineplexMap> {
-    public validTags: string[] = ["game", "builder", "nano"];
+    public validTags: ITagsMeta = MINEPLEX_TAGS;
     public exampleStrings: string[] = [
         "game:thebridges Seretopia",
         "builder:powh",

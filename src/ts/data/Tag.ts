@@ -11,7 +11,7 @@ export class Tag {
     }
 
     public static tagFromString(name: string) {
-        if (serverSearcher.validTags.includes(name)) 
+        if (serverSearcher.validTags.has(name)) 
             return name;
         return "invalid";
     }

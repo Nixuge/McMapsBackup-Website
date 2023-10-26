@@ -1,3 +1,4 @@
+import { ITagsMeta } from "@/ts/server/IServerMeta";
 import { FuncraftMap as M } from "./FuncraftMap";
 import { Download as D } from "@/ts/server/ServerMap";
 
@@ -85,3 +86,25 @@ export const FUNCRAFT_MAPS: Array<M> = [
     new M(K[12], "Map 19ème", [new D(Z, "map_19eme.zip")], 45, undefined, "Build par la Team de construction Ascentia"),
     new M(K[12], "Valdargen", [new D(Z, "valdargen.zip")], 46, undefined, "Build par la Team Rossignol"),
 ];
+
+export const FUNCRAFT_TAGS: ITagsMeta = new Map(Object.entries({
+    "jeu": K,
+    "variante": [
+        "freecube",
+        "2v2",
+        "4x8",
+        "8v8",
+        "1v1",
+        "4v4",
+        "event",
+        "8emes",
+        "quarts",
+        "demis",
+        "finale",
+        "4x2",
+        "8x2",
+        "8x4",
+        "5v5",
+        "4x6"
+    ]
+}));

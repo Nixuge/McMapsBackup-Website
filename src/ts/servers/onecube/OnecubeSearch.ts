@@ -3,10 +3,11 @@
 import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { OnecubeMap } from "./OnecubeMap";
 import { IServerSearch } from "@/ts/server/IServerSearch";
+import { ITagsMeta } from "@/ts/server/IServerMeta";
 
 
 export class OnecubeSearch implements IServerSearch<OnecubeMap> {
-    public validTags: string[] = ["jeu", "variante"];
+    public validTags: ITagsMeta = new Map<string, string[]>();
     public exampleStrings: string[] = [
         "" //TODO
     ];
