@@ -145,6 +145,8 @@ export class SearchEngine {
         
         this.recalculateWhole();
         this.update();
+
+        inputElement.focus()
     }
 
     //TODO: handle "select" change
