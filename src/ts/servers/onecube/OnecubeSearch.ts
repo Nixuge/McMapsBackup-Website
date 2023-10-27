@@ -4,33 +4,37 @@ import { OptionalTag, TagNode } from "@/ts/data/Tag";
 import { OnecubeMap } from "./OnecubeMap";
 import { IServerSearch } from "@/ts/server/IServerSearch";
 import { ITagsMeta } from "@/ts/server/IServerMeta";
+import { ONECUBE_TAGS } from "./OnecubeData";
 
 
 export class OnecubeSearch implements IServerSearch<OnecubeMap> {
-    public validTags: ITagsMeta = new Map<string, string[]>();
+    public validTags: ITagsMeta = ONECUBE_TAGS;
     public exampleStrings: string[] = [
-        "" //TODO
+        "jeu:pitchout pokemon",
+        "année:2022",
+        "game:fallenkingdom auteur:Akiiro_"
     ];
 
-    // private gameTag: OptionalTag;
-    // private variantTag: OptionalTag;
+    private gameTag: OptionalTag;
+    private authorTag: OptionalTag;
+    private yearTag: OptionalTag;
     
-    // private remaining: string = "";
+    private remaining: string = "";
 
     public grabTags(tagNode: TagNode) {
-        // this.gameTag = tagNode.getTag("jeu");
-        // this.variantTag = tagNode.getTag("variante");
-        // this.remaining = tagNode.getRemaining();
-        // TODO
+        this.gameTag = tagNode.getTag("jeu");
+        this.authorTag = tagNode.getTag("auteur");
+        this.yearTag = tagNode.getTag("annee");
+        this.remaining = tagNode.getRemaining();
     }
     public isMapGood(map: OnecubeMap) {
-        // if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
-        //     (this.variantTag != undefined && (map.variant == undefined || !map.variant.includes(this.variantTag.value))) ||
-        //     (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
-        //     return false;
-        // }
-        // return true;
-        // TODO
+        if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
+            (this.authorTag != undefined && (map.authors == undefined || !map.authors.includes(this.authorTag.value))) ||
+            (this.yearTag != undefined && map.creationYear != this.yearTag.value) ||
+            (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
+            return false;
+        }
+        
         return true;
     }
 }

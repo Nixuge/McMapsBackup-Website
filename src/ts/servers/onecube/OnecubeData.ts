@@ -1,3 +1,4 @@
+import { ITagsMeta } from "@/ts/server/IServerMeta";
 import { OnecubeMap as M } from "./OnecubeMap";
 import { Download as D } from "@/ts/server/ServerMap";
 
@@ -31,3 +32,9 @@ export const ONECUBE_MAPS: Array<M> = [
     
     new M(K[5], "UHC Run Solo", [new D(Z, "uhc_run_solo.zip")], 50, undefined, undefined, "Quasi sur que les maps sont régenerées à chaque fois, map sauvegardée juste pour le spawn (et parce que j'arrivais a lancer une game qu'en ça)."),
 ];
+
+export const ONECUBE_TAGS: ITagsMeta = new Map(Object.entries({
+    "jeu": K,
+    "auteur": [],
+    "annee": ["2022", "2023"]
+}))
