@@ -133,6 +133,19 @@ export class SearchEngine {
         }
     }
 
+    public static setLastTag(lastTagStr: string) {
+        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
+
+        const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
+
+        const newStr = `${firstPart}:${sanitize(lastTagStr)} `;
+        inputElement.value = newStr
+        this.search = sanitizeSearch(newStr);
+        
+        this.recalculateWhole();
+        this.update();
+    }
+
     //TODO: handle "select" change
     public static handleInputChange(event: any) {
         this.search = sanitizeSearch(event.target.value);

@@ -77,17 +77,17 @@ class GoThrougher {
     }
 }
 
+// tagindex="0" on autocompletevalue lets you tab to the thing you want
 </script>
 
 <template>
     <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)">
     <ul id="searchtagautocomplete" v-if="se.autocompleteValues.value !== undefined">
-        <li class="autocompletevalue" v-for="completion of se.autocompleteValues.value">{{ completion }}</li>
+        <li class="autocompletevalue" tabindex="0" v-for="completion of se.autocompleteValues.value" @click="se.setLastTag(completion)" @keypress.enter="se.setLastTag(completion)">{{ completion }}</li>
     </ul>
 </template>
 
 <style scoped>
-
 #searchtagautocomplete {
     border-radius: 5px;
     background: rgba(26, 26, 26, 0.852);
