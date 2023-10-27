@@ -92,6 +92,10 @@ class GoThrougher {
 
 <style scoped>
 #searchtagautocomplete {
+    position: absolute;
+    top: 30px;
+    left: v-bind("autocompleteOffset");
+    
     border-radius: 5px;
     background: rgba(26, 26, 26, 0.852);
     list-style: none;
@@ -116,10 +120,5 @@ input {
 
 textarea:focus, input:focus{
     outline: none;
-}
-#searchtagautocomplete {
-    position: absolute;
-    top: 30px;
-    left: v-bind("autocompleteOffset");
 }
 </style>

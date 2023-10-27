@@ -30,9 +30,9 @@ export class SearchEngine {
         const inputElement = document.getElementById('searchinput') as HTMLInputElement;
         this.dummyElement.textContent = inputElement.value;
         
-        document.body.appendChild(SearchEngine.dummyElement);
-        const offset = inputElement.offsetLeft + SearchEngine.dummyElement.offsetWidth;
-        document.body.removeChild(SearchEngine.dummyElement);
+        document.body.appendChild(this.dummyElement);
+        const offset = inputElement.offsetLeft + this.dummyElement.offsetWidth;
+        document.body.removeChild(this.dummyElement);
         return offset;
     }
     private static getAutocompleteMatchingValues(tag: Tag) {
