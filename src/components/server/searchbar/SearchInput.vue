@@ -9,7 +9,8 @@ onMounted(() => {
     new GoThrougher().run();
 
     // May be removed or adapted to support 1 saved search query/server
-    inputelement.value = se.search;
+    // newer me: removed as this doesn't make sense, search queries aren't that complicated anyways.
+    // inputelement.value = se.search;
 });
 
 const autocompleteOffset = computed(() => se.autocompleteOffset.value + "px")
@@ -78,6 +79,8 @@ class GoThrougher {
 }
 
 // tagindex="0" on autocompletevalue lets you tab to the thing you want
+
+// todo (maybe?) -> make up/down arrows work
 </script>
 
 <template>

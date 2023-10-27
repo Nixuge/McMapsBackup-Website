@@ -116,6 +116,7 @@ export class SearchEngine {
 
     public static init(allServerMaps: ServerMap[]) {
         this.allServerMaps = allServerMaps;
+        this.search = ""; // just in case
 
         this.dummyElement.style.fontSize = "20px";
         this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
