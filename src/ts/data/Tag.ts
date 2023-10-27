@@ -11,7 +11,7 @@ export class Tag {
     }
 
     public static tagFromString(name: string) {
-        if (serverSearcher.validTags.has(name)) 
+        if (serverSearcher?.validTags.has(name)) 
             return name;
         return "invalid";
     }
@@ -22,9 +22,11 @@ export type OptionalTag = Tag | undefined;
 
 export class TagNode {
     private tagList: Tag[];
+    private lastTag: OptionalTag;
     private remaining: string;
     constructor() {
         this.tagList = [];
+        this.lastTag = undefined;
         this.remaining = "";
     }
 
@@ -34,6 +36,12 @@ export class TagNode {
     public addRemaining(remaining: string) {
         this.remaining += remaining;
     }
+    public setLastTag(tag: Tag) {
+        this.lastTag = tag;
+    }
+    public setLastTagFromTaglist() {
+        this.setLastTag(this.tagList[this.tagList.length - 1]);
+    }
 
     public getTags() {
         return this.tagList;
@@ -42,6 +50,9 @@ export class TagNode {
     public getRemaining() {
         return this.remaining;
     }
+    public getLastTag() {
+        return this.lastTag;
+    }
 
     public hasTag(tagname: string) {
         return this.getTag(tagname) !== undefined
@@ -49,13 +60,6 @@ export class TagNode {
     public getTag(tagname: string) {
         for (const tag of this.tagList) {
             if (tag.type == tagname) 
-                return tag;
-        }
-        return undefined;
-    }
-    public getEmptyTag() { // Used for auto tag complete popup
-        for (const tag of this.tagList) {
-            if (tag.value == "") 
                 return tag;
         }
         return undefined;
@@ -81,6 +85,8 @@ export class TagNode {
                 new Tag(sanitize(splittedTag[0]), sanitize(splittedTag[1]))
             );
         }
+        
+        tagNode.setLastTagFromTaglist();
         
         return tagNode;
     }

@@ -26,20 +26,33 @@ export class SearchEngine {
     // }
 
     private static dummyElement = document.createElement('span');
-    private static showTagAutocompletePopup(tag: OptionalTag) {
-        if (tag === undefined) {
-            this.autocompleteValues.value = undefined;
-            return;
-        }
+    private static calculateAutocompleteOffset() {
         const inputElement = document.getElementById('searchinput') as HTMLInputElement;
         this.dummyElement.textContent = inputElement.value;
         
         document.body.appendChild(SearchEngine.dummyElement);
         const offset = inputElement.offsetLeft + SearchEngine.dummyElement.offsetWidth;
         document.body.removeChild(SearchEngine.dummyElement);
+        return offset;
+    }
 
-        this.autocompleteOffset.value = offset;
-        this.autocompleteValues.value = serverSearcher?.validTags.get(tag.type)
+    private static showTagAutocompletePopup(tag: OptionalTag) {
+        if (tag === undefined || tag.type === "invalid") {
+            this.autocompleteValues.value = undefined;
+            return;
+        }
+
+        this.autocompleteOffset.value = this.calculateAutocompleteOffset();
+
+        // assume we always have a str[], the filter at the top of this function should be enough.
+        const tagCompletions = serverSearcher?.validTags.get(tag.type) as string[]; 
+        let tagValuesMatching = [];
+        for (const tagCompletion of tagCompletions) {
+            // startsWith or includes?
+            if (tagCompletion.toLocaleLowerCase().includes(tag.value))
+                tagValuesMatching.push(tagCompletion);
+        }
+        this.autocompleteValues.value = tagValuesMatching;
       }
 
     private static recalculateWhole() {
@@ -49,7 +62,7 @@ export class SearchEngine {
 
         const tagNode = TagNode.newFromSearch(this.search);
 
-        this.showTagAutocompletePopup(tagNode.getEmptyTag());
+        this.showTagAutocompletePopup(tagNode.getLastTag());
         
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
@@ -137,8 +150,6 @@ export class SearchEngine {
             // this.recalculateInsert()
         // else
             // this.recalculateWhole();       
-        console.log(event);
-         
         
         this.recalculateWhole();
         this.update();
