@@ -74,6 +74,7 @@ export class TagNode {
         }
 
         const parts = search.split(" ");
+        const lastPart = parts[parts.length - 1];
 
         for (const part of parts) {
             if (!part.includes(":")) {
@@ -84,9 +85,11 @@ export class TagNode {
             tagNode.addTag(
                 new Tag(sanitize(splittedTag[0]), sanitize(splittedTag[1]))
             );
+            // if this is added after the loop without this check,
+            // the autocomplete will show even if you add a space/other text after the last tag.
+            if (part === lastPart)
+                tagNode.setLastTagFromTaglist();
         }
-        
-        tagNode.setLastTagFromTaglist();
         
         return tagNode;
     }

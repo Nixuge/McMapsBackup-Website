@@ -35,6 +35,17 @@ export class SearchEngine {
         document.body.removeChild(SearchEngine.dummyElement);
         return offset;
     }
+    private static getAutocompleteMatchingValues(tag: Tag) {
+        // Assume tag will always be valid (check on top of showTagAutocompletePopup())
+        const tagCompletions = serverSearcher?.validTags.get(tag.type) as string[]; 
+        let tagValuesMatching = [];
+
+        for (const tagCompletion of tagCompletions) {
+            if (sanitize(tagCompletion).includes(tag.value)) // startsWith or includes ?
+                tagValuesMatching.push(tagCompletion);
+        }
+        return tagValuesMatching;
+    }
 
     private static showTagAutocompletePopup(tag: OptionalTag) {
         if (tag === undefined || tag.type === "invalid") {
@@ -43,16 +54,7 @@ export class SearchEngine {
         }
 
         this.autocompleteOffset.value = this.calculateAutocompleteOffset();
-
-        // assume we always have a str[], the filter at the top of this function should be enough.
-        const tagCompletions = serverSearcher?.validTags.get(tag.type) as string[]; 
-        let tagValuesMatching = [];
-        for (const tagCompletion of tagCompletions) {
-            // startsWith or includes?
-            if (tagCompletion.toLocaleLowerCase().includes(tag.value))
-                tagValuesMatching.push(tagCompletion);
-        }
-        this.autocompleteValues.value = tagValuesMatching;
+        this.autocompleteValues.value = this.getAutocompleteMatchingValues(tag);
       }
 
     private static recalculateWhole() {
