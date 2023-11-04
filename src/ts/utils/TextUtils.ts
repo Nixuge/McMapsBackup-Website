@@ -4,6 +4,8 @@ export function sanitize(text: string) {
     for (const char of text.toLowerCase()) {
         if (validChars.includes(char)) {
             newText += char;
+        } else if ("éè".includes(char)) {
+            newText += "e"; //dirty 
         }
     }
     return newText;
