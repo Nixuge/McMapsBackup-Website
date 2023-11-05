@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import SearchButton from '@/components/server/searchbar/SearchButton.vue'
+
+// TODO: REMOVE & MOVE TO THE POPUP VERSION
 </script>
 
 <template>
