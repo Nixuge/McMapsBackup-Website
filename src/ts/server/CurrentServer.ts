@@ -45,7 +45,8 @@ export const SERVER_METAS: MetaMap = {
     "funcraft": async () => {const {FuncraftMeta} = await import("@/ts/servers/funcraft/FuncraftMeta"); return FuncraftMeta},
     "onecube": async () => {const {OnecubeMeta} = await import("@/ts/servers/onecube/OnecubeMeta"); return OnecubeMeta},
     "hive": async () => {const {HiveMeta} = await import("@/ts/servers/hive/HiveMeta"); return HiveMeta},
-    "lunar": async () => {const {LunarMeta} = await import("@/ts/servers/lunar/LunarMeta"); return LunarMeta}
+    "lunar": async () => {const {LunarMeta} = await import("@/ts/servers/lunar/LunarMeta"); return LunarMeta},
+    "erisium": async () => {const {ErisiumMeta} = await import("@/ts/servers/erisium/ErisiumMeta"); return ErisiumMeta},
 }
 
 

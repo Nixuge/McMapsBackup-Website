@@ -13,6 +13,11 @@ function checkKeyDownClose(key: KeyboardEvent) {
     if (key.key == "Escape")
         closePopup();
 }
+
+// TODO:
+// Rework transition
+// Manage slot loading time w a spinner or smth
+
 </script>
 
 <template>
