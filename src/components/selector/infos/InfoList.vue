@@ -66,7 +66,6 @@ function scrollInfos(up: boolean) {
         background: rgba(0, 0, 0, 0.195);
         border-radius: 10px 10px 0 0;
         padding: 5px 30px 0 30px;
-
     }
     #infoswrap {
         width: 80%;
