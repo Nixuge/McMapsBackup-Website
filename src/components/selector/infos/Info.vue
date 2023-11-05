@@ -1,20 +1,16 @@
 <script setup lang="ts">
-import { AsyncComponentLoader, defineAsyncComponent } from 'vue';
-import { loadInfoComponent, currentlyLoadedInfoComponent as CLIF } from '@/ts/manager/info/InfoPopup'
+import { AsyncComponentLoader } from 'vue';
+import { loadInfoComponent, preloadInfoComponent } from '@/ts/manager/info/InfoPopup'
 
-const props = defineProps<{
+defineProps<{
     title: string,
     component: AsyncComponentLoader,
     empty?: boolean
 }>()
-
-function loadComponent() {
-    loadInfoComponent(props.component)
-}
 </script>
 
 <template>
-    <div class="info" @click="loadComponent">
+    <div class="info" @click="loadInfoComponent(component)" @mouseover="preloadInfoComponent(component)">
         <h1>{{ title }}</h1>
         <slot />
         
