@@ -6,9 +6,9 @@ import InfoList from '@/components/selector/infos/InfoList.vue'
 </script>
 
 <template>
-    <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
-    <!-- <InfoList /> -->
-    <ServerSelector />
+        <h1>Welcome to Nixuge's Minecraft Map Archives</h1>
+        <InfoList />
+        <ServerSelector />
 </template>
 
 <style scoped>

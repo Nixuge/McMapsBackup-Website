@@ -1,14 +1,23 @@
 <script setup lang="ts">
-defineProps<{
+import { AsyncComponentLoader, defineAsyncComponent } from 'vue';
+import { loadInfoComponent, currentlyLoadedInfoComponent as CLIF } from '@/ts/manager/info/InfoPopup'
+
+const props = defineProps<{
     title: string,
+    component: AsyncComponentLoader,
     empty?: boolean
 }>()
+
+function loadComponent() {
+    loadInfoComponent(props.component)
+}
 </script>
 
 <template>
-    <div class="info">
+    <div class="info" @click="loadComponent">
         <h1>{{ title }}</h1>
         <slot />
+        
     </div>
 </template>
 

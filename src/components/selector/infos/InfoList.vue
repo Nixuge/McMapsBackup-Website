@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, useSlots } from 'vue';
+import { onMounted, ref } from 'vue';
 import Info from './Info.vue'
+import { currentlyLoadedInfoComponent as CLIF } from '@/ts/manager/info/InfoPopup'
+import InfoPopup from './InfoPopup.vue';
+
 
 let currentOffset = ref(0);
 const offsetStep = 140;
@@ -40,20 +43,20 @@ function scrollInfos(up: boolean) {
     <h1 id="infostitle"><span>Info board</span></h1>
     <div id="infoswrap">
         <div id="infos" class="fade">
-            <Info title="Search Help" :empty="true" />
-            <Info title="Aide pour la recherche" :empty="true" />
-            <Info title="DMCA" :empty="true" />
-            <Info title="API Help" :empty="true" />
-            <Info title="Mineplex">Some info about Mineplex's parsing, stats & contributors</Info>
+            <Info title="Aide pour la recherche" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
+            <Info title="Search Help" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
+            <Info title="DMCA" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
+            <Info title="API Help" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
+            <Info title="Mineplex" :component="() => import('./popups/FuncraftPopup.vue')">Some info about Mineplex's parsing, stats & contributors</Info>
 
-            <Info title="Funcraft">Le site et ses db (joueurs, rangs, forum), stats</Info>
-            
+            <Info title="Funcraft" :component="() => import('./popups/FuncraftPopup.vue')">Le site et ses db (joueurs, rangs, forum), stats de la sauvegarde</Info>
         </div>
         <div id="infoscroller">
             <div id="scrollUp" @click="scrollInfos(true)">^</div>
             <div id="scrollDown" @click="scrollInfos(false)">^</div>
         </div>
     </div>
+    <InfoPopup v-if="CLIF != undefined" key="infopopup" ><CLIF /></InfoPopup>
 </template>
 
 <style scoped>
