@@ -68,7 +68,6 @@ function checkKeyDownClose(key: KeyboardEvent) {
     position: absolute;
     bottom: 0;
     left: 0;
-    transition: 500ms;
     backdrop-filter: blur(15px);
     filter: blur(0px);
     width: 100%;

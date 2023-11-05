@@ -43,11 +43,11 @@ function scrollInfos(up: boolean) {
     <h1 id="infostitle"><span>Info board</span></h1>
     <div id="infoswrap">
         <div id="infos" class="fade">
-            <Info title="Aide pour la recherche" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
-            <Info title="Search Help" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
-            <Info title="DMCA" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
-            <Info title="API Help" :component="() => import('./popups/FuncraftPopup.vue')" :empty="true" />
-            <Info title="Mineplex" :component="() => import('./popups/FuncraftPopup.vue')">Some info about Mineplex's parsing, stats & contributors</Info>
+            <Info title="Aide pour la recherche" :component="() => import('./popups/AideRecherchePopup.vue')" :empty="true" />
+            <Info title="Search Help" :component="() => import('./popups/SearchHelpPopup.vue')" :empty="true" />
+            <Info title="DMCA" :component="() => import('./popups/DMCAPopup.vue')" :empty="true" />
+            <Info title="API Help" :component="() => import('./popups/APIHelpPopup.vue')" :empty="true" />
+            <Info title="Mineplex" :component="() => import('./popups/MineplexPopup.vue')">Some info about Mineplex's parsing, stats & contributors</Info>
 
             <Info title="Funcraft" :component="() => import('./popups/FuncraftPopup.vue')">Le site et ses db (joueurs, rangs, forum), stats de la sauvegarde</Info>
         </div>
