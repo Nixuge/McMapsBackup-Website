@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { removeInfoComponent } from '@/ts/manager/info/InfoPopup';
+import { removeInfoComponent as closePopup } from '@/ts/manager/info/InfoPopup';
 import { onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {
@@ -11,21 +11,22 @@ onUnmounted(() => {
 
 function checkKeyDownClose(key: KeyboardEvent) {
     if (key.key == "Escape")
-        removeInfoComponent();
+        closePopup();
 }
 </script>
 
 <template>
-    <div id="infoPopupBackground" @click="removeInfoComponent">
+    <div id="infoPopupBackground" @click="closePopup">
         <Transition name="slideup" mode="out-in" appear>
             <div id="infoPopup" @click.stop="">
+                <span id="infoPopupCloseButton" @click="closePopup">&#215;</span>
                 <slot></slot>
             </div>
         </Transition>
     </div>
 </template>
 
-<style>
+<style scoped>
 .slideup-enter-active {
     animation: slideup-in .5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -56,12 +57,24 @@ function checkKeyDownClose(key: KeyboardEvent) {
 </style>
 
 <style scoped>
+#infoPopupCloseButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 200%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.195);
+    padding: 0 12px 0 12px;
+    border-radius: 0 15px 0 15px;
+}
+
 #infoPopup {
     width: 80%;
     height: 80%;
     background-color: rgba(0, 0, 0, 0.195);
     text-align: center;
     border-radius: 15px;
+    position: relative;
 }
 #infoPopupBackground {
     z-index: 5; /* On top of everything (1 should be enough but meh) */
@@ -69,7 +82,6 @@ function checkKeyDownClose(key: KeyboardEvent) {
     bottom: 0;
     left: 0;
     backdrop-filter: blur(15px);
-    filter: blur(0px);
     width: 100%;
     height: 100%;
     display: flex;
