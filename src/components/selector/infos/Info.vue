@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-    title: string
+    title: string,
+    empty?: boolean
 }>()
 </script>
 
@@ -11,7 +12,7 @@ defineProps<{
     </div>
 </template>
 
-<style>
+<style scoped>
 .info {
     padding: 10px;
     margin-left: 1%;
@@ -22,8 +23,11 @@ defineProps<{
     cursor: pointer;
     margin-bottom: 20px;
     height: 100px;
-}
-.info > * {
     text-align: center;
+    overflow: auto;
+}
+h1 {
+    margin-top: v-bind("empty === true ? '30px' : '0'");
+    margin-bottom: 10px;
 }
 </style>

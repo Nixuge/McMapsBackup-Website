@@ -1,62 +1,73 @@
 <script setup lang="ts">
+import { computed, onMounted, ref, useSlots } from 'vue';
 import Info from './Info.vue'
 
-let currentOffset = 0;
+let currentOffset = ref(0);
 const offsetStep = 140;
+let elem: HTMLElement;
+let maxOffset: number;
 
-function moveValid(elem: HTMLElement, up: boolean) {
+onMounted(() => {
+    elem = document.getElementById("infos") as HTMLElement;
     //40=margins, 140=calculating 1 step late so assuming we're on the step after
-    const elemMaxScroll = elem.scrollHeight - 40 - 140; 
+    maxOffset = elem.scrollHeight - 40 - 140; 
+})
 
-    if (currentOffset == 0 && up)
-        return false;
-    
-    if (elemMaxScroll <= currentOffset && !up)
-        return false;
-    
-    return true;
+function canScrollUp() {
+    return currentOffset.value != 0;
+}
+function canScrollDown() {
+    return !(maxOffset <= currentOffset.value);
 }
 
 function scrollInfos(up: boolean) {
     const elem = document.getElementById("infos") as HTMLElement;
     
-    if (!moveValid(elem, up))
+    if ((up && !canScrollUp()) || (!up && !canScrollDown()))
         return;
 
     const offset = up ? -offsetStep : offsetStep;
-    
-    currentOffset = currentOffset + offset;
+    currentOffset.value = currentOffset.value + offset;
 
     elem?.scrollTo({
-        top: currentOffset,
+        top: currentOffset.value,
         behavior: "smooth"
     })
 }
-
 </script>
 
 <template>
+    <h1 id="infostitle"><span>Info board</span></h1>
     <div id="infoswrap">
         <div id="infos" class="fade">
-            <Info title="DMCA1">aaa</Info>
-            <Info title="DMCA2">aaa</Info>
-            <Info title="DMCA3">aaa</Info>
-            <Info title="DMCA4">aaa</Info>
-            <Info title="DMCA5">aaa</Info>
-            <Info title="DMCA6">aaa</Info>
-            <Info title="DMCA7">aaa</Info>
-            <Info title="DMCA8">aaa</Info>
-            <Info title="DMCA9">aaa</Info>
-            <Info title="DMCA10">aaa</Info>
+            <Info title="Search Help" :empty="true" />
+            <Info title="Aide pour la recherche" :empty="true" />
+            <Info title="DMCA" :empty="true" />
+            <Info title="API Help" :empty="true" />
+            <Info title="Mineplex">Some info about Mineplex's parsing, stats & contributors</Info>
+
+            <Info title="Funcraft">Le site et ses db (joueurs, rangs, forum), stats</Info>
+            
         </div>
         <div id="infoscroller">
             <div id="scrollUp" @click="scrollInfos(true)">^</div>
-            <div id="scrollDown" @click="scrollInfos(false)" style="align-self: right;">^</div>
+            <div id="scrollDown" @click="scrollInfos(false)">^</div>
         </div>
     </div>
 </template>
 
 <style scoped>
+    #infostitle {
+        text-align: center;
+        margin-bottom: 0;
+    }
+    #infostitle > span {
+        width: fit-content;
+        background: rgba(0, 0, 0, 0.195);
+        border-radius: 10px 10px 0 0;
+        padding: 5px 30px 0 30px;
+
+    }
     #infoswrap {
         width: 80%;
         margin: auto;
@@ -88,11 +99,17 @@ function scrollInfos(up: boolean) {
         padding-right: 5px;
         border-radius: 3px;
         font-size: 120%;
-        cursor: pointer;
         user-select: none;
     }
+    /* Not sure if I should keep those here or migrate them to a var in the js for cleaner css */
     #scrollDown {
         transform: rotate(180deg);
         margin-top: 5px;
+        color: v-bind("canScrollDown() ? '#fff' : '#888'");
+        cursor: v-bind("canScrollDown() ? 'pointer' : 'not-allowed'");
+    }
+    #scrollUp {
+        color: v-bind("canScrollUp() ? '#fff' : '#888'");
+        cursor: v-bind("canScrollUp() ? 'pointer' : 'not-allowed'");
     }
 </style>
