@@ -11,6 +11,7 @@ import ServerEntry from './ServerEntry.vue'
         <ServerEntry serverName="HiveMC" serverUrl="hive" thumbnailName="hive.png" death="15/04/2023" country="gb" :iconLinks="[['https://discord.gg/PEtgk4TSEF', 'discord.png', 'HiveBackup\'s Discord'], ['https://hivebackup.github.io/', 'hivebackup.png', 'HiveBackup\'s Website']]" />
         <ServerEntry serverName="lunar.gg" serverUrl="lunar" thumbnailName="lunar.png" death="01/06/2023" country="us" />
         <ServerEntry serverName="Erisium" serverUrl="erisium" thumbnailName="erisium.png" death="02/11/2023(?)" country="fr" />
+        <ServerEntry serverName="Wildya" serverUrl="wildya" thumbnailName="wildya.png" country="fr" />
     </div>
 </template>
 
