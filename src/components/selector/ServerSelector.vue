@@ -29,12 +29,12 @@ import ServerEntry from './ServerEntry.vue'
 
 #buttongrid {
     margin: auto;
-    padding-top: 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background: rgba(0, 0, 0, 0.195);
     padding-top: 10px;
+    margin-bottom: 20px;
     border-radius: 15px;
 }
 @media screen and (max-width: 849px) {

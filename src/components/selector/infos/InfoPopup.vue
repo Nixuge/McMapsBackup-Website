@@ -86,6 +86,7 @@ function checkKeyDownClose(key: KeyboardEvent) {
     position: absolute;
     bottom: 0;
     left: 0;
+    -webkit-backdrop-filter: blur(15px); /* 8y of support, still needs a prefix */
     backdrop-filter: blur(15px);
     width: 100%;
     height: 100%;
