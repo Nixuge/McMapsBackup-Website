@@ -11,9 +11,10 @@ defineProps<{
 
 <template>
     <div class="info" @click="loadInfoComponent(component)" @mouseover="preloadInfoComponent(component)">
-        <h1>{{ title }}</h1>
-        <slot />
-        
+        <div class="infocontent">
+            <h1>{{ title }}</h1>
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -47,9 +48,12 @@ defineProps<{
     height: 100px;
     text-align: center;
     overflow: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 h1 {
-    margin-top: v-bind("empty === true ? '30px' : '0'");
-    margin-bottom: 10px;
+    margin: 0;
 }
 </style>
