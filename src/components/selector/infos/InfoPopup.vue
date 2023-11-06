@@ -4,9 +4,11 @@ import { onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {
     window.addEventListener('keydown', checkKeyDownClose)
+    document.body.style.overflow = "hidden"
 })
 onUnmounted(() => {
     window.removeEventListener('keydown', checkKeyDownClose)
+    document.body.style.overflow = "auto"
 })
 
 function checkKeyDownClose(key: KeyboardEvent) {

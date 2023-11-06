@@ -18,7 +18,8 @@ app.use(router);
 app.mount('#app');
 
 /* 
-TODO LEFT:
-- use animations (see base.css#bottom)
+TODO:
 - scrollbar theme (chrome)
+- Move the pageselector out of the grid, possibly for better mobile support (+ cleaner overrall?)
+---> Might need the use of a flex instead of a grid
 */
