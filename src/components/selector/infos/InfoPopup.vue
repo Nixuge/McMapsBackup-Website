@@ -15,8 +15,7 @@ function checkKeyDownClose(key: KeyboardEvent) {
 }
 
 // TODO:
-// Rework transition
-// Manage slot loading time w a spinner or smth
+// Manage slot loading time w a spinner or smth (may not be needed w the preload on hover)
 
 </script>
 
@@ -33,20 +32,21 @@ function checkKeyDownClose(key: KeyboardEvent) {
 
 <style scoped>
 .slideup-enter-active {
-    animation: slideup-in .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation: slideup-in .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .slideup-leave-active {
-    animation: slideup-out .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation: slideup-out .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @keyframes slideup-in {
     0% {
-        transform: translateY(110%);
+        scale: 0;
+        opacity: 0;
     }
-
     100% {
-        transform: translateX(0);
+        scale: 1;
+        opacity: 1;
     }
 }
 
@@ -56,7 +56,7 @@ function checkKeyDownClose(key: KeyboardEvent) {
     }
 
     100% {
-        transform: translateY(-110%);
+        transform: translateY(-50%);
     }
 }
 </style>
