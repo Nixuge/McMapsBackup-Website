@@ -85,7 +85,7 @@ function checkKeyDownClose(key: KeyboardEvent) {
 }
 #infoPopupBackground {
     z-index: 5; /* On top of everything (1 should be enough but meh) */
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     -webkit-backdrop-filter: blur(15px); /* 8y of support, still needs a prefix */
