@@ -18,12 +18,29 @@ defineProps<{
 </template>
 
 <style scoped>
+@media screen and (max-width: 700px) {
+    .info {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 701px) {
+    .info {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1250px) {
+    .info {
+        width: 27%;
+    }
+}
+
 .info {
     padding: 10px;
     margin-left: 1%;
     margin-right: 1%;
     background: rgba(0, 0, 0, 0.195);
-    width: 27%;
     border-radius: 15px;
     cursor: pointer;
     margin-bottom: 20px;

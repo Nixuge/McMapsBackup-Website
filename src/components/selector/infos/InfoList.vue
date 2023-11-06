@@ -20,12 +20,12 @@ function canScrollUp() {
     return currentOffset.value != 0;
 }
 function canScrollDown() {
+    // NOTE:
+    // Seems like on Chrome on my laptop, maxOffset may have the wrong value.
     return !(maxOffset <= currentOffset.value);
 }
 
 function scrollInfos(up: boolean) {
-    const elem = document.getElementById("infos") as HTMLElement;
-    
     if ((up && !canScrollUp()) || (!up && !canScrollDown()))
         return;
 
