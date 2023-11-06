@@ -7,7 +7,7 @@ const props = defineProps<{
     serverName: string,
     serverUrl: string,
     thumbnailName: string,
-    death: string,
+    death?: string,
     country: string,
     iconLinks?: [string, string, string][]
 }>()
@@ -34,13 +34,14 @@ const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (
 
 <template>
     <div class="serverentry" @click="$router.push('/' + serverUrl + '/')" >
-        <div class="iconlinkswrap" v-if="iconLinks !== undefined">
+        <div class="iconlinkswrap" v-if="iconLinks">
             <img class="iconlink" v-for="icon in iconLinks" @click.stop="redirect(icon[0])" :src="WEBSITES_URL + icon[1]" :alt="icon[2]">
         </div>
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
-            <img class="deathicon" :src="THUMB_URL + 'death.png'">
-            <span class="deathtext" v-text="death"></span>
+            <img class="deathicon" :src="THUMB_URL + ((death) ? 'death.png' : 'online.png')">
+            <span v-if="death" class="deathtext">{{ death }}</span>
+            <span v-else class="onlinetext"> Online</span>
             <img class="flagicon" :src="FLAG_URL + country + '.png'">
         </div>
         <button v-text="serverName" />
@@ -93,15 +94,20 @@ const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (
     .serverdeath {
         background: rgba(0, 0, 0, 0.302);
         border-radius: 5px;
+        height: 26px;
     }
     .deathicon {
         top: 5px;
         transform: translateY(2px); /* Annoying image being 2px offcenter */
         margin-right: 2px;
-        margin-left: 2px;
+        margin-left: 3px;
     }
     .deathtext {
         color: #ff5353;
+        font-weight: bold;
+    }
+    .onlinetext {
+        color: #82f880;
         font-weight: bold;
     }
 
