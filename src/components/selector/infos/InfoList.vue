@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import Info from './Info.vue'
 import { currentlyLoadedInfoComponent as CLIF } from '@/ts/manager/info/InfoPopup'
 import InfoPopup from './InfoPopup.vue';
@@ -8,21 +8,57 @@ import InfoPopup from './InfoPopup.vue';
 let currentOffset = ref(0);
 const offsetStep = 140;
 let elem: HTMLElement;
-let maxOffset: number;
+let maxOffset = ref(0);
 
 onMounted(() => {
     elem = document.getElementById("infos") as HTMLElement;
-    //40=margins, 140=calculating 1 step late so assuming we're on the step after
-    maxOffset = elem.scrollHeight - 40 - 140; 
+    updateOffsets();
+
+    window.addEventListener("resize", updateOffsets); 
+
+    // @ts-ignore
+    if (window.chrome) {
+        // Double issue on chrome(ium?):
+        // - if you get the scrollHeight from onMounted directly you're gonna get 0.
+        // - if you get the srollHeight after a small timeout (10-100ms) it returns the height as if there was only a single column
+        //   (like on vertical screens), so here scrollHeight would always get you 880.
+        // - if you wait long enough (here 500ms), you DO get the proper scrollHeight.
+        //
+        // Neither Firefox nor Safari suffer from this issue.
+        setTimeout(() => {
+            updateOffsets();
+        }, 500);
+    }
 })
+onUnmounted(() => {
+    window.removeEventListener("resize", updateOffsets); 
+})
+
+function updateOffsets() {
+    //40=margins, 140=calculating 1 step late so assuming we're on the step after
+    maxOffset.value = elem.scrollHeight - 40 - 140;
+    
+    // Handles both reloads & resizes
+    if (elem.scrollTop > maxOffset.value) {
+        currentOffset.value = maxOffset.value;
+        scrollCurrentOffsetNocheck()
+    } else {
+        currentOffset.value = elem.scrollTop;
+    }
+    console.log(maxOffset.value);
+    
+}
+
 
 function canScrollUp() {
     return currentOffset.value != 0;
 }
 function canScrollDown() {
+    
     // NOTE:
     // Seems like on Chrome on my laptop, maxOffset may have the wrong value.
-    return !(maxOffset <= currentOffset.value);
+    return !(maxOffset.value <= currentOffset.value);
+    // return true;
 }
 
 function scrollInfos(up: boolean) {
@@ -32,11 +68,15 @@ function scrollInfos(up: boolean) {
     const offset = up ? -offsetStep : offsetStep;
     currentOffset.value = currentOffset.value + offset;
 
+    scrollCurrentOffsetNocheck();
+}
+function scrollCurrentOffsetNocheck() {
     elem?.scrollTo({
         top: currentOffset.value,
         behavior: "smooth"
-    })
+    });
 }
+
 </script>
 
 <template>
