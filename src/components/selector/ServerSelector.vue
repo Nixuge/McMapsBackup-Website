@@ -36,16 +36,17 @@ import ServerEntry from './ServerEntry.vue'
     padding-top: 10px;
     margin-bottom: 20px;
     border-radius: 15px;
+    width: fit-content;
 }
 @media screen and (max-width: 849px) {
     #buttongrid {
-        width: 100%;
+        max-width: 90%;
     }
 }
 
 @media screen and (min-width: 850px) {
     #buttongrid {
-        width: 80%;
+        max-width: 80%;
     }
 }
 </style>
