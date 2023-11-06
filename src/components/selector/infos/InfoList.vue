@@ -71,14 +71,14 @@ function scrollInfos(up: boolean) {
         padding: 5px 30px 0 30px;
     }
     #infoswrap {
-        width: 80%;
+        max-width: 80%;
+        width: fit-content;
         margin: auto;
         background: rgba(0, 0, 0, 0.195);
         display: flex;
         border-radius: 15px;
     }   
     #infos {
-        width: 95%;
         padding-top: 20px;
         padding-bottom: 20px;
         display: flex;
@@ -94,6 +94,8 @@ function scrollInfos(up: boolean) {
         align-items: center;
         flex-direction: column;
         vertical-align: center;
+        margin-right: 10px;
+        margin-left: 10px;
     }
     #infoscroller > * {
         background: rgba(0, 0, 0, 0.195);
