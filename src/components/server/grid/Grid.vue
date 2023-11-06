@@ -51,8 +51,6 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 
 .grid {
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    grid-template-rows: 1fr 1fr 1fr;
     margin: 15px;
     grid-gap: 20px;
     justify-items: center;

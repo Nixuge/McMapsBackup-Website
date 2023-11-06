@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ElementViewer from '@/components/server/ElementViewer.vue'
+import ElementViewer from '@/components/server/viewer/ElementViewer.vue'
 import SearchBar from '@/components/server/searchbar/SearchBar.vue'
 import SearchGrid from '@/components/server/grid/Grid.vue'
 import { parseUrlArgs } from '@/ts/manager/UrlManager';
@@ -33,6 +33,13 @@ parseUrlArgs()
 @media screen and (max-width: 849px) {
     #grid_container {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #grid_container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2.5fr;
     }
 }
 
