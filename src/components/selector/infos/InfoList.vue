@@ -25,6 +25,10 @@ onMounted(() => {
         // - if you wait long enough (here 500ms), you DO get the proper scrollHeight.
         //
         // Neither Firefox nor Safari suffer from this issue.
+        // The 10-100ms wrong height seem to be because of a delay before loading the proper layout,
+        // where for a sec the servers appear vertically (as if the wrapper had width: min-content instead of its current fit-content)
+        // and the info board appears smaller with only 1 element on the left.
+        // Not much I can do to fix apart from reworking the layout.
         setTimeout(() => {
             updateOffsets();
         }, 500);
