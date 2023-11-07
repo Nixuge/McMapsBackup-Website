@@ -1,13 +1,24 @@
 <script setup lang="ts">
-defineProps<{
+import router from '@/router';
+
+const props = defineProps<{
     text: string,
-    href: string
+    href?: string,
+    action?: Function
 }>()
+
+function onButtonClick() {
+    if (props.href) {
+        router.push(props.href)
+    } else if (props.action) {
+        props.action();
+    }
+}
 </script>
 
 <template>
     <div class="button">
-        <button v-on:click="$router.push(href)" v-text="text" />
+        <button v-on:click="onButtonClick" v-text="text" />
     </div>
 </template>
 <style scoped>

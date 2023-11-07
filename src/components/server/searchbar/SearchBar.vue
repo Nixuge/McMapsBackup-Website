@@ -2,11 +2,13 @@
 import SearchInput from './SearchInput.vue'
 import SearchButton from './SearchButton.vue'
 import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
+import { AutoCompleter as ac } from '@/ts/manager/SearchEngine';
 </script>
 
 <template>
     <div class="fade" id="searchbar">
-        <SearchButton text=" < " href="/" />
+        <SearchButton text=" < " href="/" />    
+        <SearchButton text=" ! " :action="() => {ac.showTaglistAutocompletePopup()}"/>
         <SearchInput />
         <SearchThemeSwitcher />
     </div>

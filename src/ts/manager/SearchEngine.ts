@@ -5,25 +5,17 @@ import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
 import { serverSearcher } from "@/ts/server/CurrentServer";
 import { OptionalTag, Tag, TagNode } from "../data/Tag";
 
+export class AutoCompleter {
+    public static xOffset = ref(0);
+    public static completionValues: Ref<string[] | undefined> = ref(undefined);
+    public static completionTaglist: boolean = false;
 
-export class SearchEngine {
-    public static search: string = "";
-    private static allServerMaps: ServerMap[] = [];
-    public static currentMapsRawArray: ServerMap[] = [];
-    public static currentMapsPages: any = reactive({});
-    public static currentLastPageIndex: number = 1;
-    public static autocompleteOffset = ref(0);
-    public static autocompleteValues: Ref<string[] | undefined> = ref(undefined);
+    public static init() {
+        this.dummyElement.style.fontSize = "20px";
+        this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
+        this.dummyElement.style.visibility = 'hidden';
+    }
 
-    // private static recalculateInsert() {
-    //     // recalculate based on what currentMaps holds
-    //     for (let i = 0; i < this.currentMapsRawArray.length; i++) {
-    //         const map =  this.currentMapsRawArray[i];
-    //         if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
-    //             this.currentMapsRawArray.splice(i, 1);
-    //         }
-    //     }
-    // }
 
     private static dummyElement = document.createElement('span');
     private static calculateAutocompleteOffset() {
@@ -47,15 +39,43 @@ export class SearchEngine {
         return tagValuesMatching;
     }
 
-    private static showTagAutocompletePopup(tag: OptionalTag) {
+    public static showTagAutocompletePopup(tag: OptionalTag) {
         if (tag === undefined || tag.type === "invalid") {
-            this.autocompleteValues.value = undefined;
+            this.completionValues.value = undefined;
             return;
         }
+        this.completionTaglist = false;
+        this.xOffset.value = this.calculateAutocompleteOffset();
+        this.completionValues.value = this.getAutocompleteMatchingValues(tag);
+    }
+    public static showTaglistAutocompletePopup() {
+        this.completionTaglist = true;
+        this.xOffset.value = this.calculateAutocompleteOffset();
 
-        this.autocompleteOffset.value = this.calculateAutocompleteOffset();
-        this.autocompleteValues.value = this.getAutocompleteMatchingValues(tag);
-      }
+        const values = serverSearcher?.validTags.keys() as IterableIterator<string>;        
+        this.completionValues.value = Array.from(values);
+    }
+}
+
+export class SearchEngine {
+    public static search: string = "";
+    private static allServerMaps: ServerMap[] = [];
+    public static currentMapsRawArray: ServerMap[] = [];
+    public static currentMapsPages: any = reactive({});
+    public static currentLastPageIndex: number = 1;
+
+
+    // private static recalculateInsert() {
+    //     // recalculate based on what currentMaps holds
+    //     for (let i = 0; i < this.currentMapsRawArray.length; i++) {
+    //         const map =  this.currentMapsRawArray[i];
+    //         if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
+    //             this.currentMapsRawArray.splice(i, 1);
+    //         }
+    //     }
+    // }
+
+
 
     private static recalculateWhole() {
         // prolly not efficient but oh well
@@ -64,7 +84,7 @@ export class SearchEngine {
 
         const tagNode = TagNode.newFromSearch(this.search);
 
-        this.showTagAutocompletePopup(tagNode.getLastTag());
+        AutoCompleter.showTagAutocompletePopup(tagNode.getLastTag());
         
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
@@ -117,10 +137,7 @@ export class SearchEngine {
     public static init(allServerMaps: ServerMap[]) {
         this.allServerMaps = allServerMaps;
         this.search = ""; // just in case
-
-        this.dummyElement.style.fontSize = "20px";
-        this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
-        this.dummyElement.style.visibility = 'hidden';
+        AutoCompleter.init()
         
         this.recalculateWhole();
         this.update();
@@ -134,19 +151,36 @@ export class SearchEngine {
         }
     }
 
-    public static setLastTag(lastTagStr: string) {
+    public static addTag(tag: string) {
         const inputElement = document.getElementById('searchinput') as HTMLInputElement;
-
-        const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
-
-        const newStr = `${firstPart}:${sanitize(lastTagStr)} `;
-        inputElement.value = newStr
-        this.search = sanitizeSearch(newStr);
+        let text = inputElement.value;
+        if (text.length > 0 && text[text.length - 1] !== ' ') {
+            text += ' ';
+        }
+        text += tag + ':';
+        inputElement.value = text;
+        this.search = sanitizeSearch(text);
         
         this.recalculateWhole();
         this.update();
 
         inputElement.focus()
+    } 
+
+    public static setLastTag(lastTagStr: string) {
+        // todo? bind inputElement.value to string here maybe
+        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
+
+        const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
+
+        const newStr = `${firstPart}:${sanitize(lastTagStr)} `;
+        inputElement.value = newStr;
+        this.search = sanitizeSearch(newStr);
+        
+        this.recalculateWhole();
+        this.update();
+
+        inputElement.focus();
     }
 
     //TODO: handle "select" change

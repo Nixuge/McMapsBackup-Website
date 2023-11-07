@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SearchEngine as se } from '@/ts/manager/SearchEngine';
+import { SearchEngine as se, AutoCompleter as ac } from '@/ts/manager/SearchEngine';
 import { serverSearcher } from '@/ts/server/CurrentServer';
 import { computed, onMounted } from 'vue';
 
@@ -13,7 +13,7 @@ onMounted(() => {
     // inputelement.value = se.search;
 });
 
-const autocompleteOffset = computed(() => se.autocompleteOffset.value + "px")
+const autocompleteOffset = computed(() => ac.xOffset.value + "px")
 
 class GoThrougher {
     private current_string_listindex: number;
@@ -81,12 +81,20 @@ class GoThrougher {
 // tagindex="0" on autocompletevalue lets you tab to the thing you want
 
 // todo (maybe?) -> make up/down arrows work
+
+function onAutocompletePress(completion: string) {
+    if (ac.completionTaglist)
+        se.addTag(completion)
+    else
+        se.setLastTag(completion)
+}
+
 </script>
 
 <template>
     <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)">
-    <ul id="searchtagautocomplete" v-if="se.autocompleteValues.value !== undefined">
-        <li class="autocompletevalue" tabindex="0" v-for="completion of se.autocompleteValues.value" @click="se.setLastTag(completion)" @keypress.enter="se.setLastTag(completion)">{{ completion }}</li>
+    <ul id="searchtagautocomplete" v-if="ac.completionValues.value !== undefined">
+        <li class="autocompletevalue" tabindex="0" v-for="completion of ac.completionValues.value" @click="onAutocompletePress(completion)" @keypress.enter="onAutocompletePress(completion)">{{ completion }}</li>
     </ul>
 </template>
 
