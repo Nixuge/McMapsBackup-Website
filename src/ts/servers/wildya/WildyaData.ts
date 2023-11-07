@@ -44,6 +44,16 @@ export const WILDYA_MAPS: Array<M> = [
     new M(K[2], "Classique", 214),
     new M(K[2], "Olympe", 215),
     new M(K[2], "Babylone", 216),
+
+    new M(K[3], "Mario", 300),
+    new M(K[3], "Sakai", 301),
+    new M(K[3], "Toplaya", 302),
+    new M(K[3], "BombBeach", 303),
+    new M(K[3], "Classique", 304),
+
+    new M(K[4], "KitFFA Halloween", 400, [new Download(Z, "halloween.zip")]),
+
+    new M(K[5], "TheTowers", 500, [new Download("Téléchargement 1", "thetowers_chests.zip"), new Download("Téléchargement 2", "thetowers_nochests.zip")], "Le téléchargement 1 devrait être complet avec tous les coffres d'une équipe (pas des deux)."),
 ];
 
 export const WILDYA_TAGS: ITagsMeta = new Map(Object.entries({
