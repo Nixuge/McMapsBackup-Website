@@ -26,7 +26,7 @@
                 </tr>
                 <tr class="odd">
                     <td>/server/allmaps.zip</td>
-                    <td class="orange">Partially</td>
+                    <td class="green">Yes</td>
                     <td>Returns a zip with all of the maps for a certain server.</td>
                 </tr>
                 <tr>
@@ -39,8 +39,8 @@
                     <td class="red">No</td>
                     <td>Returns a zip with all of the thumbnails and maps for a certain server.</td>
                 </tr>
-            </table> 
-        </div>
+            </table>
+        </div>     
 </template>
 
 <style scoped>
@@ -49,6 +49,9 @@
 }
 .red {
     background-color: #ff535340;
+}
+.green {
+    background-color: #25c41440;
 }
 .tablewrapper {
     width: 100%;

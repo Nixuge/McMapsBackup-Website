@@ -8,6 +8,7 @@ const props = defineProps<{
     serverUrl: string,
     thumbnailName: string,
     death?: string,
+    message?: string,
     country: string,
     iconLinks?: [string, string, string][]
 }>()
@@ -40,8 +41,8 @@ const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
             <img class="deathicon" :src="THUMB_URL + ((death) ? 'death.png' : 'online.png')">
-            <span v-if="death" class="deathtext">{{ death }}</span>
-            <span v-else class="onlinetext"> Online</span>
+            <span v-if="death" class="deathtext">{{ ' ' + death }}</span>
+            <span v-else class="onlinetext">{{ ' ' + (message ? message : "Online") }}</span>
             <img class="flagicon" :src="FLAG_URL + country + '.png'">
         </div>
         <button v-text="serverName" />
