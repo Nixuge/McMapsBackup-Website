@@ -34,6 +34,7 @@ onMounted(() => {
         }, 500);
     }
 })
+
 onUnmounted(() => {
     window.removeEventListener("resize", updateOffsets); 
 })
@@ -45,12 +46,10 @@ function updateOffsets() {
     // Handles both reloads & resizes
     if (elem.scrollTop > maxOffset.value) {
         currentOffset.value = maxOffset.value;
-        scrollCurrentOffsetNocheck()
+        scrollToCurrentOffset();
     } else {
         currentOffset.value = elem.scrollTop;
-    }
-    console.log(maxOffset.value);
-    
+    }    
 }
 
 
@@ -58,11 +57,7 @@ function canScrollUp() {
     return currentOffset.value != 0;
 }
 function canScrollDown() {
-    
-    // NOTE:
-    // Seems like on Chrome on my laptop, maxOffset may have the wrong value.
     return !(maxOffset.value <= currentOffset.value);
-    // return true;
 }
 
 function scrollInfos(up: boolean) {
@@ -72,10 +67,10 @@ function scrollInfos(up: boolean) {
     const offset = up ? -offsetStep : offsetStep;
     currentOffset.value = currentOffset.value + offset;
 
-    scrollCurrentOffsetNocheck();
+    scrollToCurrentOffset();
 }
-function scrollCurrentOffsetNocheck() {
-    elem?.scrollTo({
+function scrollToCurrentOffset() {
+    elem.scrollTo({
         top: currentOffset.value,
         behavior: "smooth"
     });

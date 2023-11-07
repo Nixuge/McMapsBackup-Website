@@ -82,6 +82,8 @@ function checkKeyDownClose(key: KeyboardEvent) {
     text-align: center;
     border-radius: 15px;
     position: relative;
+    overflow: auto;
+    padding: 0 10px 10px 10px; /* All except top as h1s already do that */
 }
 #infoPopupBackground {
     z-index: 5; /* On top of everything (1 should be enough but meh) */
