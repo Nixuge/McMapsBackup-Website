@@ -113,7 +113,7 @@ So now leaving it as is, honestly looks pretty nice with a fade for disappearing
 }
 
 .opacity-leave-active {
-    animation: opacity-out .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation: opacity-out .25s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @keyframes opacity-in {
@@ -132,13 +132,8 @@ So now leaving it as is, honestly looks pretty nice with a fade for disappearing
     0% {
         opacity: 1;
     }
-    75% {
-        opacity: 0;
-        display: none;
-    }
     100% {
         opacity: 0;
-        display: none;
     }
 }
 </style>
