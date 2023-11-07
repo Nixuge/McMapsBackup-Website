@@ -169,6 +169,8 @@ export class SearchEngine {
 
     public static setLastTag(lastTagStr: string) {
         // todo? bind inputElement.value to string here maybe
+        // Actually not rly worth since this.search is sanitized
+        // & we need to get the inputElement to focus it anyways.
         const inputElement = document.getElementById('searchinput') as HTMLInputElement;
 
         const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
