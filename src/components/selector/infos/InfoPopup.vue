@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { removeInfoComponent as closePopup } from '@/ts/manager/info/InfoPopup';
 import { onMounted, onUnmounted } from 'vue';
+import { currentlyLoadedInfoComponent as CLIF } from '@/ts/manager/info/InfoPopup'
+
 
 onMounted(() => {
     window.addEventListener('keydown', checkKeyDownClose)
@@ -23,25 +25,27 @@ function checkKeyDownClose(key: KeyboardEvent) {
 
 <template>
     <div id="infoPopupBackground" @click="closePopup">
-        <Transition name="slideup" mode="out-in" appear>
+
+        <Transition name="popup" mode="out-in" appear>
             <div id="infoPopup" @click.stop="">
                 <span id="infoPopupCloseButton" @click="closePopup">&#215;</span>
-                <slot></slot>
+                <CLIF />
             </div>
         </Transition>
+
     </div>
 </template>
 
 <style scoped>
-.slideup-enter-active {
-    animation: slideup-in .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+.popup-enter-active {
+    animation: popup-in .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.slideup-leave-active {
-    animation: slideup-out .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+.popup-leave-active {
+    animation: popup-out .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-@keyframes slideup-in {
+@keyframes popup-in {
     0% {
         scale: 0;
         opacity: 0;
@@ -52,13 +56,14 @@ function checkKeyDownClose(key: KeyboardEvent) {
     }
 }
 
-@keyframes slideup-out {
+@keyframes popup-out {
     0% {
-        transform: translateX(0);
+        scale: 1;
+        opacity: 1;
     }
-
     100% {
-        transform: translateY(-50%);
+        scale: 0;
+        opacity: 0;
     }
 }
 </style>

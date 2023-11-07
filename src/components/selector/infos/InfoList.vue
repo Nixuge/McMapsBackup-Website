@@ -95,8 +95,51 @@ function scrollToCurrentOffset() {
             <div id="scrollDown" @click="scrollInfos(false)">^</div>
         </div>
     </div>
-    <InfoPopup v-if="CLIF != undefined" key="infopopup" ><CLIF /></InfoPopup>
+    <Transition name="opacity" mode="out-in" appear>
+        <InfoPopup v-if="CLIF != undefined" key="infopopup" />
+    </Transition>
 </template>
+
+<style scoped>
+/* Note:
+Due to an annoying vue bug? the Transition inside of the InfoPopup doesn't seem to trigger
+AT ALL when disappearing.
+This one works just fine, and even when I add a delay to it (to let time for the
+other transition to play) it just doesn't.
+So now leaving it as is, honestly looks pretty nice with a fade for disappearing
+*/
+.opacity-enter-active {
+    animation: opacity-in .4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.opacity-leave-active {
+    animation: opacity-out .2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes opacity-in {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity-out {
+    0% {
+        opacity: 1;
+    }
+    /* 75% {
+        opacity: 1;
+    } */
+    100% {
+        opacity: 0;
+    }
+}
+</style>
 
 <style scoped>
     #infostitle {
