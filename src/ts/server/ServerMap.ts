@@ -8,6 +8,11 @@ export class Download {
     }
 }
 
+// todo (maybe?):
+// Have it so that if a string is provided as the downloads,
+// It auto generates the array with sanitizedMapName + '.zip' as the url and the given string as the name
+// Or just implement it in the server specific maps directly (see WildyaMap & WildyaData)
+
 import { sanitize } from "@/ts/utils/TextUtils";
 
 export abstract class ServerMap {
