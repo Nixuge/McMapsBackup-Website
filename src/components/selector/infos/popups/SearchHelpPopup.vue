@@ -14,7 +14,7 @@ const BASE_URL = (process.env.NODE_ENV == "development") ?
             <img :src="BASE_URL + 'help/searchtag.png'">
             <p>from there you should be able to just select one and search whathever you need.</p>
             <br>
-            <p>You can also just use a map name, or type the tags yourself</p>
+            <p>You can also just search for a map name, or just type the tags yourself</p>
         </div>
     </div>
     
