@@ -33,8 +33,7 @@ const currentMap = computed(() => {
         </div></TST>
     </div>
     <div class="text" v-else>
-        <TST><h1>Pas encore terminé !</h1></TST>
-        <TST><h2>Les maps ne sont pas encore disponibles ici. Vous pouvez me DM discord si vous en avez vraiment besoin.</h2></TST>
+        <TST><h1>Aucune map sélectionnée !</h1></TST>
     </div>
 </template>
 
