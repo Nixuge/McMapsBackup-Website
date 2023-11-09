@@ -29,7 +29,7 @@ export class OnecubeSearch implements IServerSearch<OnecubeMap> {
     }
     public isMapGood(map: OnecubeMap) {
         if ((this.gameTag != undefined && !map.sanitizedMinigame.includes(this.gameTag.value)) ||
-            (this.authorTag != undefined && (map.authors == undefined || !map.authors.includes(this.authorTag.value))) ||
+            (this.authorTag != undefined && (map.builders == undefined || !map.builders.includes(this.authorTag.value))) ||
             (this.yearTag != undefined && map.creationYear != this.yearTag.value) ||
             (this.remaining != "" && !map.sanitizedMapName.includes(this.remaining))) {
             return false;
