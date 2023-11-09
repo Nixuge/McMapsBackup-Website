@@ -103,6 +103,7 @@ function onAutocompletePress(completion: string) {
     position: absolute;
     top: 30px;
     left: v-bind("autocompleteOffset");
+    z-index: 1;
     
     border-radius: 5px;
     background: rgba(26, 26, 26, 0.852);
