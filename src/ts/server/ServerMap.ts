@@ -20,8 +20,8 @@ export abstract class ServerMap {
     public sanitizedMapName: string;
 
     constructor(public minigame: string, public mapName: string,
-        public downloads: Download[], public id: number, 
-        public commentaries?: string) {
+        public downloads: Download[], public id: number,
+        public commentaries?: string, public builders?: string) {
             this.sanitizedMinigame = sanitize(minigame);
             this.sanitizedMapName = sanitize(mapName);
         }

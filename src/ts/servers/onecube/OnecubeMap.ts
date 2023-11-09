@@ -3,9 +3,9 @@ import { Download, ServerMap } from "@/ts/server/ServerMap";
 export class OnecubeMap extends ServerMap {
 
     constructor(minigame: string, mapName: string,
-        downloads: Download[], id: number, public authors?: string, 
+        downloads: Download[], id: number, authors: string, 
         public creationYear?: string, commentaries?: string) {
-            super(minigame, mapName, downloads, id, commentaries)
+            super(minigame, mapName, downloads, id, commentaries, authors)
         }
 
     getBaseUrl(file: boolean): string {        

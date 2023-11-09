@@ -8,7 +8,7 @@ export class MineplexMap extends ServerMap {
     constructor(minigame: string, mapName: string, public builders: string,
         downloads: Download[], id: number, public nano: boolean, 
         commentaries?: string) {
-            super(minigame, mapName, downloads, id, commentaries);
+            super(minigame, mapName, downloads, id, commentaries, builders);
             this.sanitizedBuilders = sanitize(builders);
         }
     

@@ -15,7 +15,7 @@ const currentMap = computed(() => {
         <TST><h1 :key="currentMap.minigame">{{ currentMap.minigame }}</h1></TST>
         <hr>
         <TST><h1 :key="currentMap.mapName" >{{ currentMap.mapName }}</h1></TST>
-        <TST><h2 :key="currentMap.authors" class="nomarb">{{ (currentMap.authors === undefined ? "" : `Auteur(s): ${currentMap.authors}`) + (currentMap.creationYear === undefined ? "" : `[${currentMap.creationYear}]`)}}</h2></TST>
+        <TST><h2 :key="currentMap.builders" class="nomarb">{{ (currentMap.builders === undefined ? "" : `Auteur(s): ${currentMap.builders}`) + (currentMap.creationYear === undefined ? "" : `[${currentMap.creationYear}]`)}}</h2></TST>
         <hr>
         <TST><div :key="currentMap.downloads.toString()" v-if="currentMap.downloads.length != 0">
             <h1>Téléchargements:</h1>
