@@ -41,7 +41,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
     display: flex;
     flex-direction: column;
     /* Padding so that the PageSelector has some padding */
-    padding-bottom: 5px;
+    padding-bottom: 4em;
 
     background-color: var(--dark-transparent);
     border-radius: 10px;
