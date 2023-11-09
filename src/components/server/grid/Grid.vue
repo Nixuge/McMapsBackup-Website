@@ -52,7 +52,7 @@ import { PageManager as pm } from '@/ts/manager/PageManager';
 .grid {
     display: grid;
     margin: 15px;
-    grid-gap: 20px;
+    grid-gap: 10px;
     justify-items: center;
     align-items: center;
 }
