@@ -112,6 +112,39 @@ export class PageManager {
         else
             this.setPage(this.getPage() - 1)
     }
+
+    private static grid: HTMLElement;
+    private static pageSelect: HTMLElement
+    public static setElementsForOffset(grid: HTMLElement, pageSelect: HTMLElement) {
+        this.grid = grid;
+        this.pageSelect = pageSelect;
+    }
+
+
+    public static finalPos = ref(0);
+    public static maxWidth = ref("95vw");
+    public static updateOffsets() {   
+        const grid = this.grid;
+        const pageSelect = this.pageSelect;
+             
+        const gridMid = grid.clientWidth / 2;
+        const posLeft = gridMid - (pageSelect.clientWidth / 2);
+        this.finalPos.value = grid.offsetLeft + posLeft;
+        
+        const posDiff = (pageSelect.clientLeft + pageSelect.clientWidth) - (grid.clientLeft + grid.clientWidth);
+        // If goes to the right too much when centered
+        if (posDiff > 0) {        
+            this.finalPos.value = grid.offsetLeft;
+        }
+        // If is goes to the right too much when centered AND is wider
+        if (pageSelect.clientWidth > grid.clientWidth) {
+            this.maxWidth.value = grid.clientWidth + "px"
+        }
+        // Reset default value to keep full width otherwise
+        else {
+            this.maxWidth.value = "95vw"
+        }
+    }
 }
 
 export let isHovering = ref(false);

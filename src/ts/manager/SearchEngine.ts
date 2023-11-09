@@ -149,6 +149,10 @@ export class SearchEngine {
         if (PageManager.getPage() > this.currentLastPageIndex) {
             PageManager.setPage(this.currentLastPageIndex)
         }
+        // A bit dirty but meh
+        setTimeout(() => {
+            PageManager.updateOffsets();
+        }, 10);
     }
 
     public static addTag(tag: string) {

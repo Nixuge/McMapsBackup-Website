@@ -1,45 +1,34 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import PageSelectorButton from './PageSelectorButton.vue'
 import { PageManager as pm, isHovering } from '@/ts/manager/PageManager';
 
 let grid: HTMLElement;
-let pageselect: HTMLElement;
-
-let finalPos = ref(0);
-let maxWidth = ref("95vw")
+let pageSelect: HTMLElement;
 
 onMounted(() => {
     grid = document.getElementsByClassName("grid_wrapper")[0] as HTMLElement;
-    pageselect = document.getElementsByClassName("page_selector_wrapper")[0] as HTMLElement;
+    pageSelect = document.getElementsByClassName("page_selector_wrapper")[0] as HTMLElement;
+    pm.setElementsForOffset(grid, pageSelect)
+    
     setTimeout(() => {
         updateOffsets();
     }, 100);
-    window.addEventListener("resize", updateOffsets); 
+    window.addEventListener("resize", updateOffsets);
 })
 onUnmounted(() => {
     window.removeEventListener("resize", updateOffsets); 
 })
 
 function updateOffsets() {
-    const gridMid = grid.clientWidth / 2;
-    const posLeft = gridMid - (pageselect.clientWidth / 2);
-    finalPos.value = grid.offsetLeft + posLeft;
-    
-    const posDiff = (pageselect.clientLeft + pageselect.clientWidth) - (grid.clientLeft + grid.clientWidth);
-    // If goes to the right too much when centered
-    if (posDiff > 0) {        
-        finalPos.value = grid.offsetLeft;
-    }
-    // If is goes to the right too much when centered AND is wider
-    if (pageselect.clientWidth > grid.clientWidth) {
-        maxWidth.value = grid.clientWidth + "px"
-    }
-    // Reset default value to keep full width otherwise
-    else {
-        maxWidth.value = "95vw"
-    }
+    pm.updateOffsets()
 }
+
+// function updateOffsetsDelay() {
+//     console.log("hidsfsdf");
+//     updateOffsets()
+//     setTimeout(() => {updateOffsets}, 2000)
+// }
 </script>
 
 <template>
@@ -54,8 +43,8 @@ function updateOffsets() {
 .page_selector_wrapper {
     position: absolute;
     bottom: 10px;
-    left: v-bind("finalPos + 'px'");
-    max-width: v-bind("maxWidth");
+    left: v-bind("pm.finalPos.value + 'px'");
+    max-width: v-bind("pm.maxWidth.value");
     margin: auto;
     /* Needed to anchor at bottom of the page, see Grid.vue */
     /* margin-top: auto; */
