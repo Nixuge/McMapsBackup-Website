@@ -5,10 +5,19 @@ import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
 import { serverSearcher } from "@/ts/server/CurrentServer";
 import { OptionalTag, Tag, TagNode } from "../data/Tag";
 
+export enum CompletionType {
+    NONE,
+    TAGVALUE,
+    TAGNAME
+}
+
 export class AutoCompleter {
     public static xOffset = ref(0);
     public static completionValues: Ref<string[] | undefined> = ref(undefined);
-    public static completionTaglist: boolean = false;
+    public static completionTaglist: CompletionType = CompletionType.NONE;
+
+    public static currentlySelectedTag: Ref<number> = ref(-1);
+    public static currentlySelectedTagText: string = "";
 
     public static init() {
         this.dummyElement.style.fontSize = "20px";
@@ -39,21 +48,67 @@ export class AutoCompleter {
         return tagValuesMatching;
     }
 
-    public static showTagAutocompletePopup(tag: OptionalTag) {
+    public static showTagvalueAutocompletePopup(tag: OptionalTag) {
         if (tag === undefined || tag.type === "invalid") {
             this.completionValues.value = undefined;
+            this.currentlySelectedTag.value = -1;
+            this.currentlySelectedTagText = "";
             return;
         }
-        this.completionTaglist = false;
+        this.completionTaglist = CompletionType.TAGVALUE;
         this.xOffset.value = this.calculateAutocompleteOffset();
         this.completionValues.value = this.getAutocompleteMatchingValues(tag);
     }
+
     public static showTaglistAutocompletePopup() {
-        this.completionTaglist = true;
+        this.completionTaglist = CompletionType.TAGNAME ;
         this.xOffset.value = this.calculateAutocompleteOffset();
 
         const values = serverSearcher?.validTags.keys() as IterableIterator<string>;        
         this.completionValues.value = Array.from(values);
+    }
+
+    public static onAutocompletePress(completion: string) {
+        if (this.completionTaglist == CompletionType.TAGNAME)
+            SearchEngine.addTagName(completion)
+        else
+            SearchEngine.setLastTag(completion)
+    }
+
+    public static handleAutocompleteKeyboardPresses(e: KeyboardEvent) {
+        // Need to regrab every time as it disappears with v-if
+        const autocompleteElement = document.getElementById("searchtagautocomplete");
+        if (autocompleteElement === null)
+            return;
+        
+        let currentlySelected = this.currentlySelectedTag.value;
+
+        const subNodes = autocompleteElement.getElementsByTagName("li");
+
+        switch (e.key) {
+            case "Enter":
+                if (currentlySelected == -1)
+                    return;
+                this.onAutocompletePress(subNodes[currentlySelected].textContent as string);
+                break;
+
+            case "ArrowDown":
+                e.preventDefault();
+                if (currentlySelected > subNodes.length - 2)
+                    return;
+                this.currentlySelectedTag.value += 1;
+                break;
+
+            case "ArrowUp":
+                e.preventDefault();
+                if (currentlySelected < 1)
+                    return;
+                this.currentlySelectedTag.value -= 1;
+                break;
+
+            default:
+                break;
+        }
     }
 }
 
@@ -84,7 +139,7 @@ export class SearchEngine {
 
         const tagNode = TagNode.newFromSearch(this.search);
 
-        AutoCompleter.showTagAutocompletePopup(tagNode.getLastTag());
+        AutoCompleter.showTagvalueAutocompletePopup(tagNode.getLastTag());
         
         // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
         // after the sanitizeSearch
@@ -155,7 +210,7 @@ export class SearchEngine {
         }, 10);
     }
 
-    public static addTag(tag: string) {
+    public static addTagName(tag: string) {
         const inputElement = document.getElementById('searchinput') as HTMLInputElement;
         let text = inputElement.value;
         if (text.length > 0 && text[text.length - 1] !== ' ') {
@@ -179,7 +234,7 @@ export class SearchEngine {
 
         const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
 
-        const newStr = `${firstPart}:${sanitize(lastTagStr)} `;
+        const newStr = `${firstPart}:${lastTagStr.replaceAll(" ", "")} `;
         inputElement.value = newStr;
         this.search = sanitizeSearch(newStr);
         

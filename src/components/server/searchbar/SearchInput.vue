@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import AutoComplete from './AutoComplete.vue'
 import { SearchEngine as se, AutoCompleter as ac } from '@/ts/manager/SearchEngine';
 import { serverSearcher } from '@/ts/server/CurrentServer';
-import { computed, onMounted } from 'vue';
+import { onMounted } from 'vue';
 
 let inputelement: HTMLInputElement;
 onMounted(() => {
@@ -12,8 +13,6 @@ onMounted(() => {
     // newer me: removed as this doesn't make sense, search queries aren't that complicated anyways.
     // inputelement.value = se.search;
 });
-
-const autocompleteOffset = computed(() => ac.xOffset.value + "px")
 
 class GoThrougher {
     private current_string_listindex: number;
@@ -78,44 +77,14 @@ class GoThrougher {
     }
 }
 
-// tagindex="0" on autocompletevalue lets you tab to the thing you want
-
-// todo (maybe?) -> make up/down arrows work
-
-function onAutocompletePress(completion: string) {
-    if (ac.completionTaglist)
-        se.addTag(completion)
-    else
-        se.setLastTag(completion)
-}
-
 </script>
 
 <template>
-    <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)">
-    <ul id="searchtagautocomplete" v-if="ac.completionValues.value !== undefined">
-        <li class="autocompletevalue" tabindex="0" v-for="completion of ac.completionValues.value" @click="onAutocompletePress(completion)" @keypress.enter="onAutocompletePress(completion)">{{ completion }}</li>
-    </ul>
+    <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)" @keydown="ac.handleAutocompleteKeyboardPresses">
+    <AutoComplete />
 </template>
 
 <style scoped>
-#searchtagautocomplete {
-    position: absolute;
-    top: 30px;
-    left: v-bind("autocompleteOffset");
-    z-index: 1;
-    
-    border-radius: 5px;
-    background: rgba(26, 26, 26, 0.852);
-    list-style: none;
-    padding: 0 5px 0 5px;
-    max-height: 90%;
-    overflow: auto;
-}
-.autocompletevalue:hover {
-    cursor: pointer;
-}
-
 input {
     font-size: 20px;
     font-family: 'Nunito', Helvetica, Arial, sans-serif;
