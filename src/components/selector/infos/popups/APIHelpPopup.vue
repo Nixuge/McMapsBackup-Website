@@ -10,32 +10,32 @@
     <div class="tablewrapper">
             <table>
                 <tr>
-                    <th style="width: 150px">Endpoint</th>
+                    <th>Endpoint</th>
                     <th style="width: 105px">Implemented</th>
                     <th>Response</th>
                 </tr>
                 <tr class="odd">
-                    <td>/servers.json</td>
+                    <td>/static/servers.json</td>
                     <td class="red">No</td>
                     <td>Returns a json with a list of all servers.</td>
                 </tr>
                 <tr>
-                    <td>/server/data.json</td>
+                    <td>/static/server/data.json</td>
                     <td class="orange">Partially</td>
                     <td>Returns a json with a list of all maps for a certain server.</td>
                 </tr>
                 <tr class="odd">
-                    <td>/server/allmaps.zip</td>
+                    <td>/static/server/allmaps.zip</td>
                     <td class="green">Yes</td>
                     <td>Returns a zip with all of the maps for a certain server.</td>
                 </tr>
                 <tr>
-                    <td>/server/allthumbs.zip</td>
+                    <td>/static/server/allthumbs.zip</td>
                     <td class="red">No</td>
                     <td>Returns a zip with all of the thumbnails for a certain server.</td>
                 </tr>
                 <tr class="odd lasttr">
-                    <td>/server/all.zip</td>
+                    <td>/static/server/all.zip</td>
                     <td class="red">No</td>
                     <td>Returns a zip with all of the thumbnails and maps for a certain server.</td>
                 </tr>
