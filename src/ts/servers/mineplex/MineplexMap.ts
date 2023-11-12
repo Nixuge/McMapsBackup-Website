@@ -18,7 +18,10 @@ export class MineplexMap extends ServerMap {
         if (this.nano){
             base += "nano/";
         }
-        base += sanitize(this.minigame) + "/";
+        // Kinda ugly workaround to have cakewars solo ss to work on standard too
+        base += (this.sanitizedMapName == "cakewarsstandard") ?
+            "cakewarssoloduos/" : 
+            this.sanitizedMinigame + "/";
         return base;
     }
 }
