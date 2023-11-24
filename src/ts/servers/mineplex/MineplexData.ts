@@ -931,7 +931,7 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[22], "Out Of The Woods", "TeaIsSpilled", [new D(Z, "outofthewoods.zip"), new D(P, "nekoli_parsed/outofthewoods.zip", "nekoli"), new D(U, "nekoli_unparsed/outofthewoods.zip", "nekoli")], 2242, false),
     new M(K[22], "Revenge of the Colossal Squid", "Intoxicating & Dutty", [new D(Z, "revengeofthecolossalsquid.zip"), new D(P, "nekoli_parsed/revengeofthecolossalsquid.zip", "nekoli"), new D(U, "nekoli_unparsed/revengeofthecolossalsquid.zip", "nekoli")], 2243, false),
     new M(K[22], "Cryonia", "Wolfey", [new D(Z, "cryonia.zip"), new D(P, "nekoli_parsed/cryonia.zip", "nekoli"), new D(U, "nekoli_unparsed/cryonia.zip", "nekoli")], 2244, false),
-    
+    // Community only maps
     new M(K[22], "Fish Tank", "Danese", [new D(P, "nekoli_parsed/fishtank.zip", "nekoli")], 2245, false),
     new M(K[22], "Land of Time", "Wiitarted", [new D(P, "nekoli_parsed/landoftime.zip", "nekoli")], 2246, false),
     new M(K[22], "Micro Forest", "Bluetiebacca & Cakeys", [new D(P, "nekoli_parsed/microforest.zip", "nekoli")], 2247, false),
@@ -1071,7 +1071,9 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[29], "Tiger Forest", "Picksoul & Piju", [new D(Z, "tigerforest.zip"), new D(P, "nekoli_parsed/tigerforest.zip", "nekoli"), new D(U, "nekoli_unparsed/tigerforest.zip", "nekoli")], 2909, false),
     new M(K[29], "Ruins 2.0", "Mineplex Build Team", [new D(Z, "ruins20.zip"), new D(P, "nekoli_parsed/ruins20.zip", "nekoli"), new D(U, "nekoli_unparsed/ruins20.zip", "nekoli")], 2910, false),
     new M(K[29], "Half-Moon Island", "Sebown", [new D(Z, "halfmoonisland.zip"), new D(P, "nekoli_parsed/halfmoonisland.zip", "nekoli"), new D(U, "nekoli_unparsed/halfmoonisland.zip", "nekoli")], 2911, false),
-    
+    // Community only maps
+    new M(K[29], "Twin Peaks", "Chiss", [new D(P, "nekoli_parsed/twinpeaks.zip", "nekoli")], 2912, false),
+
     new M(K[30], "Escape Room", "dekkster", [new D(Z, "escaperoom.zip")], 3000, false),
     new M(K[30], "Volcanic Fire", "LithiumPolly", [new D(Z, "volcanicfire.zip")], 3001, false),
     new M(K[30], "Macrocosm", "Masts & Penguiiiin", [new D(Z, "macrocosm.zip")], 3002, false),
@@ -1249,22 +1251,32 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[37], "Where'd The Witch Go?", "spikecreates, xSalted, & xOeuf", [new D(Z, "wheredthewitchgo.zip"), new D(P, "nekoli_parsed/wheredthewitchgo.zip", "nekoli"), new D(U, "nekoli_unparsed/wheredthewitchgo.zip", "nekoli")], 3725, false),
     new M(K[37], "Uh Oh Spaghetti O's", "BlueeFiree, Dutty & Intoxicating", [new D(Z, "uhohspaghettios.zip"), new D(P, "nekoli_parsed/uhohspaghettios.zip", "nekoli"), new D(U, "nekoli_unparsed/uhohspaghettios.zip", "nekoli")], 3726, false),
     new M(K[37], "Castle Grounds", "Dutty", [new D(Z, "castlegrounds.zip"), new D(P, "nekoli_parsed/castlegrounds.zip", "nekoli"), new D(U, "nekoli_unparsed/castlegrounds.zip", "nekoli")], 3727, false),
+    // Community only maps
+    new M(K[37], "Chopping Board", "Cousinss & skreb & dekkster", [new D(P, "nekoli_parsed/choppingboard.zip", "nekoli")], 3728, false),
+    new M(K[37], "Volcanic Mineshaft", "RandallRL", [new D(P, "nekoli_parsed/volcanicmineshaft.zip", "nekoli")], 3729, false),
+    new M(K[37], "Wood Plaza", "turzmobine", [new D(P, "nekoli_parsed/woodplaza.zip", "nekoli")], 3730, false),
 
-    new M(K[38], "Kikoshi Islands", "Cephyr", [new D(Z, "kikoshiislands.zip")], 3800, false),
-    new M(K[38], "Aztec Islands", "Mineplex", [new D(Z, "aztecislands.zip")], 3801, false),
-    new M(K[38], "Tropia", "Untold", [new D(Z, "tropia.zip")], 3802, false),
-    new M(K[38], "Elven Citadel", "Equa MC", [new D(Z, "elvencitadel.zip")], 3803, false),
-    new M(K[38], "Depths of the Ocean", "Mineplex Build Team & Map Testers", [new D(Z, "depthsoftheocean.zip")], 3804, false),
-    new M(K[38], "PlexWorld", "Mineplex", [new D(Z, "plexworld.zip")], 3805, false),
-    new M(K[38], "Shattered Kingdom", "Aeon Gears", [new D(Z, "shatteredkingdom.zip")], 3806, false),
-    new M(K[38], "Fallout", "Redwarfare", [new D(Z, "fallout.zip")], 3807, false),
-    new M(K[38], "Wild West", "Mineplex Build Team", [new D(Z, "wildwest.zip")], 3808, false),
-    new M(K[38], "Riverton Castle", "Cephyr", [new D(Z, "rivertoncastle.zip")], 3809, false),
-    new M(K[38], "Primal", "Mineplex Build Team", [new D(Z, "primal.zip")], 3810, false),
-    new M(K[38], "Fantasy Land", "Mineplex Build Team", [new D(Z, "fantasyland.zip")], 3811, false),
+    new M(K[38], "Kikoshi Islands", "Cephyr", [new D(Z, "kikoshiislands.zip"), new D(P, "nekoli_parsed/kikoshiislands.zip", "nekoli")], 3800, false),
+    new M(K[38], "Aztec Islands", "Mineplex", [new D(Z, "aztecislands.zip"), new D(P, "nekoli_parsed/aztecislands.zip", "nekoli")], 3801, false),
+    new M(K[38], "Tropia", "Untold", [new D(Z, "tropia.zip"), new D(P, "nekoli_parsed/tropia.zip", "nekoli")], 3802, false),
+    new M(K[38], "Elven Citadel", "Equa MC", [new D(Z, "elvencitadel.zip"), new D(P, "nekoli_parsed/elvencitadel.zip", "nekoli")], 3803, false),
+    new M(K[38], "Depths of the Ocean", "Mineplex Build Team & Map Testers", [new D(Z, "depthsoftheocean.zip"), new D(P, "nekoli_parsed/depthsoftheocean.zip", "nekoli")], 3804, false),
+    new M(K[38], "PlexWorld", "Mineplex", [new D(Z, "plexworld.zip"), new D(P, "nekoli_parsed/plexworld.zip", "nekoli")], 3805, false),
+    new M(K[38], "Shattered Kingdom", "Aeon Gears", [new D(Z, "shatteredkingdom.zip"), new D(P, "nekoli_parsed/shatteredkingdom.zip", "nekoli")], 3806, false),
+    new M(K[38], "Fallout", "Redwarfare", [new D(Z, "fallout.zip"), new D(P, "nekoli_parsed/fallout.zip", "nekoli")], 3807, false),
+    new M(K[38], "Wild West", "Mineplex Build Team", [new D(Z, "wildwest.zip"), new D(P, "nekoli_parsed/wildwest.zip", "nekoli")], 3808, false),
+    new M(K[38], "Riverton Castle", "Cephyr", [new D(Z, "rivertoncastle.zip"), new D(P, "nekoli_parsed/rivertoncastle.zip", "nekoli")], 3809, false),
+    new M(K[38], "Primal", "Mineplex Build Team", [new D(Z, "primal.zip"), new D(P, "nekoli_parsed/primal.zip", "nekoli")], 3810, false),
+    new M(K[38], "Fantasy Land", "Mineplex Build Team", [new D(Z, "fantasyland.zip"), new D(P, "nekoli_parsed/fantasyland.zip", "nekoli")], 3811, false),
+    // Community only maps
+    new M(K[38], "Kikoshi Islands 2.0", "Cephyr", [new D(P, "nekoli_parsed/kikoshiislands20.zip", "nekoli")], 3812, false),
+    new M(K[38], "Palace", "Mineplex Build Team", [new D(P, "nekoli_parsed/palace.zip", "nekoli")], 3813, false),
+    new M(K[38], "xxx", "xxx", [new D(P, "nekoli_parsed/xxx.zip", "nekoli")], 3814, false),
+
     new M(K[39], "Point Break", "unrelease", [new D(Z, "pointbreak.zip")], 3900, false),
     new M(K[39], "Tribal Herds", "MCCharity", [new D(Z, "tribalherds.zip")], 3901, false),
     new M(K[39], "Throwback Farm", "Dutty", [new D(Z, "throwbackfarm.zip")], 3902, false),
+
     new M(K[40], "Marigold", "joshuart_", [new D(Z, "marigold.zip")], 4000, false),
     new M(K[40], "Forest Village", "TeaIsSpilled", [new D(Z, "forestvillage.zip")], 4001, false),
     new M(K[40], "Labyrinth", "Saxumos", [new D(Z, "labyrinth.zip")], 4002, false),
