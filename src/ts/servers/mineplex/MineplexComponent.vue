@@ -27,7 +27,7 @@ const currentMap = computed(() => {
                     </a>
                     <template v-else>
                         <a :href="currentMap.getDownloadUrl(download.url)">
-                            <li class="commu">{{ download.name }}<span class="communitydl" @mouseenter="">i<span class="communitydltooltip">This map is from the community</span></span></li>
+                            <li class="commu">{{ download.name }}<span class="communitydl" @mouseenter="">i<span class="communitydltooltip">This map is from a community member:<br>{{ download.community }}</span></span></li>
                         </a>
                     </template>
                 </template>
@@ -74,7 +74,7 @@ a {
     padding: 5px 0;
     position: absolute;
     z-index: 3;
-    top: -70px;
+    top: -95px;
     right: -20%; 
     margin-left: -150px;
     
@@ -90,14 +90,11 @@ a {
     position: absolute;
     top: 50%;
     left: 89%;
-    margin-top: 30px;
+    margin-top: 42px;
     border-width: 5px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.5) transparent transparent transparent;
 }
-
-
-
 
 
 .commu {
