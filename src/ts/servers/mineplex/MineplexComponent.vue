@@ -21,9 +21,16 @@ const currentMap = computed(() => {
         <TST><div :key="currentMap.downloads.toString()" v-if="currentMap.downloads.length != 0">
             <h1>Downloads</h1>
             <ul>
-                <a v-for="download in currentMap.downloads" :href="currentMap.getDownloadUrl(download.url)">
-                    <li>{{ download.name }}</li>
-                </a>
+                <template v-for="download in currentMap.downloads">
+                    <a v-if="!download.community" :href="currentMap.getDownloadUrl(download.url)">
+                        <li>{{ download.name }}</li>
+                    </a>
+                    <template v-else>
+                        <a :href="currentMap.getDownloadUrl(download.url)">
+                            <li class="commu">{{ download.name }}<span class="communitydl" @mouseenter="">i<span class="communitydltooltip">This map is from the community</span></span></li>
+                        </a>
+                    </template>
+                </template>
             </ul>
         </div></TST>
         
@@ -40,6 +47,93 @@ const currentMap = computed(() => {
 </template>
 
 <style scoped>
+a {
+    cursor: pointer;
+}
+.communitydl {
+    font-size: large;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: underline #000;
+    margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #fff;
+    border-radius: 100px;
+
+    position: relative;
+    display: inline-block;
+}
+.communitydltooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 3;
+    top: -70px;
+    right: -20%; 
+    margin-left: -150px;
+    
+    opacity: 0;
+    transition: opacity .25s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.communitydl:hover .communitydltooltip {
+  visibility: visible;
+  opacity: 1;
+}
+.communitydl .communitydltooltip::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 89%;
+    margin-top: 30px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.5) transparent transparent transparent;
+}
+
+
+
+
+
+.commu {
+    color: #fcad02;
+    text-decoration: underline #fcad02;
+}
+a:visited > .commu {
+    color: #fc8302;
+    text-decoration: underline #fc8302;
+}
+/* .commu::after {
+    content: "i";
+    background-color: #fff;
+    width: 50px;
+    height: 20px;
+}
+.commu::before {
+    content: "owo";
+    background-color: #fff;
+    width: 50px;
+    height: 20px;
+} */
+/* .communitydl {
+    font-size: large;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: underline #000;
+    margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #fff;
+    border-radius: 999px;
+}
+.communitytooltip {
+    display: none;
+} */
 .text {
     padding: 10px;
 }
