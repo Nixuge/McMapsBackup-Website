@@ -932,6 +932,13 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[22], "Revenge of the Colossal Squid", "Intoxicating & Dutty", [new D(Z, "revengeofthecolossalsquid.zip"), new D(P, "nekoli_parsed/revengeofthecolossalsquid.zip", "nekoli"), new D(U, "nekoli_unparsed/revengeofthecolossalsquid.zip", "nekoli")], 2243, false),
     new M(K[22], "Cryonia", "Wolfey", [new D(Z, "cryonia.zip"), new D(P, "nekoli_parsed/cryonia.zip", "nekoli"), new D(U, "nekoli_unparsed/cryonia.zip", "nekoli")], 2244, false),
     
+    new M(K[22], "Fish Tank", "Danese", [new D(P, "nekoli_parsed/fishtank.zip", "nekoli")], 2245, false),
+    new M(K[22], "Land of Time", "Wiitarted", [new D(P, "nekoli_parsed/landoftime.zip", "nekoli")], 2246, false),
+    new M(K[22], "Micro Forest", "Bluetiebacca & Cakeys", [new D(P, "nekoli_parsed/microforest.zip", "nekoli")], 2247, false),
+    new M(K[22], "MURICA!! F--K YEAH!!", "Uncle Sam", [new D(P, "nekoli_parsed/muricafkyeah.zip", "nekoli")], 2248, false),
+    new M(K[22], "Seasons", "JoeMaster & Sebown", [new D(P, "nekoli_parsed/seasons.zip", "nekoli")], 2249, false),
+    new M(K[22], "Towers 9998", "Jugz_", [new D(P, "nekoli_parsed/towers9998.zip", "nekoli")], 2250, false, "towers9999 also present"),
+
     new M(K[23], "Breeze", "Ian923", [new D(Z, "breeze.zip")], 2300, false),
     new M(K[23], "Radioactive", "FlashHallows", [new D(Z, "radioactive.zip")], 2301, false),
     new M(K[23], "Radian Citadel", "Cmelvard", [new D(Z, "radiancitadel.zip")], 2302, false),
