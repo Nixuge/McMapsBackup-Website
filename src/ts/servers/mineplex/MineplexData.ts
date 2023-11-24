@@ -803,7 +803,11 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[16], "Cabbage", "Intoxicating", [new D(Z, "cabbage.zip"), new D(P, "nekoli_parsed/cabbage.zip", "nekoli"), new D(U, "nekoli_unparsed/cabbage.zip", "nekoli")], 1629, false),
     new M(K[16], "Scarcity", "BlueeFiree", [new D(Z, "scarcity.zip"), new D(P, "nekoli_parsed/scarcity.zip", "nekoli"), new D(U, "nekoli_unparsed/scarcity.zip", "nekoli")], 1630, false),
     new M(K[16], "Caribbean Islands", "TheDarkWarLord & DeadcBG", [new D(Z, "caribbeanislands.zip"), new D(P, "nekoli_parsed/caribbeanislands.zip", "nekoli"), new D(U, "nekoli_unparsed/caribbeanislands.zip", "nekoli")], 1631, false),
-    
+    // Community only maps
+    new M(K[16], "Sky Ship", "PythonMc & Friends", [new D(P, "nekoli_parsed/skyship.zip", "nekoli")], 1632, false),
+    new M(K[16], "Voyage", "MrJugz39s", [new D(P, "nekoli_parsed/voyage.zip", "nekoli")], 1633, false),
+    // new M(K[16], "Island (Ocean Village dupe?)", "turzmobine", [new D(P, "nekoli_parsed/island.zip")], 1634, false),
+
     new M(K[17], "Quiescent Pines", "Mvdge & BlueeFiree", [new D(Z, "quiescentpines.zip"), new D(P, "nekoli_parsed/quiescentpines.zip", "nekoli"), new D(U, "nekoli_unparsed/quiescentpines.zip", "nekoli")], 1700, false),
     new M(K[17], "Zodiac", "IceRock", [new D(Z, "zodiac.zip"), new D(P, "nekoli_parsed/zodiac.zip", "nekoli"), new D(U, "nekoli_unparsed/zodiac.zip", "nekoli")], 1701, false),
     new M(K[17], "Poseidon's Realm", "Ocelotguyy", [new D(Z, "poseidonsrealm.zip"), new D(P, "nekoli_parsed/poseidonsrealm.zip", "nekoli"), new D(U, "nekoli_unparsed/poseidonsrealm.zip", "nekoli")], 1702, false),
