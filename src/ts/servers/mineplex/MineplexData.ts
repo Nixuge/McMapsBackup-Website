@@ -1279,7 +1279,6 @@ export const MINEPLEX_MAPS: M[] = [
     // Community only maps
     new M(K[38], "Kikoshi Islands 2.0", "Cephyr", [new D(P, "nekoli_parsed/kikoshiislands20.zip", "nekoli")], 3812, false),
     new M(K[38], "Palace", "Mineplex Build Team", [new D(P, "nekoli_parsed/palace.zip", "nekoli")], 3813, false),
-    new M(K[38], "xxx", "xxx", [new D(P, "nekoli_parsed/xxx.zip", "nekoli")], 3814, false),
 
     new M(K[39], "Point Break", "unrelease", [new D(Z, "pointbreak.zip")], 3900, false),
     new M(K[39], "Tribal Herds", "MCCharity", [new D(Z, "tribalherds.zip")], 3901, false),
