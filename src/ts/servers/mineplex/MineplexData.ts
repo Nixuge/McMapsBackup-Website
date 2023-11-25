@@ -1264,7 +1264,7 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[37], "Volcanic Mineshaft", "RandallRL", [new D(P, "nekoli_parsed/volcanicmineshaft.zip", "nekoli")], 3729, false),
     new M(K[37], "Wood Plaza", "turzmobine", [new D(P, "nekoli_parsed/woodplaza.zip", "nekoli")], 3730, false),
 
-    new M(K[38], "Kikoshi Islands", "Cephyr", [new D(Z, "kikoshiislands.zip"), new D(P, "nekoli_parsed/kikoshiislands.zip", "nekoli"), new D(U, "nekoli_unparsed/kikoshiislands.zip", "nekoli")], 3800, false),
+    new M(K[38], "Kikoshi Islands", "Cephyr", [new D(Z, "kikoshiislands.zip"), new D(P, "nekoli_parsed/kikoshiislands20.zip", "nekoli"), new D(U, "nekoli_unparsed/kikoshiislands20.zip", "nekoli")], 3800, false),
     new M(K[38], "Aztec Islands", "Mineplex", [new D(Z, "aztecislands.zip"), new D(P, "nekoli_parsed/aztecislands.zip", "nekoli"), new D(U, "nekoli_unparsed/aztecislands.zip", "nekoli")], 3801, false),
     new M(K[38], "Tropia", "Untold", [new D(Z, "tropia.zip"), new D(P, "nekoli_parsed/tropia.zip", "nekoli"), new D(U, "nekoli_unparsed/tropia.zip", "nekoli")], 3802, false),
     new M(K[38], "Elven Citadel", "Equa MC", [new D(Z, "elvencitadel.zip"), new D(P, "nekoli_parsed/elvencitadel.zip", "nekoli"), new D(U, "nekoli_unparsed/elvencitadel.zip", "nekoli")], 3803, false),
@@ -1277,7 +1277,7 @@ export const MINEPLEX_MAPS: M[] = [
     new M(K[38], "Primal", "Mineplex Build Team", [new D(Z, "primal.zip"), new D(P, "nekoli_parsed/primal.zip", "nekoli"), new D(U, "nekoli_unparsed/primal.zip", "nekoli")], 3810, false),
     new M(K[38], "Fantasy Land", "Mineplex Build Team", [new D(Z, "fantasyland.zip"), new D(P, "nekoli_parsed/fantasyland.zip", "nekoli"), new D(U, "nekoli_unparsed/fantasyland.zip", "nekoli")], 3811, false),
     // Community only maps
-    new M(K[38], "Kikoshi Islands 2.0", "Cephyr", [new D(P, "nekoli_parsed/kikoshiislands20.zip", "nekoli")], 3812, false),
+    new M(K[38], "Kokoshi Islands", "Cephyr", [new D(P, "nekoli_parsed/kokoshiislands.zip", "nekoli")], 3812, false),
     new M(K[38], "Palace", "Mineplex Build Team", [new D(P, "nekoli_parsed/palace.zip", "nekoli")], 3813, false),
 
     new M(K[39], "Point Break", "unrelease", [new D(Z, "pointbreak.zip")], 3900, false),
