@@ -6,7 +6,48 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 style='color:red'>404</h1>
-    <p>Not found</p>
+    <h1>404 - not found</h1>
+    <div id="warning">
+        <h1 id="warningtitle">Community map</h1>
+        <h2>The maps may/may not be available yet</h2><h2>Except limited support</h2></div>
+    <h2>Please report the following path on the discord: </h2>
+    <h2 id="path"></h2>
 </body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+    body {
+        color: #fff;
+        background-color: #222;
+        font-family: 'Nunito', Helvetica, Arial, sans-serif;
+        text-align: center;
+    }
+
+    h2 {
+        padding: 0;
+        margin: 0;
+    }
+    #warningtitle {
+        margin: 0;
+        padding: 0;
+    }
+    #warning {
+        display: none;
+        color: #fcb102;
+        margin-bottom: 30px;
+    }
+</style>
+<script>
+    const currentUrl = window.location.href;
+    const urlPath = currentUrl
+        .replace("https://maps.nixuge.me/static/", "")
+        .replace("http://127.0.0.1:5500/src/", "")
+
+    // Unparsed check redundant but why not
+    if (urlPath.includes("unparsed") || urlPath.includes("parsed") || urlPath.includes("nekoli")) {
+        const warn = document.getElementById("warning");
+        warn.style.display = "block";
+    }
+    document.getElementById("path").textContent = '"' + urlPath + '"'
+</script>
 </html>
