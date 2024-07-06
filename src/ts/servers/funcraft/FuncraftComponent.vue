@@ -34,7 +34,7 @@ const currentMap = computed(() => {
     </div>
     <div class="text" v-else>
         <TST><h1>Aucune map sélectionnée</h1></TST>
-        <TST><h2>Si vous voulez télécharger une archive de toutes les maps, <a href="https://maps.nixuge.me/static/funcraft/zip/all.zip">cliquez ici</a>.</h2></TST>
+        <TST><h2>Si vous voulez télécharger une archive de toutes les maps, <a href="https://maps.nixuge.me/static/funcraft/allmaps.zip">cliquez ici</a>.</h2></TST>
         <TST><h2>Les maps Skywars ne sont actuellement pas sur le site. Elles sont disponible dans la backup complète au dessus.</h2></TST>
     </div>
 </template>
