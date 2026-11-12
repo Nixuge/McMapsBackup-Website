@@ -1,86 +1,78 @@
 <script setup lang="ts">
 import AutoComplete from './AutoComplete.vue'
-import { SearchEngine as se, AutoCompleter as ac } from '@/ts/manager/SearchEngine';
+import { SearchEngine as se, AutoCompleter as ac, registerSearchInput } from '@/ts/manager/SearchEngine';
 import { serverSearcher } from '@/ts/server/CurrentServer';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 
-let inputelement: HTMLInputElement;
+const inputElement = ref<HTMLInputElement | null>(null);
+const placeholder = ref("");
+let isRunning = false;
+
 onMounted(() => {
-    inputelement = document.getElementById("searchinput") as HTMLInputElement;
-    new GoThrougher().run();
-
-    // May be removed or adapted to support 1 saved search query/server
-    // newer me: removed as this doesn't make sense, search queries aren't that complicated anyways.
-    // inputelement.value = se.search;
+    registerSearchInput(inputElement.value);
+    isRunning = true;
+    startGoThrougher();
 });
 
-class GoThrougher {
-    private current_string_listindex: number;
-    private current_string: string = "";
-    private char_index: number;
-    private example_strings: string[] = [];
-    
-    constructor() {
-        this.current_string_listindex = 0;
-        this.char_index = 0;
-    }
+onUnmounted(() => {
+    isRunning = false;
+    registerSearchInput(null);
+});
 
-    private delay(ms: number) {
-        return new Promise( resolve => setTimeout(resolve, ms) );
-    }
-
-    private nextString() {
-        if (this.current_string_listindex >= this.example_strings.length - 1)
-            this.current_string_listindex = 0;
-        else
-            this.current_string_listindex += 1;
-        
-        this.current_string = this.example_strings[this.current_string_listindex];
-    }
-
-    // A bit dirty but oh well.
-    // Placed here instead of the constructor to support async data loading.
-    private async waitForServerSearch() {
-        while (serverSearcher === undefined)
-            await this.delay(10);
-        this.example_strings = serverSearcher.exampleStrings;
-        this.current_string = this.example_strings[this.current_string_listindex];
-    }
-    
-    public async run() {
-        await this.waitForServerSearch();
-        
-        while (!false) {
-            await this.goThrough();
-            await this.delay(2000);
-            await this.goThroughReverse();
-            this.nextString();
-            await this.delay(500);
-        }
-    }
-
-    private async goThrough() {
-        while (this.char_index < this.current_string.length) {
-            inputelement.placeholder += this.current_string[this.char_index];
-            await this.delay(40);
-            this.char_index += 1;
-        }
-    }
-
-    private async goThroughReverse() {
-        while (this.char_index > 0) {
-            const placeholderStr = inputelement.placeholder;
-            inputelement.placeholder = placeholderStr.substring(0, placeholderStr.length - 1);
-            await this.delay(30);
-            this.char_index -= 1;
-        }
-    }
+function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+let goThrougherStarted = false;
+function startGoThrougher() {
+    if (goThrougherStarted) return;
+    
+    const stopWatcher = watch(serverSearcher, (searcher) => {
+        if (searcher && searcher.exampleStrings && searcher.exampleStrings.length > 0) {
+            goThrougherStarted = true;
+            stopWatcher();
+            runGoThrougher(searcher.exampleStrings);
+        }
+    }, { immediate: true });
+}
+
+async function runGoThrougher(exampleStrings: string[]) {
+    let listIndex = 0;
+
+    while (isRunning && exampleStrings.length > 0) {
+        const currentString = exampleStrings[listIndex];
+        
+        // Type forward
+        for (let i = 0; i < currentString.length; i++) {
+            if (!isRunning) return;
+            placeholder.value += currentString[i];
+            await delay(40);
+        }
+
+        await delay(2000);
+
+        // Delete backward
+        while (placeholder.value.length > 0) {
+            if (!isRunning) return;
+            placeholder.value = placeholder.value.slice(0, -1);
+            await delay(30);
+        }
+
+        listIndex = (listIndex + 1) % exampleStrings.length;
+        await delay(500);
+    }
+}
 </script>
 
 <template>
-    <input id="searchinput" name="Search Input" placeholder="" @input="event => se.handleInputChange(event)" @keydown="ac.handleAutocompleteKeyboardPresses">
+    <input
+        ref="inputElement"
+        id="searchinput"
+        name="Search Input"
+        :placeholder="placeholder"
+        @input="event => se.handleInputChange(event)"
+        @keydown="ac.handleAutocompleteKeyboardPresses"
+    />
     <AutoComplete />
 </template>
 
@@ -96,7 +88,7 @@ input {
     color: var(--text-color);
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus {
     outline: none;
 }
 </style>

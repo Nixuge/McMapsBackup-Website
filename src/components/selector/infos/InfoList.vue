@@ -7,39 +7,34 @@ import InfoPopup from './InfoPopup.vue';
 
 let currentOffset = ref(0);
 const offsetStep = 140;
-let elem: HTMLElement;
+const infosElem = ref<HTMLElement | null>(null);
 let maxOffset = ref(0);
+let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
-    elem = document.getElementById("infos") as HTMLElement;
     updateOffsets();
-
     window.addEventListener("resize", updateOffsets); 
 
-    // @ts-ignore
-    if (window.chrome) {
-        // Double issue on chrome(ium?):
-        // - if you get the scrollHeight from onMounted directly you're gonna get 0.
-        // - if you get the srollHeight after a small timeout (10-100ms) it returns the height as if there was only a single column
-        //   (like on vertical screens), so here scrollHeight would always get you 880.
-        // - if you wait long enough (here 500ms), you DO get the proper scrollHeight.
-        //
-        // Neither Firefox nor Safari suffer from this issue.
-        // The 10-100ms wrong height seem to be because of a delay before loading the proper layout,
-        // where for a sec the servers appear vertically (as if the wrapper had width: min-content instead of its current fit-content)
-        // and the info board appears smaller with only 1 element on the left.
-        // Not much I can do to fix apart from reworking the layout.
-        setTimeout(() => {
+    if (infosElem.value && typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(() => {
             updateOffsets();
-        }, 500);
+        });
+        resizeObserver.observe(infosElem.value);
     }
 })
 
 onUnmounted(() => {
+    if (resizeObserver) {
+        resizeObserver.disconnect();
+        resizeObserver = null;
+    }
     window.removeEventListener("resize", updateOffsets); 
 })
 
 function updateOffsets() {
+    const elem = infosElem.value;
+    if (!elem) return;
+
     //40=margins, 140=calculating 1 step late so assuming we're on the step after
     maxOffset.value = elem.scrollHeight - 40 - 140;
     
@@ -70,7 +65,7 @@ function scrollInfos(up: boolean) {
     scrollToCurrentOffset();
 }
 function scrollToCurrentOffset() {
-    elem.scrollTo({
+    infosElem.value?.scrollTo({
         top: currentOffset.value,
         behavior: "smooth"
     });
@@ -81,7 +76,7 @@ function scrollToCurrentOffset() {
 <template>
     <h1 id="infostitle"><span>Info board</span></h1>
     <div id="infoswrap">
-        <div id="infos" class="fade">
+        <div id="infos" ref="infosElem" class="fade">
             <Info title="Aide pour la recherche" :component="() => import('./popups/AideRecherchePopup.vue')" :empty="true" />
             <Info title="Search Help" :component="() => import('./popups/SearchHelpPopup.vue')" :empty="true" />
             <Info title="DMCA" :component="() => import('./popups/DMCAPopup.vue')" :empty="true" />
