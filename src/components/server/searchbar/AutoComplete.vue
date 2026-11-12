@@ -6,6 +6,7 @@ const autocompleteOffset = computed(() => ac.xOffset.value + "px");
 
 const itemRefs = ref<(HTMLElement | null)[]>([]);
 
+// itemrefs is an array of refs, so setting refs in a list inside the li.
 function setItemRef(el: HTMLElement | null, index: number) {
     itemRefs.value[index] = el;
 }
