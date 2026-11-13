@@ -1,4 +1,4 @@
-import { Ref, reactive, ref } from "vue";
+import { Ref, nextTick, reactive, ref } from "vue";
 import { ServerMap } from "@/ts/server/ServerMap";
 import { PageManager } from "./PageManager";
 import { sanitizeSearch, sanitize } from "@/ts/utils/TextUtils";
@@ -11,6 +11,19 @@ export enum CompletionType {
     TAGNAME
 }
 
+let registeredInputElement: HTMLInputElement | null = null;
+export function registerSearchInput(el: HTMLInputElement | null) {
+    registeredInputElement = el;
+}
+
+function getInputElement(): HTMLInputElement | null {
+    if (registeredInputElement) return registeredInputElement;
+    if (typeof document !== "undefined") {
+        return document.getElementById("searchinput") as HTMLInputElement | null;
+    }
+    return null;
+}
+
 export class AutoCompleter {
     public static xOffset = ref(0);
     public static completionValues: Ref<string[] | undefined> = ref(undefined);
@@ -19,31 +32,45 @@ export class AutoCompleter {
     public static currentlySelectedTag: Ref<number> = ref(-1);
     public static currentlySelectedTagText: string = "";
 
+    private static dummyElement: HTMLSpanElement | null = null;
+
     public static init() {
-        this.dummyElement.style.fontSize = "20px";
-        this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
-        this.dummyElement.style.visibility = 'hidden';
+        if (typeof document !== "undefined" && !this.dummyElement) {
+            this.dummyElement = document.createElement("span");
+            this.dummyElement.style.fontSize = "20px";
+            this.dummyElement.style.whiteSpace = "pre"; // needed to handle spaces in spans
+            this.dummyElement.style.visibility = "hidden";
+        }
     }
 
-
-    private static dummyElement = document.createElement('span');
     private static calculateAutocompleteOffset() {
-        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
+        const inputElement = getInputElement();
+        if (!inputElement || typeof document === "undefined")
+            return 0;
+
+        if (!this.dummyElement) {
+            this.init();
+        }
+        if (!this.dummyElement) return inputElement.offsetLeft;
+
         this.dummyElement.textContent = inputElement.value;
-        
         document.body.appendChild(this.dummyElement);
         const offset = inputElement.offsetLeft + this.dummyElement.offsetWidth;
         document.body.removeChild(this.dummyElement);
         return offset;
     }
-    private static getAutocompleteMatchingValues(tag: Tag) {
-        // Assume tag will always be valid (check on top of showTagAutocompletePopup())
-        const tagCompletions = serverSearcher?.validTags.get(tag.type) as string[]; 
-        let tagValuesMatching = [];
 
+    private static getAutocompleteMatchingValues(tag: Tag) {
+        const searcher = serverSearcher.value;
+        const tagCompletions = searcher?.validTags.get(tag.type) as string[] | undefined;
+        if (!tagCompletions)
+            return [];
+
+        const tagValuesMatching: string[] = [];
         for (const tagCompletion of tagCompletions) {
-            if (sanitize(tagCompletion).includes(tag.value)) // startsWith or includes ?
+            if (sanitize(tagCompletion).includes(tag.value)) {
                 tagValuesMatching.push(tagCompletion);
+            }
         }
         return tagValuesMatching;
     }
@@ -61,49 +88,47 @@ export class AutoCompleter {
     }
 
     public static showTaglistAutocompletePopup() {
-        this.completionTaglist = CompletionType.TAGNAME ;
+        this.completionTaglist = CompletionType.TAGNAME;
         this.xOffset.value = this.calculateAutocompleteOffset();
 
-        const values = serverSearcher?.validTags.keys() as IterableIterator<string>;        
-        this.completionValues.value = Array.from(values);
+        const values = serverSearcher.value?.validTags.keys() as IterableIterator<string> | undefined;
+        this.completionValues.value = values ? Array.from(values) : [];
     }
 
     public static onAutocompletePress(completion: string) {
-        if (this.completionTaglist == CompletionType.TAGNAME)
-            SearchEngine.addTagName(completion)
-        else
-            SearchEngine.setLastTag(completion)
+        if (this.completionTaglist === CompletionType.TAGNAME) {
+            SearchEngine.addTagName(completion);
+        } else {
+            SearchEngine.setLastTag(completion);
+        }
     }
 
     public static handleAutocompleteKeyboardPresses(e: KeyboardEvent) {
-        // Need to regrab every time as it disappears with v-if
-        const autocompleteElement = document.getElementById("searchtagautocomplete");
-        if (autocompleteElement === null)
+        const completions = this.completionValues.value;
+        if (!completions || completions.length === 0)
             return;
-        
-        let currentlySelected = this.currentlySelectedTag.value;
 
-        const subNodes = autocompleteElement.getElementsByTagName("li");
+        const currentlySelected = this.currentlySelectedTag.value;
 
         switch (e.key) {
             case "Enter":
-                if (currentlySelected == -1)
+                if (currentlySelected === -1)
                     return;
-                this.onAutocompletePress(subNodes[currentlySelected].textContent as string);
+                this.onAutocompletePress(completions[currentlySelected]);
                 break;
 
             case "ArrowDown":
                 e.preventDefault();
-                if (currentlySelected > subNodes.length - 2)
-                    return;
-                this.currentlySelectedTag.value += 1;
+                if (currentlySelected < completions.length - 1) {
+                    this.currentlySelectedTag.value += 1;
+                }
                 break;
 
             case "ArrowUp":
                 e.preventDefault();
-                if (currentlySelected < 1)
-                    return;
-                this.currentlySelectedTag.value -= 1;
+                if (currentlySelected > 0) {
+                    this.currentlySelectedTag.value -= 1;
+                }
                 break;
 
             default:
@@ -116,74 +141,49 @@ export class SearchEngine {
     public static search: string = "";
     private static allServerMaps: ServerMap[] = [];
     public static currentMapsRawArray: ServerMap[] = [];
-    public static currentMapsPages: any = reactive({});
+    public static currentMapsPages: Record<number, ServerMap[]> = reactive({});
     public static currentLastPageIndex: number = 1;
 
-
-    // private static recalculateInsert() {
-    //     // recalculate based on what currentMaps holds
-    //     for (let i = 0; i < this.currentMapsRawArray.length; i++) {
-    //         const map =  this.currentMapsRawArray[i];
-    //         if (!(map.mapName.includes(this.search) || map.builders.includes(this.search) || map.minigame.includes(this.search))) {
-    //             this.currentMapsRawArray.splice(i, 1);
-    //         }
-    //     }
-    // }
-
-
-
     private static recalculateWhole() {
-        // prolly not efficient but oh well
-
         this.currentMapsRawArray.length = 0;
 
         const tagNode = TagNode.newFromSearch(this.search);
 
         AutoCompleter.showTagvalueAutocompletePopup(tagNode.getLastTag());
-        
-        // Need the ":"s and " "s for the getNewTags parser, so re sanitizing fully 
-        // after the sanitizeSearch
-        this.search = sanitize(this.search);
-        
-        // Note: wanted to do smth better with a dict w a function
-        // but since everything is just a tiny bit different I can't
-        serverSearcher?.grabTags(tagNode);
 
+        this.search = sanitize(this.search);
+
+        const searcher = serverSearcher.value;
+        searcher?.grabTags(tagNode);
 
         for (const map of this.allServerMaps) {
-            if (serverSearcher?.isMapGood(map))
+            if (searcher?.isMapGood(map)) {
                 this.currentMapsRawArray.push(map);
+            }
         }
     }
 
     private static generateCurrentMapsPages() {
-        // Didn't bother with optimization on this one tbh, always clearing & redoing
-
-        // Clear the old pages
-        for (let i = 0; i < this.currentLastPageIndex; i++) {
+        for (let i = 0; i <= this.currentLastPageIndex; i++) {
             delete this.currentMapsPages[i];
         }
         this.currentLastPageIndex = 1;
 
-        // Set the initial page to both the dict & the list
         let _page = 1;
-
         this.currentMapsPages[_page] = [];
 
-        // Split every 9 items
         for (let i = 0; i < this.currentMapsRawArray.length; i++) {
             const map = this.currentMapsRawArray[i];
-            if (this.currentLastPageIndex != _page) {
+            if (this.currentLastPageIndex !== _page) {
                 this.currentLastPageIndex = _page;
                 this.currentMapsPages[_page] = [];
             }
             this.currentMapsPages[_page].push(map);
-            if ((i + 1) % 9 == 0) {
+            if ((i + 1) % 9 === 0) {
                 _page += 1;
             }
         }
 
-        // If last page higher than current page, reduce current page to higher page
         if (PageManager.getPage() > _page) {
             PageManager.setPage(_page);
         }
@@ -191,9 +191,9 @@ export class SearchEngine {
 
     public static init(allServerMaps: ServerMap[]) {
         this.allServerMaps = allServerMaps;
-        this.search = ""; // just in case
-        AutoCompleter.init()
-        
+        this.search = "";
+        AutoCompleter.init();
+
         this.recalculateWhole();
         this.update();
     }
@@ -202,68 +202,51 @@ export class SearchEngine {
         this.generateCurrentMapsPages();
         PageManager.genPageListSelect();
         if (PageManager.getPage() > this.currentLastPageIndex) {
-            PageManager.setPage(this.currentLastPageIndex)
+            PageManager.setPage(this.currentLastPageIndex);
         }
-        // A bit dirty but meh
-        setTimeout(() => {
+        nextTick(() => {
             PageManager.updateOffsets();
-        }, 10);
+        });
     }
 
     public static addTagName(tag: string) {
-        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
+        const inputElement = getInputElement();
+        if (!inputElement) return;
+
         let text = inputElement.value;
-        if (text.length > 0 && text[text.length - 1] !== ' ') {
-            text += ' ';
+        if (text.length > 0 && text[text.length - 1] !== " ") {
+            text += " ";
         }
-        text += tag + ':';
+        text += tag + ":";
         inputElement.value = text;
         this.search = sanitizeSearch(text);
-        
-        this.recalculateWhole();
-        this.update();
 
-        inputElement.focus()
-    } 
-
-    public static setLastTag(lastTagStr: string) {
-        // todo? bind inputElement.value to string here maybe
-        // Actually not rly worth since this.search is sanitized
-        // & we need to get the inputElement to focus it anyways.
-        const inputElement = document.getElementById('searchinput') as HTMLInputElement;
-
-        const firstPart = inputElement.value.split(':').slice(0, -1).join(':'); // Get all parts except the last one
-
-        const newStr = `${firstPart}:${lastTagStr.replaceAll(" ", "")} `;
-        inputElement.value = newStr;
-        this.search = sanitizeSearch(newStr);
-        
         this.recalculateWhole();
         this.update();
 
         inputElement.focus();
     }
 
-    //TODO: handle "select" change
-    public static handleInputChange(event: any) {
-        this.search = sanitizeSearch(event.target.value);
+    public static setLastTag(lastTagStr: string) {
+        const inputElement = getInputElement();
+        if (!inputElement)
+            return;
 
-        // insertText -> causes issues when ctrl+a ing & replacing :/, will maybe have to recalculate everything anyways
-        // deleteContentBackward, insertFromPaste, historyUndo -> tested ones, need recalculateWhole
-        // 
-        // TODO?:  have recalculateWhole do it based on last input, & check from that
-        //
-        // ========== Edit (for now) ==========
-        // Due to numerous issues, and since CPUs are powerful enough nowadays, 
-        // recalculateWhole() is used everytime, even when just adding text.
-        // (note: even when spamming, this uses like 2% 
-        // of what the animated gradient background uses)
+        const firstPart = inputElement.value.split(":").slice(0, -1).join(":"); // Get all parts except the last one
+        const newStr = `${firstPart}:${lastTagStr.replaceAll(" ", "")} `;
+        inputElement.value = newStr;
+        this.search = sanitizeSearch(newStr);
 
-        // if (event.inputType == "insertText")
-            // this.recalculateInsert()
-        // else
-            // this.recalculateWhole();       
-        
+        this.recalculateWhole();
+        this.update();
+
+        inputElement.focus();
+    }
+
+    public static handleInputChange(event: Event) {
+        const target = event.target as HTMLInputElement;
+        this.search = sanitizeSearch(target.value);
+
         this.recalculateWhole();
         this.update();
     }

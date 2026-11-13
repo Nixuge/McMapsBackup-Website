@@ -9,9 +9,15 @@ import { SearchEngine } from "@/ts/manager/SearchEngine";
 
 import { updateUrl } from "@/ts/manager/UrlManager";
 import { setCurrentMap } from "@/ts/manager/CurrentMap";
-import { defineAsyncComponent, shallowRef } from "vue";
+import { Component, defineAsyncComponent, ref, shallowRef } from "vue";
 
 const emptyComponent = defineAsyncComponent(() => import('@/ts/server/default/EmptyComponent.vue'));
+
+export const serverSubUrl = ref<string>("");
+export const serverSearcher = shallowRef<IServerSearch<any> | undefined>(undefined);
+export let serverMeta: IServerMeta | undefined;
+export const ElementViewerComponent = shallowRef<Component>(emptyComponent);
+
 export async function setServer(serverName: string) {
     const metaClassLoader = SERVER_METAS[serverName];
 
@@ -23,22 +29,23 @@ export async function setServer(serverName: string) {
     // Not 100% needed but a bit cleaner
     ElementViewerComponent.value = emptyComponent;
     // Needed, otherwise autocomplete may show results from previous instance
-    serverSearcher = undefined;
+    serverSearcher.value = undefined;
 
     const metaClass = await metaClassLoader();
 
-    serverMeta = new metaClass();
-    serverSubUrl = serverMeta.subUrl; // could just be = serverName but this makes things more consistent;
-    serverSearcher = new serverMeta.serverSearcher();    
-    ElementViewerComponent.value = serverMeta.elementViewerComponent;
+    const metaInstance = new metaClass();
+    serverMeta = metaInstance;
+    serverSubUrl.value = metaInstance.subUrl; // could just be = serverName but this makes things more consistent;
+    serverSearcher.value = new metaInstance.serverSearcher();    
+    ElementViewerComponent.value = metaInstance.elementViewerComponent;
 
-    SearchEngine.init(serverMeta.serverMaps);
+    SearchEngine.init(metaInstance.serverMaps);
     setCurrentMap(new EmptyServerMap());
     updateUrl();
 }
 
 interface MetaMap {
-    [key: string]: () => Promise<any>;
+    [key: string]: () => Promise<new () => IServerMeta>;
 }
 export const SERVER_METAS: MetaMap = {
     "mineplex": async () => {const {MineplexMeta} = await import("@/ts/servers/mineplex/MineplexMeta"); return MineplexMeta},
@@ -49,11 +56,4 @@ export const SERVER_METAS: MetaMap = {
     "erisium": async () => {const {ErisiumMeta} = await import("@/ts/servers/erisium/ErisiumMeta"); return ErisiumMeta},
     // "wildya": async () => {const {WildyaMeta} = await import("@/ts/servers/wildya/WildyaMeta"); return WildyaMeta},
 }
-
-
-export let serverSubUrl: string = "";
-export let serverSearcher: IServerSearch<any> | undefined;
-export let serverMeta: IServerMeta;
-
-export let ElementViewerComponent: any = shallowRef(emptyComponent);
 

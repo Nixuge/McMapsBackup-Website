@@ -3,9 +3,20 @@ import ElementViewer from '@/components/server/viewer/ElementViewer.vue'
 import SearchBar from '@/components/server/searchbar/SearchBar.vue'
 import SearchGrid from '@/components/server/grid/Grid.vue'
 import { parseUrlArgs } from '@/ts/manager/UrlManager';
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-parseUrlArgs()
+const route = useRoute();
 
+parseUrlArgs().catch(console.error);
+
+// When using the back button on browser to navigate between pages,
+// this is requires to switch to the right page, otherwise it doesnt switch
+watch(() => route.params, (newParams, oldParams) => {
+    if (newParams && oldParams && (newParams.server !== oldParams.server || newParams.page !== oldParams.page || newParams.mapname !== oldParams.mapname)) {
+        parseUrlArgs().catch(console.error);
+    }
+});
 </script>
 
 <template>

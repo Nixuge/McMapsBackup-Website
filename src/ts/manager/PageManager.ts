@@ -1,43 +1,50 @@
-import { reactive, ref, watch, watchEffect } from "vue";
+import { reactive, ref, watch } from "vue";
 import { updateUrl } from "./UrlManager";
 import { SearchEngine } from "./SearchEngine";
 import { PageButtonData, ButtonType, ButtonEffect } from "@/ts/data/PageButtonType";
 
+export const page = ref(1);
+export const pageSelector = reactive<PageButtonData[]>([
+    new PageButtonData(ButtonType.NORMAL, 1, undefined, () => PageManager.setPage(1))
+]);
+export const finalPos = ref(0);
+export const maxWidth = ref("95vw");
+export const isHovering = ref(false);
+
 export class PageManager {
-    public static page = ref(1);
-    public static pageSelector: PageButtonData[] = reactive([new PageButtonData(ButtonType.NORMAL, 1)]);
+    public static page = page;
+    public static pageSelector = pageSelector;
+    public static finalPos = finalPos;
+    public static maxWidth = maxWidth;
 
     public static setPage(_page: number) {
         if (_page > SearchEngine.currentLastPageIndex || _page < 1)
             return;
-        this.page.value = _page;
+        page.value = _page;
         updateUrl();
     }
 
     public static nextPage() {
-        this.page.value += 1;
+        page.value += 1;
         updateUrl();
     }
 
     public static previousPage() {
-        if (this.page.value > 1) {
-            this.page.value -= 1;
+        if (page.value > 1) {
+            page.value -= 1;
             updateUrl();
         }
     }
 
     public static getPage() {
-        return this.page.value;
+        return page.value;
     }
 
     private static genPageListSimpleRange(lastIndex: number) {
         // Used if 10 or less pages shown
         for (let i = 1; i <= lastIndex; i++) {
-            if (i == this.getPage()) {
-                this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i, ButtonEffect.CURRENT));
-            } else {
-                this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i));
-            }
+            const effect = i === this.getPage() ? ButtonEffect.CURRENT : undefined;
+            pageSelector.push(new PageButtonData(ButtonType.NORMAL, i, effect, () => PageManager.setPage(i)));
         }
     }
 
@@ -52,21 +59,21 @@ export class PageManager {
                 totalToDoAfter++;
                 continue;
             }
-            this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i));
+            pageSelector.push(new PageButtonData(ButtonType.NORMAL, i, undefined, () => PageManager.setPage(i)));
         }
 
         // current page
-        this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, currentPage, ButtonEffect.CURRENT));
+        pageSelector.push(new PageButtonData(ButtonType.NORMAL, currentPage, ButtonEffect.CURRENT, () => PageManager.setPage(currentPage)));
 
         // after current page
         const maxLoopIndex = currentPage + totalToDoAfter;
-        let overflow = 0
+        let overflow = 0;
         for (let i = currentPage + 1; i < maxLoopIndex; i++) {
             if (i > lastIndex) {
-                overflow = maxLoopIndex - i
+                overflow = maxLoopIndex - i;
                 break;
             }
-            this.pageSelector.push(new PageButtonData(ButtonType.NORMAL, i));
+            pageSelector.push(new PageButtonData(ButtonType.NORMAL, i, undefined, () => PageManager.setPage(i)));
         }
 
         // balance out overflow by adding before
@@ -74,14 +81,13 @@ export class PageManager {
             for (let i = currentPage - 5; i > currentPage - 5 - overflow; i--) {
                 if (i < 1)
                     break;
-                this.pageSelector.unshift(new PageButtonData(ButtonType.NORMAL, i));
+                pageSelector.unshift(new PageButtonData(ButtonType.NORMAL, i, undefined, () => PageManager.setPage(i)));
             }
         }
-
     }
 
     public static genPageListSelect() {
-        this.pageSelector.length = 0;
+        pageSelector.length = 0;
 
         const lastIndex = SearchEngine.currentLastPageIndex;
         const currentPage = this.getPage();
@@ -91,79 +97,69 @@ export class PageManager {
         else
             this.genPageListComplicated(lastIndex);
 
+        pageSelector.unshift(new PageButtonData(
+            ButtonType.PREVIOUS,
+            undefined,
+            currentPage <= 1 ? ButtonEffect.DISABLED : undefined,
+            () => PageManager.previousPage()
+        ));
 
-        this.pageSelector.unshift(new PageButtonData(
-            ButtonType.PREVIOUS, undefined,
-            (currentPage <= 1) ? ButtonEffect.DISABLED : undefined));
-
-
-        this.pageSelector.push(new PageButtonData(
-            ButtonType.NEXT, undefined,
-            (currentPage >= lastIndex) ? ButtonEffect.DISABLED : undefined));
+        pageSelector.push(new PageButtonData(
+            ButtonType.NEXT,
+            undefined,
+            currentPage >= lastIndex ? ButtonEffect.DISABLED : undefined,
+            () => PageManager.nextPage()
+        ));
     }
 
-    public static onScroll(event: any) {
+    public static onScroll(event: WheelEvent) {
         if (!isHovering.value)
             return;
 
-        event.preventDefault()
+        event.preventDefault();
         if (event.deltaY < 0)
-            this.setPage(this.getPage() + 1)
+            this.setPage(this.getPage() + 1);
         else
-            this.setPage(this.getPage() - 1)
+            this.setPage(this.getPage() - 1);
     }
 
-    private static grid: HTMLElement;
-    private static pageSelect: HTMLElement
+    private static grid?: HTMLElement;
+    private static pageSelect?: HTMLElement;
+
     public static setElementsForOffset(grid: HTMLElement, pageSelect: HTMLElement) {
         this.grid = grid;
         this.pageSelect = pageSelect;
     }
 
-
-    public static finalPos = ref(0);
-    public static maxWidth = ref("95vw");
-    public static updateOffsets() {   
+    public static updateOffsets() {
         const grid = this.grid;
         const pageSelect = this.pageSelect;
-             
+        if (!grid || !pageSelect)
+            return;
+
         const gridMid = grid.clientWidth / 2;
         const posLeft = gridMid - (pageSelect.clientWidth / 2);
         this.finalPos.value = grid.offsetLeft + posLeft;
-        
+
         const posDiff = (pageSelect.clientLeft + pageSelect.clientWidth) - (grid.clientLeft + grid.clientWidth);
         // If goes to the right too much when centered
-        if (posDiff > 0) {        
+        if (posDiff > 0) {
             this.finalPos.value = grid.offsetLeft;
         }
         // If is goes to the right too much when centered AND is wider
         if (pageSelect.clientWidth > grid.clientWidth) {
-            this.maxWidth.value = grid.clientWidth + "px"
-        }
-        // Reset default value to keep full width otherwise
-        else {
-            this.maxWidth.value = "95vw"
+            this.maxWidth.value = grid.clientWidth + "px";
+        } else {
+            this.maxWidth.value = "95vw";
         }
     }
 }
 
-export let isHovering = ref(false);
+if (typeof window !== "undefined") {
+    // {passive: false} Needed to preventDefault()
+    window.addEventListener("wheel", (event: WheelEvent) => { PageManager.onScroll(event); }, { passive: false });
+}
 
-// {passive: false} Needed to preventDefault()
-addEventListener("wheel", (event) => { PageManager.onScroll(event) }, {passive: false}); 
-
-watch(PageManager.page, () => {
-    // works for reactivity tracking
-    // TODO: rework by watching the URL instead
+watch(page, () => {
     PageManager.genPageListSelect();
 });
-
-// Basically did a loop import between PageButtonType & PageManager
-// & I couldn't set those functions by default so just replacing them
-// after PageManager is initialized lmao
-function dirtyTypeEnumFix() {
-    ButtonType.NORMAL.func = PageManager.setPage;
-    ButtonType.NEXT.func = PageManager.nextPage;
-    ButtonType.PREVIOUS.func = PageManager.previousPage;
-}
-dirtyTypeEnumFix()

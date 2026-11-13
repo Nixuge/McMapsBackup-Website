@@ -5,7 +5,7 @@ import { serverSubUrl, setServer } from "@/ts/server/CurrentServer";
 
 
 export function updateUrl() {
-    let fullUrl = `/${serverSubUrl}/${PageManager.getPage()}/`
+    let fullUrl = `/${serverSubUrl.value}/${PageManager.getPage()}/`
     if (currentMap.value.minigame)
         fullUrl += currentMap.value.minigame + "/";
     if (currentMap.value.mapName)
