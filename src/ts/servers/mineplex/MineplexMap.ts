@@ -1,16 +1,21 @@
 import { sanitize } from "@/ts/utils/TextUtils";
-import { Download, ServerMap } from "@/ts/server/ServerMap"
-
+import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
 
 export class MineplexMap extends ServerMap {
     public sanitizedBuilders: string;
 
-    constructor(minigame: string, mapName: string, public builders: string,
-        downloads: Download[], id: number, public nano: boolean, 
-        commentaries?: string) {
-            super(minigame, mapName, downloads, id, commentaries, builders);
-            this.sanitizedBuilders = sanitize(builders);
-        }
+    constructor(
+        minigame: string,
+        mapName: string,
+        public builders: string,
+        downloads?: DownloadInput,
+        id?: number,
+        public nano: boolean = false, 
+        commentaries?: string
+    ) {
+        super(minigame, mapName, downloads, id, commentaries, builders);
+        this.sanitizedBuilders = sanitize(builders);
+    }
     
     getBaseUrl(file: boolean): string {
         let base = "/static/mineplex/";

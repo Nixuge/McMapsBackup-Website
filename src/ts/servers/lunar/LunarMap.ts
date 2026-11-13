@@ -1,15 +1,15 @@
-import { Download, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
 
 export class LunarMap extends ServerMap {
 
     constructor(minigame: string, mapName: string,
-        downloads: Download[], id: number, public authors?: string, 
+        downloads?: DownloadInput, id?: number, public authors?: string, 
         public creationYear?: string, commentaries?: string) {
-            super(minigame, mapName, downloads, id, commentaries)
+            super(minigame, mapName, downloads, id, commentaries);
         }
 
     getBaseUrl(file: boolean): string {        
-        let base = "/static/hive/";
+        let base = "/static/lunar/";
         base += (file) ? "zip/" : "img/";
         base += this.sanitizedMinigame + "/";
         return base;

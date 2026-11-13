@@ -244,6 +244,8 @@ export class SearchEngine {
     }
 
     public static handleInputChange(event: Event) {
+        // Note: at one point tried to have it recalculate based on last input data
+        // but ended up too messy so just recalculating everything every time
         const target = event.target as HTMLInputElement;
         this.search = sanitizeSearch(target.value);
 

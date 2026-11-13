@@ -1,12 +1,16 @@
-import { Download, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
 
 export class FuncraftMap extends ServerMap {
 
     constructor(minigame: string, mapName: string,
-        downloads: Download[], id: number, public variant?: string, 
+        downloads?: DownloadInput, id?: number, public variant?: string, 
         commentaries?: string) {
-            super(minigame, mapName, downloads, id, commentaries)
+            super(minigame, mapName, downloads, id, commentaries);
         }
+
+    protected override getDefaultDownloadName(): string {
+        return "Téléchargement principal";
+    }
 
     getBaseUrl(file: boolean): string {        
         let base = "/static/funcraft/";
