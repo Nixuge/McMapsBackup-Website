@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { getAssetPrefix } from '@/ts/server/ServerMap';
 
-const BASE_URL = (process.env.NODE_ENV == "development") ? 
-    "https://maps.nixuge.me/static/" : 
-    "static/";
+const BASE_URL = getAssetPrefix() + "/static/";
 </script>
 
 <template>

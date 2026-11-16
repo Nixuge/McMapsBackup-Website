@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getAssetPrefix } from '@/ts/server/ServerMap';
+
 // Note about iconLinks:
 // They were originally done with an array of a class called ClickableIcon (ClickableIcon[]).
 // However, found out the Vue compiler doesn't handle class instanciations in component props,
@@ -13,9 +15,7 @@ const props = defineProps<{
     iconLinks?: [string, string, string][]
 }>()
 
-const BASE_URL = (process.env.NODE_ENV == "development") ? 
-    "https://maps.nixuge.me/static/" : 
-    "static/";
+const BASE_URL = getAssetPrefix() + "/static/";
 
 const WEBSITES_URL = BASE_URL + "websites/";
 const THUMB_URL = BASE_URL + "server_thumbnails/";

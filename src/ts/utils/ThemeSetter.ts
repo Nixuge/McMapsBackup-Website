@@ -5,17 +5,16 @@ const cookieTheme = localStorage.getItem("theme");
 
 export let darkTheme = ref(cookieTheme == undefined || cookieTheme == "dark");
 
-export let themeIconClass = computed(() => ({
-    "gg-moon": darkTheme.value,
-    "gg-sun": !darkTheme.value
-}));
-
-
 const classList = document.documentElement.classList
 export function switchTheme() {
     darkTheme.value = !darkTheme.value;
     updateTheme();
 };
+
+export function setTheme(theme: 'dark' | 'light') {
+    darkTheme.value = theme === "dark";
+    updateTheme();
+}
 
 function updateTheme() {
     if (darkTheme.value) {

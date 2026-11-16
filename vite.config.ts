@@ -12,7 +12,13 @@ export default defineConfig({
     }
   },
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/static': {
+        target: 'https://maps.nixuge.me',
+        changeOrigin: true
+      }
+    }
   },
   build: {
     target: "es2015" // My beautiful iPhone 6s with iOS 13.2.2 Safari won't be left for dead

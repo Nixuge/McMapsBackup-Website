@@ -123,6 +123,10 @@ body {
     font-family: 'Nunito', Helvetica, Arial, sans-serif;
 }
 
+body.no-bg-animation {
+    animation: none;
+}
+
 .fade {
     animation: fadeInFromNone 0.3s ease-out;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
