@@ -15,7 +15,6 @@ const Game: Array<string> = [
     "Arcade - Lucky Race",
     "Arcade - Woosh",
     "Arcade - Bomberman",
-    "UHC",
     "Practice"
 ];
 
@@ -102,16 +101,14 @@ export const ERISIUM_MAPS: Array<EriMap> = [
 
     new EriMap(Game[11], "Classique", "classique.zip"),
 
-    new EriMap(Game[12], "Génération Aléatoire", [], "Les parties UHC Run Solo et UHC Meetup se jouaient sur des maps générées aléatoirement. Seuls les lobbies d'attente ont pu être sauvegardés (disponibles dans la catégorie Lobby)."),
-
-    new EriMap(Game[13], "BrickSide", practiceDl("brickside.zip", "brickside_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "Debuff", practiceDl("debuff.zip", "debuff_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "IndianTop", practiceDl("indiantop.zip", "indiantop_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "NoDebuff", practiceDl("nodebuff.zip", "nodebuff_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "Statues", practiceDl("statues.zip", "statue_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "TopBorders", practiceDl("topborders.zip", "topborders_trees.zip"), PRACTICE_NOTE),
-    new EriMap(Game[13], "Japan Sakura", "japan_sakura.zip", "Map identique avec ou sans arbres."),
-    new EriMap(Game[13], "Japan Red", [new Dl("Avec arbres", "japan_red_trees.zip")], "Version sans arbres introuvable/non sauvegardée (la version avec arbres peut être nettoyée en supprimant les arbres)."),
+    new EriMap(Game[12], "BrickSide", practiceDl("brickside.zip", "brickside_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "Debuff", practiceDl("debuff.zip", "debuff_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "IndianTop", practiceDl("indiantop.zip", "indiantop_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "NoDebuff", practiceDl("nodebuff.zip", "nodebuff_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "Statues", practiceDl("statues.zip", "statue_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "TopBorders", practiceDl("topborders.zip", "topborders_trees.zip"), PRACTICE_NOTE),
+    new EriMap(Game[12], "Japan Sakura", "japan_sakura.zip", "Map identique avec ou sans arbres."),
+    new EriMap(Game[12], "Japan Red", [new Dl("Avec arbres", "japan_red_trees.zip")], "Version sans arbres introuvable/non sauvegardée (la version avec arbres peut être nettoyée en supprimant les arbres)."),
 ];
 
 export const ERISIUM_TAGS: ITagsMeta = new Map(Object.entries({
