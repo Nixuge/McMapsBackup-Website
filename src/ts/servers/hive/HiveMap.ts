@@ -1,4 +1,4 @@
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 
 export class HiveMap extends ServerMap {
 
@@ -8,9 +8,9 @@ export class HiveMap extends ServerMap {
             super(minigame, mapName, downloads, id, commentaries);
         }
 
-    getBaseUrl(file: boolean): string {        
+    getBaseUrl(fileType: FileType): string {        
         let base = "/static/hive/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         base += this.sanitizedMinigame + "/";
         return base;
     }

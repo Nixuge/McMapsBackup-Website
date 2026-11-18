@@ -1,4 +1,4 @@
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 import { sanitize } from "@/ts/utils/TextUtils";
 
 export class WildyaMap extends ServerMap {
@@ -10,9 +10,9 @@ export class WildyaMap extends ServerMap {
         return "Téléchargement Principal";
     }
 
-    getBaseUrl(file: boolean): string {        
+    getBaseUrl(fileType: FileType): string {        
         let base = "/static/wildya/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         base += this.sanitizedMinigame + "/";
         return base;
     }

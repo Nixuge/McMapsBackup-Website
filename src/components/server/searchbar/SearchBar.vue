@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import SearchInput from './SearchInput.vue'
 import SearchButton from './SearchButton.vue'
-import SearchThemeSwitcher from './SearchThemeSwitcher.vue'
 import { AutoCompleter as ac } from '@/ts/manager/SearchEngine';
 </script>
 
@@ -10,7 +9,7 @@ import { AutoCompleter as ac } from '@/ts/manager/SearchEngine';
         <SearchButton text=" < " href="/" />    
         <SearchButton text=" ! " :action="() => {ac.showTaglistAutocompletePopup()}"/>
         <SearchInput />
-        <SearchThemeSwitcher />
+        <div class="settings-spacer"></div>
     </div>
 </template>
 
@@ -33,5 +32,9 @@ import { AutoCompleter as ac } from '@/ts/manager/SearchEngine';
 }
 #searchbar > * {
     padding-right: 5px;
+}
+.settings-spacer {
+    width: 25px;
+    flex-shrink: 0;
 }
 </style>

@@ -1,4 +1,4 @@
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 
 export class FuncraftMap extends ServerMap {
 
@@ -12,9 +12,9 @@ export class FuncraftMap extends ServerMap {
         return "Téléchargement principal";
     }
 
-    getBaseUrl(file: boolean): string {        
+    getBaseUrl(fileType: FileType): string {        
         let base = "/static/funcraft/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         base += this.sanitizedMinigame + "/";
         return base;
     }

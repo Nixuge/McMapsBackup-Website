@@ -2,11 +2,21 @@ export class Download {
     constructor(public name: string, public url: string, public community?: string) {}
 }
 
+export enum FileType {
+    FILE = "zip",
+    IMAGE = "img",
+    MODEL = "model"
+}
+
 export type DownloadInput = Download[] | Download | string;
 
 import { sanitize } from "@/ts/utils/TextUtils";
 
 let nextAutoId = 10000;
+
+export function getAssetPrefix(): string {
+    return import.meta.env.PROD ? "https://maps.nixuge.me" : "";
+}
 
 export abstract class ServerMap {
     public sanitizedMinigame: string;
@@ -48,17 +58,24 @@ export abstract class ServerMap {
         return [input];
     }
 
-    abstract getBaseUrl(file: boolean): string; 
+    abstract getBaseUrl(fileType: FileType): string; 
 
     public getDownloadUrl(filename: string) {
-        return this.getBaseUrl(true) + filename;
+        return getAssetPrefix() + this.getBaseUrl(FileType.FILE) + filename;
     }
     
     public getPreviewUrl() {
-        const prefix = import.meta.env.DEV ? "https://maps.nixuge.me" : "";
+        const prefix = getAssetPrefix();
         if (this.minigame == "")
             return prefix + "/static/img/unselected.png";
-        return `${prefix}${this.getBaseUrl(false)}${this.sanitizedMapName}.png`;
+        return `${prefix}${this.getBaseUrl(FileType.IMAGE)}${this.sanitizedMapName}.png`;
+    }
+
+    public getModelUrl(): string {
+        const prefix = getAssetPrefix();
+        if (this.minigame == "")
+            return "";
+        return `${prefix}${this.getBaseUrl(FileType.MODEL)}${this.sanitizedMapName}.mcbin`;
     }
 }
 
@@ -68,7 +85,7 @@ export class EmptyServerMap extends ServerMap {
     constructor() {
         super("", "", [], -1);
     }
-    getBaseUrl(_: boolean): string {
+    getBaseUrl(_: FileType): string {
         return "";
     }
 }

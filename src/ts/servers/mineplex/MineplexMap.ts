@@ -1,5 +1,5 @@
 import { sanitize } from "@/ts/utils/TextUtils";
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 
 export class MineplexMap extends ServerMap {
     public sanitizedBuilders: string;
@@ -17,9 +17,9 @@ export class MineplexMap extends ServerMap {
         this.sanitizedBuilders = sanitize(builders);
     }
     
-    getBaseUrl(file: boolean): string {
+    getBaseUrl(fileType: FileType): string {
         let base = "/static/mineplex/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         if (this.nano){
             base += "nano/";
         }

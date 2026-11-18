@@ -1,4 +1,4 @@
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 
 export class OnecubeMap extends ServerMap {
 
@@ -12,9 +12,9 @@ export class OnecubeMap extends ServerMap {
         return "Téléchargement principal";
     }
 
-    getBaseUrl(file: boolean): string {        
+    getBaseUrl(fileType: FileType): string {        
         let base = "/static/onecube/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         base += this.sanitizedMinigame + "/";
         return base;
     }

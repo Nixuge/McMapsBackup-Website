@@ -1,4 +1,4 @@
-import { DownloadInput, ServerMap } from "@/ts/server/ServerMap";
+import { DownloadInput, FileType, ServerMap } from "@/ts/server/ServerMap";
 
 export class ErisiumMap extends ServerMap {
     constructor(minigame: string, mapName: string,
@@ -7,9 +7,9 @@ export class ErisiumMap extends ServerMap {
             super(minigame, mapName, downloads, id, commentaries);
         }
 
-    getBaseUrl(file: boolean): string {        
+    getBaseUrl(fileType: FileType): string {        
         let base = "/static/erisium/";
-        base += (file) ? "zip/" : "img/";
+        base += fileType + "/";
         base += this.sanitizedMinigame + "/";
         return base;
     }
