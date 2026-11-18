@@ -7,7 +7,9 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "export-data": "node scripts/export.mjs",
+    "export-dist": "node scripts/export.mjs --dist"
   },
   "dependencies": {
     "three": "^0.187.0",
