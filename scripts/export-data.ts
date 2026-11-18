@@ -31,6 +31,7 @@ export interface ExportMap {
     creationYear?: string;
     nano?: boolean;
     commentaries?: string;
+    games?: string[];
 }
 
 export function formatMap(serverName: string, map: ServerMap, baseUrl: string = "https://maps.nixuge.me"): ExportMap {
@@ -68,6 +69,9 @@ export function formatMap(serverName: string, map: ServerMap, baseUrl: string = 
         const author = anyMap.authors || anyMap.builders;
         if (author) entry.authors = author;
         if (anyMap.creationYear) entry.creationYear = anyMap.creationYear;
+        if (serverName === "lunar" && anyMap.games && anyMap.games.length > 0) {
+            entry.games = anyMap.games;
+        }
     } else if (serverName === "funcraft") {
         if (anyMap.variant) entry.variant = anyMap.variant;
     }
