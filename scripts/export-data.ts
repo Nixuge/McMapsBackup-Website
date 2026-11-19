@@ -53,6 +53,7 @@ export function formatMap(serverName: string, map: ServerMap, baseUrl: string = 
         mapName: map.mapName,
         minigame: map.minigame,
         image: `${prefix}${map.getBaseUrl(FileType.IMAGE)}${map.sanitizedMapName}.png`,
+        preview: `${prefix}${map.getBaseUrl(FileType.IMAGE)}${map.sanitizedMapName}-preview.webp`,
         model: `${prefix}${map.getBaseUrl(FileType.MODEL)}${map.sanitizedMapName}.mcbin`,
         downloads,
     };
