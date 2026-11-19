@@ -68,7 +68,7 @@ export abstract class ServerMap {
         const prefix = getAssetPrefix();
         if (this.minigame == "")
             return prefix + "/static/img/unselected.png";
-        return `${prefix}${this.getBaseUrl(FileType.IMAGE)}${this.sanitizedMapName}.png`;
+        return `${prefix}${this.getBaseUrl(FileType.IMAGE)}${this.sanitizedMapName}-preview.webp`;
     }
 
     public getModelUrl(): string {
