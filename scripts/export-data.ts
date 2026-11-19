@@ -137,7 +137,7 @@ Usage:
 
 Options:
   -o, --out <dir>      Output directory for JSON files (default: "exported_data", or "dist/static" with --dist)
-  --dist               Export to server subdirectories: <dir>/<server>/<server>_maps.json
+  --dist               Export to server subdirectories: <dir>/<server>/<server>.json, plus all_servers.json and summary.json at <dir>/
   --base-url <url>     Base URL prefix for files, images, and models (default: "https://maps.nixuge.me")
   --relative           Use relative paths (e.g. "/static/...") instead of an absolute URL prefix
   --wrap               Wrap maps array inside an object ({ server, total, maps })
@@ -155,11 +155,11 @@ export function runExport() {
     }
 
     const resolvedOutDir = resolve(process.cwd(), outDir);
-    if (!dist && !existsSync(resolvedOutDir)) {
+    if (!existsSync(resolvedOutDir)) {
         mkdirSync(resolvedOutDir, { recursive: true });
     }
 
-    console.log(`Exporting map data ${dist ? "to dist layout" : "to"}: ${resolvedOutDir}${dist ? "/<server>/<server>_maps.json" : ""}`);
+    console.log(`Exporting map data ${dist ? "to dist layout" : "to"}: ${resolvedOutDir}${dist ? "/<server>/<server>.json" : ""}`);
     console.log(`Base URL prefix: ${baseUrl || "(relative /)"}`);
     console.log(`Output format: ${wrap ? "Wrapped ({ server, total, maps })" : "Raw Array ([...])"}\n`);
 
@@ -174,40 +174,39 @@ export function runExport() {
             ? { server: server.name, total: formattedMaps.length, maps: formattedMaps }
             : formattedMaps;
 
+        allServersExport[server.name] = serverPayload;
+
         if (dist) {
             const serverDir = join(resolvedOutDir, server.name);
             if (!existsSync(serverDir)) {
                 mkdirSync(serverDir, { recursive: true });
             }
-            const outPath = join(serverDir, `${server.name}_maps.json`);
+            const outPath = join(serverDir, `${server.name}.json`);
             writeFileSync(outPath, JSON.stringify(serverPayload, null, 2), "utf-8");
-            console.log(`  ✓ ${server.name.padEnd(10)}: ${String(formattedMaps.length).padStart(4)} maps -> ${outDir}/${server.name}/${server.name}_maps.json`);
+            console.log(`  ✓ ${server.name.padEnd(10)}: ${String(formattedMaps.length).padStart(4)} maps -> ${outDir}/${server.name}/${server.name}.json`);
         } else {
             const outPath = join(resolvedOutDir, `${server.name}.json`);
             writeFileSync(outPath, JSON.stringify(serverPayload, null, 2), "utf-8");
-            allServersExport[server.name] = serverPayload;
-            console.log(`  ✓ ${server.name.padEnd(10)}: ${String(formattedMaps.length).padStart(4)} maps -> ${server.name}.json`);
+            console.log(`  ✓ ${server.name.padEnd(10)}: ${String(formattedMaps.length).padStart(4)} maps -> ${outDir}/${server.name}.json`);
         }
     }
 
-    if (!dist) {
-        // Write all_servers.json
-        const allServersPath = join(resolvedOutDir, "all_servers.json");
-        writeFileSync(allServersPath, JSON.stringify(allServersExport, null, 2), "utf-8");
-        console.log(`  ✓ all_servers: ${String(grandTotalMaps).padStart(4)} maps across ${SERVERS.length} servers -> all_servers.json`);
+    // Write all_servers.json
+    const allServersPath = join(resolvedOutDir, "all_servers.json");
+    writeFileSync(allServersPath, JSON.stringify(allServersExport, null, 2), "utf-8");
+    console.log(`  ✓ all_servers: ${String(grandTotalMaps).padStart(4)} maps across ${SERVERS.length} servers -> ${outDir}/all_servers.json`);
 
-        // Write summary.json
-        const summaryPath = join(resolvedOutDir, "summary.json");
-        const summary = {
-            exportedAt: new Date().toISOString(),
-            baseUrl: baseUrl || "",
-            totalServers: SERVERS.length,
-            totalMaps: grandTotalMaps,
-            servers: Object.fromEntries(SERVERS.map((s) => [s.name, s.maps.length])),
-        };
-        writeFileSync(summaryPath, JSON.stringify(summary, null, 2), "utf-8");
-        console.log(`  ✓ summary    : metadata & counts -> summary.json`);
-    }
+    // Write summary.json
+    const summaryPath = join(resolvedOutDir, "summary.json");
+    const summary = {
+        exportedAt: new Date().toISOString(),
+        baseUrl: baseUrl || "",
+        totalServers: SERVERS.length,
+        totalMaps: grandTotalMaps,
+        servers: Object.fromEntries(SERVERS.map((s) => [s.name, s.maps.length])),
+    };
+    writeFileSync(summaryPath, JSON.stringify(summary, null, 2), "utf-8");
+    console.log(`  ✓ summary    : metadata & counts -> ${outDir}/summary.json`);
 
     const elapsed = Date.now() - startTime;
     console.log(`\nSuccessfully exported ${grandTotalMaps} maps in ${elapsed}ms.`);
