@@ -2,45 +2,63 @@
     <h1>API Help</h1>
     
     <div class="centeredContent">
-        <p>Unfortunately, this website doesn't really have an API.</p>
+        <p>This website doesn't really have an API.</p>
         <p>Everything is done client side, the only thing the server does is hosting static files.</p>
         <br>
         <h3>There are however a few endpoints that could help you:</h3>
     </div>
     <div class="tablewrapper">
-            <table>
-                <tr>
-                    <th>Endpoint</th>
-                    <th style="width: 105px">Implemented</th>
-                    <th>Response</th>
-                </tr>
-                <tr class="odd">
-                    <td>/static/servers.json</td>
-                    <td class="red">No</td>
-                    <td>Returns a json with a list of all servers.</td>
-                </tr>
-                <tr>
-                    <td>/static/server/data.json</td>
-                    <td class="orange">Partially</td>
-                    <td>Returns a json with a list of all maps for a certain server.</td>
-                </tr>
-                <tr class="odd">
-                    <td>/static/server/allmaps.zip</td>
-                    <td class="green">Yes</td>
-                    <td>Returns a zip with all of the maps for a certain server.</td>
-                </tr>
-                <tr>
-                    <td>/static/server/allthumbs.zip</td>
-                    <td class="red">No</td>
-                    <td>Returns a zip with all of the thumbnails for a certain server.</td>
-                </tr>
-                <tr class="odd lasttr">
-                    <td>/static/server/all.zip</td>
-                    <td class="red">No</td>
-                    <td>Returns a zip with all of the thumbnails and maps for a certain server.</td>
-                </tr>
-            </table>
-        </div>     
+        <table>
+            <tr>
+                <th>Endpoint</th>
+                <th style="width: 105px">Implemented</th>
+                <th>Response</th>
+            </tr>
+            <tr>
+                <td>/static/all_servers.json</td>
+                <td class="green">Yes</td>
+                <td>Returns a json with a list of all servers.</td>
+            </tr>
+            <tr class="odd">
+                <td>/static/(server)/(server).json</td>
+                <!-- <td class="orange">Partially</td> -->
+                <td class="green">Yes</td>
+                <td>Returns a json with a list of all maps for a certain server.</td>
+            </tr>
+            <tr>
+                <td>/static/(server)/allmaps.zip</td>
+                <td class="green">Yes</td>
+                <td>Returns a zip with all of the maps for a certain server.</td>
+            </tr>
+            <tr class="odd">
+                <td>/static/summary.json</td>
+                <td class="green">Yes</td>
+                <td>Returns a json with a summary of the jsons exports.</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    
+    <h3>Unimplemented:</h3>
+    <div class="tablewrapper">
+        <table>
+            <tr>
+                <th>Endpoint</th>
+                <th style="width: 105px">Implemented</th>
+                <th>Response</th>
+            </tr>
+            <tr>
+                <td>/static/(server)/allthumbs.zip</td>
+                <td class="red">No</td>
+                <td>Returns a zip with all of the thumbnails for a certain server.</td>
+            </tr>
+            <tr class="odd lasttr">
+                <td>/static/(server)/all.zip</td>
+                <td class="red">No</td>
+                <td>Returns a zip with all of the thumbnails and maps for a certain server.</td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <style scoped>

@@ -83,7 +83,7 @@ function checkKeyDownClose(key: KeyboardEvent) {
 #infoPopup {
     width: 80%;
     height: 80%;
-    background-color: rgba(0, 0, 0, 0.195);
+    background-color: rgba(0, 0, 0, 0.263);
     text-align: center;
     border-radius: 15px;
     position: relative;
@@ -95,8 +95,8 @@ function checkKeyDownClose(key: KeyboardEvent) {
     position: fixed;
     bottom: 0;
     left: 0;
-    -webkit-backdrop-filter: blur(15px); /* 8y of support, still needs a prefix */
-    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(25px); /* 8y of support, still needs a prefix */
+    backdrop-filter: blur(25px);
     width: 100%;
     height: 100%;
     display: flex;
