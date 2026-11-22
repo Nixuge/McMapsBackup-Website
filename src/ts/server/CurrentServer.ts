@@ -54,6 +54,9 @@ export const SERVER_METAS: MetaMap = {
     "hive": async () => {const {HiveMeta} = await import("@/ts/servers/hive/HiveMeta"); return HiveMeta},
     "lunar": async () => {const {LunarMeta} = await import("@/ts/servers/lunar/LunarMeta"); return LunarMeta},
     "erisium": async () => {const {ErisiumMeta} = await import("@/ts/servers/erisium/ErisiumMeta"); return ErisiumMeta},
+    "epicube": async () => {const {SoonMetaEpicube} = await import("@/ts/servers/soon/SoonMetaEpicube"); return SoonMetaEpicube},
+    "rewinside": async () => {const {SoonMetaRewinside} = await import("@/ts/servers/soon/SoonMetaRewinside"); return SoonMetaRewinside},
+    "badlion": async () => {const {SoonMetaBadlion} = await import("@/ts/servers/soon/SoonMetaBadlion"); return SoonMetaBadlion},
     // "wildya": async () => {const {WildyaMeta} = await import("@/ts/servers/wildya/WildyaMeta"); return WildyaMeta},
 }
 

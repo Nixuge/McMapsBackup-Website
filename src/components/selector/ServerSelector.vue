@@ -12,6 +12,9 @@ import ServerEntry from './ServerEntry.vue'
         <ServerEntry serverName="lunar.gg" serverUrl="lunar" thumbnailName="lunar.png" death="01/06/2023" country="us" />
         <ServerEntry serverName="Erisium" serverUrl="erisium" thumbnailName="erisium.png" death="03/02/2023" country="fr" />
         <!-- <ServerEntry serverName="Wildya" serverUrl="wildya" thumbnailName="wildya.png" country="fr" /> -->
+        <ServerEntry serverName="Epicube" serverUrl="epicube" thumbnailName="epicube.jpg" death="31/10/2018" country="fr" :iconLinks="[['/epicube', 'exclamation.png', 'In progress']]" />
+        <ServerEntry serverName="Rewinside" serverUrl="rewinside" thumbnailName="rewinside.jpg" death="31/03/2021" country="de" :iconLinks="[['/rewinside', 'exclamation.png', 'In progress']]" />
+        <ServerEntry serverName="Badlion" serverUrl="badlion" thumbnailName="badlion.png" death="10/06/2018" country="us" :iconLinks="[['/badlion', 'exclamation.png', 'In progress']]" />
     </div>
 </template>
 
