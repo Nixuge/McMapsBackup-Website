@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { loadInfoComponent, preloadInfoComponent } from '@/ts/manager/info/InfoPopup';
 import { getAssetPrefix } from '@/ts/server/ServerMap';
+import { AsyncComponentLoader } from 'vue';
 
 // Note about iconLinks:
 // They were originally done with an array of a class called ClickableIcon (ClickableIcon[]).
@@ -12,7 +14,7 @@ const props = defineProps<{
     death?: string,
     message?: string,
     country: string,
-    iconLinks?: [string, string, string][]
+    iconLinks?: [string, string, string][] | [AsyncComponentLoader, string, string][]
 }>()
 
 const BASE_URL = getAssetPrefix() + "/static/";
@@ -31,12 +33,14 @@ function redirect(link: string | undefined) {
 // To adapt if I change the padding.
 // Currently 65 = 50(img) + 2x5(padding) + 5 (margin-left)
 const marginLeft: string = (props.iconLinks === undefined) ? "" : (140 - (65 * (props.iconLinks.length - 1))) + "px";
+
+const isString = (val: string | AsyncComponentLoader) => typeof val === "string"
 </script>
 
 <template>
     <div class="serverentry" @click="$router.push('/' + serverUrl + '/')" >
         <div class="iconlinkswrap" v-if="iconLinks">
-            <img class="iconlink" v-for="icon in iconLinks" @click.stop="redirect(icon[0])" :src="WEBSITES_URL + icon[1]" :alt="icon[2]">
+            <img class="iconlink" v-for="icon in iconLinks" @mouseover="isString(icon[0]) ? null : preloadInfoComponent(icon[0])" @click.stop="isString(icon[0]) ? redirect(icon[0]) : loadInfoComponent(icon[0])" :src="WEBSITES_URL + icon[1]" :alt="icon[2]">
         </div>
         <img class="servericon" :src="THUMB_URL + thumbnailName">
         <div class="serverdeath">
