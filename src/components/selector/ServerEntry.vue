@@ -92,6 +92,7 @@ const isString = (val: string | AsyncComponentLoader) => typeof val === "string"
         border: transparent;
         margin-top: 10px;
         width: 100%;
+        max-width: 200px;
     }
     button:hover {
         cursor: pointer;

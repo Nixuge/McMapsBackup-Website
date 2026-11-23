@@ -14,6 +14,7 @@ import ServerEntry from './ServerEntry.vue'
         <!-- <ServerEntry serverName="Wildya" serverUrl="wildya" thumbnailName="wildya.png" country="fr" /> -->
         <ServerEntry serverName="Epicube" serverUrl="epicube" thumbnailName="epicube.jpg" death="31/10/2018" country="fr" :iconLinks="[[() => import('@/components/selector/entry/SoonPopup.vue'), 'exclamation.png', 'In progress']]" />
         <ServerEntry serverName="Rewinside" serverUrl="rewinside" thumbnailName="rewinside.jpg" death="31/03/2021" country="de" :iconLinks="[[() => import('@/components/selector/entry/SoonPopup.vue'), 'exclamation.png', 'In progress']]" />
+        <ServerEntry serverName="FantaBob" serverUrl="fantabobworld" thumbnailName="fantabobworld.jpg" death="29/06/2018" country="fr" :iconLinks="[[() => import('@/components/selector/entry/SoonPopup.vue'), 'exclamation.png', 'In progress']]" />
         <ServerEntry serverName="Badlion" serverUrl="badlion" thumbnailName="badlion.png" death="10/06/2018" country="us" :iconLinks="[[() => import('@/components/selector/entry/SoonPopup.vue'), 'exclamation.png', 'In progress']]" />
     </div>
 </template>
